@@ -1,0 +1,19 @@
+Los clientes de los restaurantes pueden llamar por teléfono para reservar una mesa, y le atenderá el jefe
+de sala. El jefe de sala tiene a su disposición una pantalla donde aparecen los tres turnos que hay por comida
+y por cena, con una configuración de mesas de 2, 4 y 6 comensales. Si el usuario llega con tiempo al
+restaurante se le asigna la mesa y el jefe de sala la marca como ocupada y asigna un camarero que atienda
+la mesa; si se retrasa al menos 20 minutos, el sistema cancela inmediatamente la mesa y la pone en estado
+de disponible. Para la cadena de restaurantes es muy importante saber cuánto tiempo pasa cada una de la
+mesa en uno de los siguientes estados:
+• Libre: si nadie la ha reservado
+• Reservada: si alguien ha hecho una reserva
+• Ocupada: cuando los comensales están sentados en la mesa
+• Pidiendo: Si el camarero está recogiendo la comanda
+• En espera de comida: si los comensales están esperando la comida
+• Servidos: si los comensales están comiendo los platos que han pedido
+• Esperando la cuenta: si los comensales han pedido la cuenta.
+• Pagando: si los comensales ya tienen la cuenta en la mesa.
+• En Preparación: cuando los comensales se han retirado de la mesa, y los camareros la están
+preparando para que vuelva a estar libre.
+Todas estas transacciones deben almacenarse para poder ser analizadas convenientemente, de cara a
+mejorar el servicio de la cadena de restaurantes. 
