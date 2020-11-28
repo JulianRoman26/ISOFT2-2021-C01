@@ -1,5 +1,4 @@
 package Dominio;
-
 // JORGE
 public class Camarero_Barra extends Camarero {
 	private String barra;
