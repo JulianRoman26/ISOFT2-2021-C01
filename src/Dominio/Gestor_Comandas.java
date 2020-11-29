@@ -1,4 +1,7 @@
 package Dominio;
+
+import java.util.ArrayList;
+
 //SERGIO: AVISARCOCINA, REPONERALMACEN
 //ALEX: MANDARCOMIDA, MANDARBEBIDA
 //RAFA: ANOTARCOMANDA, PREPARARBEBIDA
@@ -20,9 +23,31 @@ public class Gestor_Comandas {
 		throw new UnsupportedOperationException();
 	}
 
-	public int camarero_anotarComanda() {
+	public int camarero_anotarComanda(Camarero_Mesa cam,ArrayList<String> entrante,ArrayList<String> primer,ArrayList<String>segundo
+									,ArrayList<String>postre, ArrayList<String>bebida) {
 		// TODO - implement Gestor_Comandas.camarero_anotarComanda
-		throw new UnsupportedOperationException();
+		int res=0;
+		Comanda comanda = new Comanda();
+	
+			comanda.setEntrantes(entrante);
+			comanda.setPrimer_plato(primer);
+			comanda.setSegundo_plato(segundo);
+			comanda.setPostre(postre);
+			comanda.setBebidas(bebida);
+		if(camarero_validarComanda(comanda)==true) {
+			cam.anotarComanda(); //Anadir la comanda en la base de datos
+			camarero_mandarComida(comanda);
+			camarero_mandarBebida(comanda);
+			
+		}else {
+			camarero_AvisarCocina_FaltaIngredientes();
+			
+		}
+		
+		
+		
+		return res;
+
 	}
 
 	/**
@@ -44,7 +69,7 @@ public class Gestor_Comandas {
 	 * @param ingredientes
 	 * @param cantidad_ingredientes
 	 */
-	public int camarero_AvisarCocina_FaltaIngredientes(String[] ingredientes, int[] cantidad_ingredientes) {
+	public int camarero_AvisarCocina_FaltaIngredientes() {
 		// TODO - implement Gestor_Comandas.camarero_AvisarCocina_FaltaIngredientes
 		throw new UnsupportedOperationException();
 	}
