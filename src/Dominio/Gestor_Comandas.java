@@ -23,8 +23,8 @@ public class Gestor_Comandas {
 		throw new UnsupportedOperationException();
 	}
 
-	public int camarero_anotarComanda(Camarero_Mesa cam,ArrayList<String> entrante,ArrayList<String> primer,ArrayList<String>segundo
-									,ArrayList<String>postre, ArrayList<String>bebida) {
+	public int camarero_anotarComanda(Camarero_Mesa cam,ArrayList<Plato> entrante,ArrayList<Plato> primer,ArrayList<Plato>segundo
+									,ArrayList<Plato>postre, ArrayList<String>bebida) {
 		// TODO - implement Gestor_Comandas.camarero_anotarComanda
 		int res=0;
 		Comanda comanda = new Comanda();
@@ -55,7 +55,12 @@ public class Gestor_Comandas {
 	 * @param comandaAnotada
 	 */
 	public boolean camarero_validarComanda(Comanda comandaAnotada) {
-		return false;
+		if(comandaAnotada!=null) {
+			return true;
+		}else {
+			return false;
+		}
+		
 
 	}
 
@@ -125,8 +130,13 @@ public class Gestor_Comandas {
 	 * @param cantidad
 	 */
 	public int camareroBarra_reponerBebidas(String[] bebidas, int[] cantidad) {
-		// TODO - implement Gestor_Comandas.camareroBarra_reponerBebidas
-		throw new UnsupportedOperationException();
+		for(int i = 0;i<bebidas.length;i++) {
+			if(cantidad[i]<0) {
+				cantidad[i]+=10;
+			}
+		}
+		return 1;
+		
 	}
 
 }

@@ -5,24 +5,24 @@ import java.util.ArrayList;
 public class Comanda {
 
 	private ArrayList<String> bebidas;
-	private ArrayList<String> entrantes;
-	private ArrayList<String> primer_plato;
-	private ArrayList<String> segundo_plato;
-	private ArrayList<String> postre;
+	private ArrayList<Plato> entrantes;
+	private ArrayList<Plato> primer_plato;
+	private ArrayList<Plato> segundo_plato;
+	private ArrayList<Plato> postre;
 	private Mesa mesa_asociada;
 	public void setBebidas(ArrayList<String> bebidas) {
 		this.bebidas = bebidas;
 	}
-	public void setEntrantes(ArrayList<String> entrantes) {
+	public void setEntrantes(ArrayList<Plato> entrantes) {
 		this.entrantes = entrantes;
 	}
-	public void setPrimer_plato(ArrayList<String> primer_plato) {
+	public void setPrimer_plato(ArrayList<Plato> primer_plato) {
 		this.primer_plato = primer_plato;
 	}
-	public void setSegundo_plato(ArrayList<String> segundo_plato) {
+	public void setSegundo_plato(ArrayList<Plato> segundo_plato) {
 		this.segundo_plato = segundo_plato;
 	}
-	public void setPostre(ArrayList<String> postre) {
+	public void setPostre(ArrayList<Plato> postre) {
 		this.postre = postre;
 	}
 	public void setMesa_asociada(Mesa mesa_asociada) {
@@ -31,16 +31,16 @@ public class Comanda {
 	public ArrayList<String> getBebidas() {
 		return bebidas;
 	}
-	public ArrayList<String> getEntrantes() {
+	public ArrayList<Plato> getEntrantes() {
 		return entrantes;
 	}
-	public ArrayList<String> getPrimer_plato() {
+	public ArrayList<Plato> getPrimer_plato() {
 		return primer_plato;
 	}
-	public ArrayList<String> getSegundo_plato() {
+	public ArrayList<Plato> getSegundo_plato() {
 		return segundo_plato;
 	}
-	public ArrayList<String> getPostre() {
+	public ArrayList<Plato> getPostre() {
 		return postre;
 	}
 	public Mesa getMesa_asociada() {
