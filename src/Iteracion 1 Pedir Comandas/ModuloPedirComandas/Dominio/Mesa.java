@@ -28,10 +28,6 @@ public class Mesa {
 		return this.numero;
 	}
 
-	/**
-	 * 
-	 * @param numero
-	 */
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
@@ -40,10 +36,6 @@ public class Mesa {
 		return this.plazas;
 	}
 
-	/**
-	 * 
-	 * @param plazas
-	 */
 	public void setPlazas(int plazas) {
 		this.plazas = plazas;
 	}
@@ -53,10 +45,14 @@ public class Mesa {
 
 	}
 
-	/**
-	 * 
-	 * @param camarero_asociado
-	 */
+	public Comanda getComanda_asociada() {
+		return comanda_asociada;
+	}
+
+	public void setComanda_asociada(Comanda comanda_asociada) {
+		this.comanda_asociada = comanda_asociada;
+	}
+
 	public void setCamarero_asociado(Camarero_Mesa camarero_asociado) {
 
 	}
