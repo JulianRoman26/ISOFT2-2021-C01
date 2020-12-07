@@ -5,6 +5,14 @@ public class Mesa {
 	private String estado;
 	private Comanda comanda_asociada;
 	private int numero;
+	public Comanda getComanda_asociada() {
+		return comanda_asociada;
+	}
+
+	public void setComanda_asociada(Comanda comanda_asociada) {
+		this.comanda_asociada = comanda_asociada;
+	}
+
 	private int plazas;
 	private Camarero_Mesa camarero_asociado;
 
