@@ -1,6 +1,6 @@
 package Dominio;
 //ALEX
-public class Mesa {
+public class Mesa implements Estados{
 
 	private String estado;
 	private Comanda comanda_asociada;

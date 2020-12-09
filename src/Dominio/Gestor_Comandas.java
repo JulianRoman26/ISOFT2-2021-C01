@@ -2,6 +2,8 @@ package Dominio;
 
 import java.util.ArrayList;
 
+import Presentacion.IU_Cocina;
+
 //SERGIO: AVISARCOCINA, REPONERALMACEN
 //ALEX: MANDARCOMIDA, MANDARBEBIDA
 //RAFA: ANOTARCOMANDA, PREPARARBEBIDA
@@ -83,8 +85,29 @@ public class Gestor_Comandas {
 	 * 
 	 * @param comanda
 	 */
-	public int camarero_mandarComida(Comanda comanda) {
-		return 0;
+	public void camarero_mandarComida(Comanda comanda) {
+		ArrayList<Plato>comida=comanda.getEntrantes();
+		String notificacion="Preparar la comida de la mesa: " + comanda.getMesa_asociada().getNumero() +"\n";
+		notificacion=notificacion+"ENTRANTES\n";
+		while(!comida.isEmpty()) {
+			notificacion= notificacion+ comida.remove(0) + "\n";
+		}
+		comida=comanda.getPrimer_plato();
+		notificacion=notificacion+"PRIMEROS\n";
+		while(!comida.isEmpty()) {
+			notificacion= notificacion+ comida.remove(0) + "\n";
+		}
+		comida=comanda.getSegundo_plato();
+		notificacion=notificacion+"SEGUNDOS\n";
+		while(!comida.isEmpty()) {
+			notificacion= notificacion+ comida.remove(0) + "\n";
+		}
+		comida=comanda.getPostre();
+		notificacion=notificacion+"POSTRES\n";
+		while(!comida.isEmpty()) {
+			notificacion= notificacion+ comida.remove(0) + "\n";
+		}
+		IU_Cocina.getNotificaciones().add(notificacion);
 
 	}
 
@@ -92,8 +115,13 @@ public class Gestor_Comandas {
 	 * 
 	 * @param comanda
 	 */
-	public int camarero_mandarBebida(Comanda comanda) {
-		return 0;
+	public void camarero_mandarBebida(Comanda comanda) {
+		ArrayList<String>bebida=comanda.getBebidas();
+		String notificacion="Preparar las bebidas de la mesa: " + comanda.getMesa_asociada().getNumero() +"\n";
+		while(!bebida.isEmpty()) {
+			notificacion= notificacion+ bebida.remove(0) + "\n";
+		}
+		IU_Cocina.getNotificaciones().add(notificacion);
 
 	}
 

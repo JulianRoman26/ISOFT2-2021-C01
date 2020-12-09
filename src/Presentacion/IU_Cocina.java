@@ -6,8 +6,8 @@ import java.util.Scanner;
 //NO POR EL MOMENTO
 public class IU_Cocina {
 	static Scanner scanner = new Scanner(System.in);
-	ArrayList<String> notificaciones=new ArrayList<String>();
-	public ArrayList<String> getNotificaciones() {
+	static ArrayList<String> notificaciones=new ArrayList<String>();
+	public static ArrayList<String> getNotificaciones() {
 		return notificaciones;
 	}
 	public void leerNotificaciones() {
