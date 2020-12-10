@@ -8,9 +8,9 @@ import Dominio.Gestor_Comandas;
 //NO POR EL MOMENTO
 public class IU_Camarero {
 	static Scanner scanner = new Scanner(System.in);
-	ArrayList<String> notificaciones=new ArrayList<String>();
+	static ArrayList<String> notificaciones=new ArrayList<String>();
 	
-	public ArrayList<String> getNotificaciones() {
+	public static ArrayList<String> getNotificaciones() {
 		return notificaciones;
 	}
 
@@ -22,18 +22,31 @@ public class IU_Camarero {
 				System.out.println("\n           ****   MENU   ****\n");
 				System.out.println("  1.- Anotar Comanda");
 				System.out.println("  2.- Secuenciar Estado de una Mesa");
-				System.out.println("  3.- ");
+				System.out.println("  3.- Seleccionar Numero de mesa");
+				System.out.println("  4.- Mostrar Notificaciones");
 
 				opcion = controlarNumero("\nSeleccione entre 1-6:");
-			} while (opcion < 1 && opcion > 6);	System.out.println("");
+			} while (opcion < 1 && opcion > 5);
+			System.out.println("");
 			
 			switch(opcion) {
 			case 1:
 				seleccionarPlatos();
 				break;
+			case 2:
+				break;
+			case 3:
+				seleccionarMesa();
+				break;
+			case 4:
+				mostrarNotificacion();
+				break;
+			case 5:
+				fin=true;
+				break;
 			}
 			leerNotificaciones();
-		}while(fin);
+		}while(fin==false);
 			
 	}
 	public void leerNotificaciones() {
@@ -73,7 +86,6 @@ public class IU_Camarero {
 			//while entrantes no acabados
 			
 			opcion=controlarNumero("Seleccione un plato");
-			//while primeros no acabados
 			switch(opcion) {
 			case 1:
 				seleccionarEntrantes(entrantes);
@@ -82,16 +94,16 @@ public class IU_Camarero {
 				seleccionarPrimeros(primeros);
 				break;
 			case 3:
-		
-				break;
-			case 4:
 				seleccionarSegundos(segundos);
 				break;
-			case 5:
+			case 4:
 				seleccionarPostres(postres);
 				break;
+			case 5:
+				seleccionarBebidas(bebidas);
+				break;
 			
-			case 7:
+			case 6:
 				finComanda=true;
 				break;
 			}
@@ -101,8 +113,7 @@ public class IU_Camarero {
 	}
 
 	public void seleccionarMesa() {
-		// TODO - implement IU_Camarero.seleccionarMesa
-		throw new UnsupportedOperationException();
+
 	}
 	
 	public static int controlarNumero(String texto) {
@@ -153,17 +164,114 @@ public class IU_Camarero {
 	}
 	
 	private void seleccionarPostres(ArrayList<String> postres) {
-		// TODO Auto-generated method stub
+		int opcion;
+		boolean fin_entrante=false;
+		do {
+			System.out.println("\n1-Jamon\n2-Queso\n3Tostas\n4-Calamares");
+			opcion=controlarNumero("Seleccione un entrante: ");
+			switch(opcion) {
+			case 1:
+				postres.add("Tarta");
+				break;
+			case 2:
+				postres.add("Helado");
+				break;
+			case 3:
+				postres.add("Chocolate");
+				break;
+			case 4:
+				postres.add("Bizcocho");
+				break;
+			
+			case 5:
+				fin_entrante=true;
+				break;
+			}
+		}while(fin_entrante==false);
 		
 	}
 
 	private void seleccionarSegundos(ArrayList<String> segundos) {
-		// TODO Auto-generated method stub
+		int opcion;
+		boolean fin_entrante=false;
+		do {
+			System.out.println("\n1-Jamon\n2-Queso\n3Tostas\n4-Calamares");
+			opcion=controlarNumero("Seleccione un entrante: ");
+			switch(opcion) {
+			case 1:
+				segundos.add("Lubina");
+				break;
+			case 2:
+				segundos.add("Solomillo");
+				break;
+			case 3:
+				segundos.add("Macarrones");
+				break;
+			case 4:
+				segundos.add("Hamburguesa");
+				break;
+			
+			case 5:
+				fin_entrante=true;
+				break;
+			}
+		}while(fin_entrante==false);
 		
 	}
 
 	private void seleccionarPrimeros(ArrayList<String> primeros) {
-		// TODO Auto-generated method stub
+		int opcion;
+		boolean fin_entrante=false;
+		do {
+			System.out.println("\n1-Jamon\n2-Queso\n3Tostas\n4-Calamares");
+			opcion=controlarNumero("Seleccione un entrante: ");
+			switch(opcion) {
+			case 1:
+				primeros.add("Cocido");
+				break;
+			case 2:
+				primeros.add("Ensalada");
+				break;
+			case 3:
+				primeros.add("Crema de Verduras");
+				break;
+			case 4:
+				primeros.add("Esparragos");
+				break;
+			
+			case 5:
+				fin_entrante=true;
+				break;
+			}
+		}while(fin_entrante==false);
+		
+	}
+	
+	private void seleccionarBebidas(ArrayList<String> bebidas) {
+		int opcion;
+		boolean fin_entrante=false;
+		do {
+			System.out.println("\n1-Jamon\n2-Queso\n3Tostas\n4-Calamares");
+			opcion=controlarNumero("Seleccione un entrante: ");
+			switch(opcion) {
+			case 1:
+				bebidas.add("Soda");
+				break;
+			case 2:
+				bebidas.add("CocaCola");
+				break;
+			case 3:
+				bebidas.add("Vino");
+				break;
+			case 4:
+				bebidas.add("Cerveza");
+				break;
+			
+			case 5:
+				fin_entrante=true;
+				break;
+			}
+		}while(fin_entrante==false);
 		
 	}
 

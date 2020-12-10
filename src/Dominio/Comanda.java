@@ -10,6 +10,11 @@ public class Comanda {
 	private ArrayList<Plato> segundo_plato;
 	private ArrayList<Plato> postre;
 	private Mesa mesa_asociada;
+	/*private int id;
+
+	//public void setId(int id) {
+		this.id = id;
+	}*/
 	public void setBebidas(ArrayList<String> bebidas) {
 		this.bebidas = bebidas;
 	}
@@ -28,6 +33,9 @@ public class Comanda {
 	public void setMesa_asociada(Mesa mesa_asociada) {
 		this.mesa_asociada = mesa_asociada;
 	}
+	/*public int getId() {
+		return id;
+	}*/
 	public ArrayList<String> getBebidas() {
 		return bebidas;
 	}

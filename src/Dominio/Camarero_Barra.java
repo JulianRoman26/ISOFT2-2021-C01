@@ -1,4 +1,9 @@
 package Dominio;
+
+import java.util.ArrayList;
+
+import Persistencia.Agente;
+
 // JORGE
 public class Camarero_Barra extends Camarero {
 	private String barra;
@@ -16,19 +21,20 @@ public class Camarero_Barra extends Camarero {
 	 * 
 	 * @param comanda
 	 */
-	public int prepararBebidas(Comanda comanda) {
-		int res=0;
-		
-		return res;
+	public static void prepararBebidas(Comanda comanda) {
+		ArrayList<String> bebidas= comanda.getBebidas();
+		for(int j = 0;j<bebidas.size();j++) {
+		Agente.modificar("UPDATE Bebidas SET cantidad_disponible=(cantidad_disponible-"+1+
+				") WHERE nombre="+ bebidas.get(0));
+		}
 	}
 
 	/**
 	 * 
 	 * @param bebidas
 	 */
-	public int reponerBebidas(String[] bebidas) {
-		// TODO - implement Camarero_Barra.reponerBebidas
-		throw new UnsupportedOperationException();
+	public static void reponerBebidas() {
+		Agente.modificar("UPDATE Bebidas SET cantidad_disponible=50 WHERE cantidad_disponible<10;\");"); //Insertar Bebidas
 	}
 
 }
