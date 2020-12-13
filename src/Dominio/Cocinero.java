@@ -13,7 +13,7 @@ public class Cocinero implements Carta{
 	 * @param comanda
 	 */
 	public static void cocinarPlatos(Comanda comanda) {
-		Plato p=new Plato();
+		Plato p=new Plato("");
 		
 		ArrayList<Ingrediente> ingredientes=new ArrayList<Ingrediente>();
 

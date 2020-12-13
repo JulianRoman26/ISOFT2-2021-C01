@@ -12,6 +12,10 @@ public class Camarero_Barra extends Camarero {
 		super(experiencia_laboral);
 		// TODO Auto-generated constructor stub
 	}
+	public Camarero_Barra() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public int avisarCamarero_Mesa_BebidasListas() {
 		// TODO - implement Camarero_Barra.avisarCamarero_Mesa_BebidasListas
 		throw new UnsupportedOperationException();

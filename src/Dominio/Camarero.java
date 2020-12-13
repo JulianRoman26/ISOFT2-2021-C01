@@ -8,4 +8,8 @@ public abstract class Camarero {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Camarero() {
+		// TODO Auto-generated constructor stub
+	}
+
 }

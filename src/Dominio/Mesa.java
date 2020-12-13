@@ -8,6 +8,10 @@ public class Mesa implements Estados{
 	private int plazas;
 	private Camarero_Mesa camarero_asociado;
 
+	public Mesa() {
+
+	}
+	
 	public String getEstado() {
 		return this.estado;
 	}
@@ -20,9 +24,7 @@ public class Mesa implements Estados{
 		this.estado = estado;
 	}
 
-	public Mesa() {
 
-	}
 
 	public int getNumero() {
 		return this.numero;
@@ -52,13 +54,49 @@ public class Mesa implements Estados{
 		return camarero_asociado;
 
 	}
-
-	/**
-	 * 
+	/*
 	 * @param camarero_asociado
 	 */
 	public void setCamarero_asociado(Camarero_Mesa camarero_asociado) {
-
+		this.camarero_asociado= camarero_asociado;
 	}
 
+	public Comanda getComanda_asociada() {
+		return comanda_asociada;
+	}
+
+	public void setComanda_asociada(Comanda comanda_asociada) {
+		this.comanda_asociada = comanda_asociada;
+	}
+
+	public void secuenciarEstado() {
+		switch(estado) {
+		case "Libre":
+			setEstado(Estados.OCUPADO);
+			break;
+		case "Ocupado":
+			setEstado(Estados.PIDIENDO);
+			break;
+		case "Pidiendo":
+			setEstado(Estados.EN_ESPERA);
+			break;
+		case "En espera":
+			setEstado(Estados.SERVIDOS);
+			break;
+		case "Servidos":
+			setEstado(Estados.ESPERANDO);
+			break;
+		case "Esperando":
+			setEstado(Estados.PAGANDO);
+			break;
+		case "Pagando":
+			setEstado(Estados.EN_PREPARACION);
+			break;
+		case "En preparacion":
+			setEstado(Estados.LIBRE);
+			break;
+		}
+		
+		
+	}
 }

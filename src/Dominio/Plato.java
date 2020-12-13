@@ -21,8 +21,8 @@ public class Plato {
 		this.ingredientes = ingredientes;
 	}
 	
-	public Plato() {
-		
+	public Plato(String nombre) {
+		this.nombre=nombre;
 	}
 
 	public ArrayList<Ingrediente> getIngredientes() {

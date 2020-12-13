@@ -2,8 +2,7 @@ package Dominio;
 
 import java.util.ArrayList;
 
-import Presentacion.*;
-;
+import Presentacion.*;;
 
 //SERGIO: AVISARCOCINA, REPONERALMACEN
 //ALEX: MANDARCOMIDA, MANDARBEBIDA
@@ -21,29 +20,30 @@ public class Gestor_Comandas {
 	 * 
 	 * @param numeroMesa
 	 */
-	public int camarero_secuenciarEstado(int numeroMesa) {
+	public static int camarero_secuenciarEstado(int numeroMesa) {
+		Camarero_Mesa.secuenciarEstado_Mesa(numeroMesa);
 		// TODO - implement Gestor_Comandas.camarero_secuenciarEstado
 		throw new UnsupportedOperationException();
 	}
 
-	public void camarero_anotarComanda(Camarero_Mesa cam,ArrayList<Plato> entrante,ArrayList<Plato> primer,ArrayList<Plato>segundo
-									,ArrayList<Plato>postre, ArrayList<String>bebida) {
+	public static void camarero_anotarComanda(Camarero_Mesa cam, ArrayList<Plato> entrante, ArrayList<Plato> primer,
+			ArrayList<Plato> segundo, ArrayList<Plato> postre, ArrayList<String> bebida) {
 
 		Comanda comanda = new Comanda();
-	
-			comanda.setEntrantes(entrante);
-			comanda.setPrimer_plato(primer);
-			comanda.setSegundo_plato(segundo);
-			comanda.setPostre(postre);
-			comanda.setBebidas(bebida);
-		if(camarero_validarComanda(comanda)==true) {
-			cam.anotarComanda(); //Anadir la comanda en la base de datos
+
+		comanda.setEntrantes(entrante);
+		comanda.setPrimer_plato(primer);
+		comanda.setSegundo_plato(segundo);
+		comanda.setPostre(postre);
+		comanda.setBebidas(bebida);
+		if (camarero_validarComanda(comanda) == true) {
+			cam.anotarComanda(); // Anadir la comanda en la base de datos
 			camarero_mandarComida(comanda);
 			camarero_mandarBebida(comanda);
-			
-		}else {
+
+		} else {
 			camarero_AvisarCocina_FaltaIngredientes();
-			
+
 		}
 	}
 
@@ -51,13 +51,12 @@ public class Gestor_Comandas {
 	 * 
 	 * @param comandaAnotada
 	 */
-	public boolean camarero_validarComanda(Comanda comandaAnotada) {
-		if(comandaAnotada!=null) {
+	public static boolean camarero_validarComanda(Comanda comandaAnotada) {
+		if (comandaAnotada != null) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
-		
 
 	}
 
@@ -71,8 +70,8 @@ public class Gestor_Comandas {
 	 * @param ingredientes
 	 * @param cantidad_ingredientes
 	 */
-	public void camarero_AvisarCocina_FaltaIngredientes() {
-		String notificacion="NOS HEMOS QUEDADO SIN INGREDIENTES. DEBES REPONER EL ALMACEN";
+	public static void camarero_AvisarCocina_FaltaIngredientes() {
+		String notificacion = "NOS HEMOS QUEDADO SIN INGREDIENTES. DEBES REPONER EL ALMACEN";
 		IU_Cocina.getNotificaciones().add(notificacion);
 	}
 
@@ -80,27 +79,27 @@ public class Gestor_Comandas {
 	 * 
 	 * @param comanda
 	 */
-	public void camarero_mandarComida(Comanda comanda) {
-		ArrayList<Plato>comida=comanda.getEntrantes();
-		String notificacion="Preparar la comida de la mesa: " + comanda.getMesa_asociada().getNumero() +"\n";
-		notificacion=notificacion+"ENTRANTES\n";
-		while(!comida.isEmpty()) {
-			notificacion= notificacion+ comida.remove(0) + "\n";
+	public static void camarero_mandarComida(Comanda comanda) {
+		ArrayList<Plato> comida = comanda.getEntrantes();
+		String notificacion = "Preparar la comida de la mesa: " + comanda.getMesa_asociada().getNumero() + "\n";
+		notificacion = notificacion + "ENTRANTES\n";
+		while (!comida.isEmpty()) {
+			notificacion = notificacion + comida.remove(0) + "\n";
 		}
-		comida=comanda.getPrimer_plato();
-		notificacion=notificacion+"PRIMEROS\n";
-		while(!comida.isEmpty()) {
-			notificacion= notificacion+ comida.remove(0) + "\n";
+		comida = comanda.getPrimer_plato();
+		notificacion = notificacion + "PRIMEROS\n";
+		while (!comida.isEmpty()) {
+			notificacion = notificacion + comida.remove(0) + "\n";
 		}
-		comida=comanda.getSegundo_plato();
-		notificacion=notificacion+"SEGUNDOS\n";
-		while(!comida.isEmpty()) {
-			notificacion= notificacion+ comida.remove(0) + "\n";
+		comida = comanda.getSegundo_plato();
+		notificacion = notificacion + "SEGUNDOS\n";
+		while (!comida.isEmpty()) {
+			notificacion = notificacion + comida.remove(0) + "\n";
 		}
-		comida=comanda.getPostre();
-		notificacion=notificacion+"POSTRES\n";
-		while(!comida.isEmpty()) {
-			notificacion= notificacion+ comida.remove(0) + "\n";
+		comida = comanda.getPostre();
+		notificacion = notificacion + "POSTRES\n";
+		while (!comida.isEmpty()) {
+			notificacion = notificacion + comida.remove(0) + "\n";
 		}
 		IU_Cocina.getNotificaciones().add(notificacion);
 
@@ -110,11 +109,11 @@ public class Gestor_Comandas {
 	 * 
 	 * @param comanda
 	 */
-	public void camarero_mandarBebida(Comanda comanda) {
-		ArrayList<String>bebida=comanda.getBebidas();
-		String notificacion="Preparar las bebidas de la mesa: " + comanda.getMesa_asociada().getNumero() +"\n";
-		while(!bebida.isEmpty()) {
-			notificacion= notificacion+ bebida.remove(0) + "\n";
+	public static void camarero_mandarBebida(Comanda comanda) {
+		ArrayList<String> bebida = comanda.getBebidas();
+		String notificacion = "Preparar las bebidas de la mesa: " + comanda.getMesa_asociada().getNumero() + "\n";
+		while (!bebida.isEmpty()) {
+			notificacion = notificacion + bebida.remove(0) + "\n";
 		}
 		IU_Cocina.getNotificaciones().add(notificacion);
 
@@ -136,8 +135,9 @@ public class Gestor_Comandas {
 	public void cocina_reponerAlmacen(String[] ingredientes) {
 		Cocinero.reponerAlmacen();
 	}
+
 	public void cocina_avisarComidaLista(Comanda comanda) {
-		String notificacion="COMANDA LISTA de la mesa: " + comanda.getMesa_asociada().getNumero() +"\n";
+		String notificacion = "COMANDA LISTA de la mesa: " + comanda.getMesa_asociada().getNumero() + "\n";
 		IU_Camarero.getNotificaciones().add(notificacion);
 
 	}
@@ -150,15 +150,14 @@ public class Gestor_Comandas {
 		Camarero_Barra.prepararBebidas(comanda);
 		camareroBarra_avisarBebidaLista(comanda);
 	}
-	
+
 	public static void camareroBarra_reponerBebidas() {
 		Camarero_Barra.reponerBebidas();
-		
 	}
-	public void camareroBarra_avisarBebidaLista(Comanda comanda) {
-		String notificacion="BEBIDAS LISTA de la mesa: " + comanda.getMesa_asociada().getNumero() +"\n";
-		IU_Camarero.getNotificaciones().add(notificacion);
 
+	public void camareroBarra_avisarBebidaLista(Comanda comanda) {
+		String notificacion = "BEBIDAS LISTA de la mesa: " + comanda.getMesa_asociada().getNumero() + "\n";
+		IU_Camarero.getNotificaciones().add(notificacion);
 	}
 
 }
