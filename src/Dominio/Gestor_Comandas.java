@@ -82,7 +82,6 @@ public class Gestor_Comandas {
 	 */
 	public void camarero_mandarComida(Comanda comanda) {
 
-		ArrayList<String>comida=comanda.getEntrantes();
 
 		ArrayList<Plato>comida=comanda.getEntrantes();
 
