@@ -1,6 +1,10 @@
 package Dominio;
 //ALEX
+
+public class Mesa implements Estados {
+
 public class Mesa implements Estados{
+
 
 	private String estado;
 	private Comanda comanda_asociada;
@@ -21,7 +25,14 @@ public class Mesa implements Estados{
 	}
 
 	public Mesa() {
+	}
 
+	public Comanda getComanda_asociada() {
+		return comanda_asociada;
+	}
+
+	public void setComanda_asociada(Comanda comanda_asociada) {
+		this.comanda_asociada = comanda_asociada;
 	}
 
 	public int getNumero() {

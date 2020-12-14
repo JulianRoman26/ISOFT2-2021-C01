@@ -1,4 +1,5 @@
 package Dominio;
+
 public interface Estados {
 	public String LIBRE="Libre";
 	public String OCUPADO="Ocupado";
@@ -9,4 +10,8 @@ public interface Estados {
 	public String PAGANDO="Pagando";
 	public String EN_PREPARACION="En preparacion";
 	
+
 }
+
+}
+

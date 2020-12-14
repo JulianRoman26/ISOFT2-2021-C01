@@ -3,7 +3,7 @@ package Dominio;
 import java.util.ArrayList;
 
 import Presentacion.*;
-;
+
 
 //SERGIO: AVISARCOCINA, REPONERALMACEN
 //ALEX: MANDARCOMIDA, MANDARBEBIDA
@@ -81,7 +81,11 @@ public class Gestor_Comandas {
 	 * @param comanda
 	 */
 	public void camarero_mandarComida(Comanda comanda) {
+
+		ArrayList<String>comida=comanda.getEntrantes();
+
 		ArrayList<Plato>comida=comanda.getEntrantes();
+
 		String notificacion="Preparar la comida de la mesa: " + comanda.getMesa_asociada().getNumero() +"\n";
 		notificacion=notificacion+"ENTRANTES\n";
 		while(!comida.isEmpty()) {
