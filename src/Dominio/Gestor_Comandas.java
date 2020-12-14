@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Presentacion.*;
 
+
 //SERGIO: AVISARCOCINA, REPONERALMACEN
 //ALEX: MANDARCOMIDA, MANDARBEBIDA
 //RAFA: ANOTARCOMANDA, PREPARARBEBIDA
@@ -18,17 +19,16 @@ public class Gestor_Comandas {
 
 	/**
 	 * 
-	 * @param idMesa
+	 * @param numeroMesa
 	 */
-	public int camarero_secuenciarEstado(int idMesa) {
+	public int camarero_secuenciarEstado(int numeroMesa) {
 		// TODO - implement Gestor_Comandas.camarero_secuenciarEstado
 		throw new UnsupportedOperationException();
 	}
 
-	public int camarero_anotarComanda(Camarero_Mesa cam,ArrayList<String> entrante,ArrayList<String> primer,ArrayList<String>segundo
-									,ArrayList<String>postre, ArrayList<String>bebida) {
-		// TODO - implement Gestor_Comandas.camarero_anotarComanda
-		int res=0;
+	public void camarero_anotarComanda(Camarero_Mesa cam,ArrayList<Plato> entrante,ArrayList<Plato> primer,ArrayList<Plato>segundo
+									,ArrayList<Plato>postre, ArrayList<String>bebida) {
+
 		Comanda comanda = new Comanda();
 	
 			comanda.setEntrantes(entrante);
@@ -45,11 +45,6 @@ public class Gestor_Comandas {
 			camarero_AvisarCocina_FaltaIngredientes();
 			
 		}
-		
-		
-		
-		return res;
-
 	}
 
 	/**
@@ -57,7 +52,12 @@ public class Gestor_Comandas {
 	 * @param comandaAnotada
 	 */
 	public boolean camarero_validarComanda(Comanda comandaAnotada) {
-		return false;
+		if(comandaAnotada!=null) {
+			return true;
+		}else {
+			return false;
+		}
+		
 
 	}
 
@@ -71,9 +71,9 @@ public class Gestor_Comandas {
 	 * @param ingredientes
 	 * @param cantidad_ingredientes
 	 */
-	public int camarero_AvisarCocina_FaltaIngredientes() {
-		// TODO - implement Gestor_Comandas.camarero_AvisarCocina_FaltaIngredientes
-		throw new UnsupportedOperationException();
+	public void camarero_AvisarCocina_FaltaIngredientes() {
+		String notificacion="NOS HEMOS QUEDADO SIN INGREDIENTES. DEBES REPONER EL ALMACEN";
+		IU_Cocina.getNotificaciones().add(notificacion);
 	}
 
 	/**
@@ -81,7 +81,11 @@ public class Gestor_Comandas {
 	 * @param comanda
 	 */
 	public void camarero_mandarComida(Comanda comanda) {
+
 		ArrayList<String>comida=comanda.getEntrantes();
+
+		ArrayList<Plato>comida=comanda.getEntrantes();
+
 		String notificacion="Preparar la comida de la mesa: " + comanda.getMesa_asociada().getNumero() +"\n";
 		notificacion=notificacion+"ENTRANTES\n";
 		while(!comida.isEmpty()) {
@@ -124,8 +128,21 @@ public class Gestor_Comandas {
 	 * 
 	 * @param comanda
 	 */
-	public int camareroBarra_prepararBebida(Comanda comanda) {
-		return 0;
+	public void cocina_cocinarPlatos(Comanda comanda) {
+		Cocinero.cocinarPlatos(comanda);
+		cocina_avisarComidaLista(comanda);
+	}
+
+	/**
+	 * 
+	 * @param ingredientes
+	 */
+	public void cocina_reponerAlmacen(String[] ingredientes) {
+		Cocinero.reponerAlmacen();
+	}
+	public void cocina_avisarComidaLista(Comanda comanda) {
+		String notificacion="COMANDA LISTA de la mesa: " + comanda.getMesa_asociada().getNumero() +"\n";
+		IU_Camarero.getNotificaciones().add(notificacion);
 
 	}
 
@@ -133,28 +150,19 @@ public class Gestor_Comandas {
 	 * 
 	 * @param comanda
 	 */
-	public int cocina_cocinarPlatos(Comanda comanda) {
-		return 0;
-
+	public void camareroBarra_prepararBebida(Comanda comanda) {
+		Camarero_Barra.prepararBebidas(comanda);
+		camareroBarra_avisarBebidaLista(comanda);
 	}
-
-	/**
-	 * 
-	 * @param ingredientes
-	 */
-	public int cocina_reponerAlmacen(String[] ingredientes) {
-		// TODO - implement Gestor_Comandas.cocina_reponerAlmacen
-		throw new UnsupportedOperationException();
+	
+	public static void camareroBarra_reponerBebidas() {
+		Camarero_Barra.reponerBebidas();
+		
 	}
+	public void camareroBarra_avisarBebidaLista(Comanda comanda) {
+		String notificacion="BEBIDAS LISTA de la mesa: " + comanda.getMesa_asociada().getNumero() +"\n";
+		IU_Camarero.getNotificaciones().add(notificacion);
 
-	/**
-	 * 
-	 * @param bebidas
-	 * @param cantidad
-	 */
-	public int camareroBarra_reponerBebidas(String[] bebidas, int[] cantidad) {
-		// TODO - implement Gestor_Comandas.camareroBarra_reponerBebidas
-		throw new UnsupportedOperationException();
 	}
 
 }

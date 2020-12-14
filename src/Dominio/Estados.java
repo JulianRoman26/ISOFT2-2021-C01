@@ -10,4 +10,8 @@ public interface Estados {
 	public String PAGANDO="Pagando";
 	public String EN_PREPARACION="En preparacion";
 	
+
 }
+
+}
+
