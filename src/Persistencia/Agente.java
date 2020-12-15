@@ -3,7 +3,6 @@ package Persistencia;
 //AARON
 import java.sql.*;
 
-
 //AARON
 public class Agente {
 	//Creamos una variable de conexion estatica ya que vamos a utilizar el patron singleton
