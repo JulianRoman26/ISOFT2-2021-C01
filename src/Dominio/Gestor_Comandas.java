@@ -37,7 +37,7 @@ public class Gestor_Comandas {
 		comanda.setPostre(postre);
 		comanda.setBebidas(bebida);
 		if (camarero_validarComanda(comanda) == true) {
-			cam.anotarComanda(); // Anadir la comanda en la base de datos
+			cam.anotarComanda(comanda); // Anadir la comanda en la base de datos
 			camarero_mandarComida(comanda);
 			camarero_mandarBebida(comanda);
 
@@ -80,7 +80,9 @@ public class Gestor_Comandas {
 	 * @param comanda
 	 */
 	public static void camarero_mandarComida(Comanda comanda) {
+		
 		ArrayList<Plato> comida = comanda.getEntrantes();
+		
 		String notificacion = "Preparar la comida de la mesa: " + comanda.getMesa_asociada().getNumero() + "\n";
 		notificacion = notificacion + "ENTRANTES\n";
 		while (!comida.isEmpty()) {
