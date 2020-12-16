@@ -3,9 +3,12 @@ package Persistencia;
 //AARON
 import java.sql.*;
 
+import java.sql.*;
+
+
 //AARON
 public class Agente {
-	//Creamos una variable de conexion estatica ya que vamos a utilizar el patron singleton
+	//Creamos una variable de conexion estatica ya que vamos a utilizar el patron singleton.
 	private static Connection conexion = null;
 	private static PreparedStatement ps;
 	private static ResultSet rs;
@@ -15,7 +18,7 @@ public class Agente {
     private String password;
     
     //Constructor
-    public Agente() {
+    private Agente() {
     	 String url = "jdbc:mysql://servidorpecespi.hopto.org:3306/restaurante";
     	 String driver = "com.mysql.cj.jdbc.Driver";
     	 String usuario = "isoft2";
@@ -29,7 +32,9 @@ public class Agente {
 		}
     }
     
-    //Metodos para la interaccion con la base de datos.
+    //Metodos para la interaccion con la base de datos:
+    
+    //Método para iniciar la conexion con la base de datos
     public static Connection getConnection(){
     	if (conexion == null) {
     		new Agente();
@@ -37,6 +42,7 @@ public class Agente {
     	return conexion;
     }
     
+    //Método para cerrar la conexion con la base de datos
     public static void closeConnection() throws SQLException {
     	if(conexion != null) {
     		conexion.close();
@@ -44,85 +50,100 @@ public class Agente {
     }
     
     //Método para insertar registros en la base de dato.
-    public static void insertar(String comando) {
-    	if(conexion == null) {
-    		try {
-    			getConnection();
-    			ps = conexion.prepareStatement(comando);
-    			int res = ps.executeUpdate();
-    			if(res>0) {
-    				System.out.println("Valores guardados en la base de datos");
-    			}else System.out.println("Error al guardar valores en la base de datos");
-    			conexion.close();
-    		}catch(Exception e) {
-    			System.err.print(e);
-    		}
-    	}
-    }
+	public static void insertar(String comando) {
+		try {
+			getConnection();
+			ps = conexion.prepareStatement(comando);
+			int res = ps.executeUpdate();
+			if (res > 0) {
+				System.out.println("Valores guardados");
+			} else
+				System.out.println("Error al guardar valores");
+			conexion.close();
+		} catch (Exception e) {
+			System.err.print(e);
+		}
+	}
+    
+    //Método para mostrar datos
+	public static void mostrar(String comando) {
+		try {
+			getConnection();
+			ps = conexion.prepareStatement(comando);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ResultSetMetaData rsmd = rs.getMetaData();
+				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+					if (i > 1) {
+						System.out.print(" | ");
+					}
+					int type = rsmd.getColumnType(i);
+					if (type == Types.VARCHAR || type == Types.CHAR) {
+						System.out.print(rs.getString(i));
+					} else {
+						System.out.print(Long.toString(rs.getLong(i)));
+					}
+				}
+				System.out.println();
+			}
+		} catch (Exception e) {
+			System.err.print(e);
+		}
+	}
     
     //Método para realizar consultas en la base de datos.
     public static String consultar(String comando) {
     	String resultado="0";
-    	if(conexion == null) {
-    		try {
-    			getConnection();
-    			ps = conexion.prepareStatement(comando);
-    			rs = ps.executeQuery();
-				while(rs.next()) {
-					ResultSetMetaData rsmd = rs.getMetaData();
-					for(int i=1; i<= rsmd.getColumnCount();i++) {
-						if(i>1) {
-							System.out.print(" | ");
-						}
-						int type = rsmd.getColumnType(i);
-						if(type==Types.VARCHAR || type == Types.CHAR) {
-							resultado = rs.getString(i);
-							System.out.print(resultado);
-						}else {
-							resultado = Long.toString(rs.getLong(i));
-							System.out.print(resultado);
-						}
+		try {
+			getConnection();
+			ps = conexion.prepareStatement(comando);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				ResultSetMetaData rsmd = rs.getMetaData();
+				for(int i=1; i<= rsmd.getColumnCount();i++) {
+					int type = rsmd.getColumnType(i);
+					if(type==Types.VARCHAR || type == Types.CHAR) {
+						resultado = rs.getString(i);
+					}else {
+						resultado = Long.toString(rs.getLong(i));
 					}
-					System.out.println();
 				}
-    		}catch(Exception e) {
-    			System.err.print(e);
-    		}
-    	}
+			}
+		}catch(Exception e) {
+			System.err.print(e);
+		}
     	return resultado;
     }
     
     //Método para modificar las tablas.
-    public static void modificar(String comando) {
-    	if(conexion == null) {
-    		try {
-    			getConnection();
-    			ps = conexion.prepareStatement(comando);
-    			int res = ps.executeUpdate();
-    			if(res>0) {
-    				System.out.println("Valores modificados en la base de datos");
-    			}else System.out.println("Error al modificar valores en la base de datos");
-    			conexion.close();
-    		}catch(Exception e) {
-    			System.err.print(e);
-    		}
-    	}
-    }
+	public static void modificar(String comando) {
+		try {
+			getConnection();
+			ps = conexion.prepareStatement(comando);
+			int res = ps.executeUpdate();
+			if (res > 0) {
+				System.out.println("Valores modificados en la base de datos");
+			} else
+				System.out.println("Error al modificar valores en la base de datos");
+			conexion.close();
+		} catch (Exception e) {
+			System.err.print(e);
+		}
+	}
     
-    public static void eliminar(String comando) {
-    	if(conexion == null) {
-    		try {
-    			getConnection();
-    			ps = conexion.prepareStatement(comando);
-    			int res = ps.executeUpdate();
-    			if(res>0) {
-    				System.out.println("Valores eliminados de la base de datos");
-    			}else System.out.println("Error al eliminar valores de la base de datos");
-    			conexion.close();
-    		}catch(Exception e) {
-    			System.err.print(e);
-    		}
-    	}
-    }
-
+	//Método para eliminar elementos de la base de datos
+	public static void eliminar(String comando) {
+		try {
+			getConnection();
+			ps = conexion.prepareStatement(comando);
+			int res = ps.executeUpdate();
+			if (res > 0) {
+				System.out.println("Valores eliminados de la base de datos");
+			} else
+				System.out.println("Error al eliminar valores de la base de datos");
+			conexion.close();
+		} catch (Exception e) {
+			System.err.print(e);
+		}
+	}
 }
