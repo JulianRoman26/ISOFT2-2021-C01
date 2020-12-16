@@ -1,10 +1,7 @@
-
 package Persistencia;
-//AARON
-import java.sql.*;
 
 import java.sql.*;
-
+import java.util.*;
 
 //AARON
 public class Agente {
@@ -19,7 +16,7 @@ public class Agente {
     
     //Constructor
     private Agente() {
-    	 String url = "jdbc:mysql://servidorpecespi.hopto.org:3306/restaurante";
+    	 String url = "jdbc:mysql://servidorpecespi.hopto.org:3306/nation";
     	 String driver = "com.mysql.cj.jdbc.Driver";
     	 String usuario = "isoft2";
     	 String password = "isoft2c01";
@@ -91,8 +88,34 @@ public class Agente {
 		}
 	}
     
-    //Método para realizar consultas en la base de datos.
-    public static String consultar(String comando) {
+    //Método para obtener varios elementos de una tabla.
+	public static ArrayList<ArrayList<String>> getMany(String comando) {
+    	ArrayList<ArrayList<String>> lista= new ArrayList<ArrayList<String>>();
+		try {
+			getConnection();
+			ps = conexion.prepareStatement(comando);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				ArrayList<String> elemento= new ArrayList<String>();
+				ResultSetMetaData rsmd = rs.getMetaData();
+				for(int i=1; i<= rsmd.getColumnCount();i++) {
+					int type = rsmd.getColumnType(i);
+					if(type==Types.VARCHAR || type == Types.CHAR) {
+						elemento.add(rs.getString(i));
+					}else{
+						elemento.add(Long.toString(rs.getLong(i)));
+					}
+				}
+				lista.add(elemento);
+			}
+		}catch(Exception e) {
+			System.err.print(e);
+		}
+    	return lista;
+    }
+	
+	//Metodo para obtener un unico elemento de una tabla
+    public static String get(String comando) {
     	String resultado="0";
 		try {
 			getConnection();
