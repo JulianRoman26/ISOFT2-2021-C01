@@ -7,11 +7,21 @@ import Persistencia.Agente;
 
 // JULIAN
 public class Cocinero implements Carta{
-
+	
+	public Cocinero() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * 
 	 * @param comanda
 	 */
+	public int avisarCamarero_Mesa_PlatosListos() {
+		String mensaje= "LOS PLATOS DE LA COMANDA X YA ESTAN LISTOS PARA SER SERVIDOS ";
+		IU_Camarero.getNotificaciones().add(mensaje);
+		throw new UnsupportedOperationException();
+	}
+	
 	public static void cocinarPlatos(Comanda comanda) {
 		Plato p=new Plato("");
 		
