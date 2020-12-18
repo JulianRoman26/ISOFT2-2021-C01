@@ -17,6 +17,8 @@ public class Camarero_Barra extends Camarero {
 		// TODO Auto-generated constructor stub
 	}
 	public int avisarCamarero_Mesa_BebidasListas() {
+		String mensaje= "LAS BEBIDAS DE LA COMANDA X YA ESTAN LISTAS PARA SER SERVIDAS ";
+		IU_Camarero.getNotificaciones().add(mensaje);
 		// TODO - implement Camarero_Barra.avisarCamarero_Mesa_BebidasListas
 		throw new UnsupportedOperationException();
 	}
