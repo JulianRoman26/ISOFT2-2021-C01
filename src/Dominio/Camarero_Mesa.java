@@ -26,9 +26,41 @@ public class Camarero_Mesa extends Camarero{
 
 
 
-	public boolean validarComanda() {
-		// TODO - implement Camarero_Mesa.validarComanda
-		throw new UnsupportedOperationException();
+	public boolean validarComanda(Comanda comandaAnotada) {
+		ArrayList<Ingrediente> ingredientes= new ArrayList<Ingrediente>();
+		ArrayList<Plato> platos = new ArrayList<Plato>();
+		Plato p;
+		
+		platos.addAll(comandaAnotada.getEntrantes());
+		platos.addAll(comandaAnotada.getPrimer_plato());
+		platos.addAll(comandaAnotada.getSegundo_plato());
+		platos.addAll(comandaAnotada.getPostre());
+		Iterator<Plato> iter = platos.iterator();
+		
+		while (iter.hasNext()) {
+			p= iter.next();
+			Iterator<Ingrediente> iter2= p.getIngredientes().iterator();
+			
+			while (iter2.hasNext()){
+				Ingrediente i=iter2.next();
+				if (!ingredientes.contains(i)) {
+					ingredientes.add(i);	
+				}else {
+					int num=ingredientes.indexOf(i);
+					ingredientes.get(num).setCantidad(ingredientes.get(num).getCantidad()+i.getCantidad());
+				}
+			}
+		}
+		Iterator<Ingrediente> iter3 = ingredientes.iterator();
+		while (iter3.hasNext()) {
+			// quiza se pueda usar una coleccion para almacenar todo lo que reciba Collection coleccion;
+			Ingrediente ing= null; 
+			Ingrediente ing_actual= iter3.next();
+			ArrayList<ArrayList<String>> componente =Agente.consultar("SELECT cantidad FROM Ingredientes WHERE nombre = "+ ing_actual.getNombre() +"");
+			
+			if (ing_actual.getCantidad() > Integer.parseInt(componente.get(0).get(0))) return false;
+		}
+		return true;
 	}
 
 	public void anotarComanda(Comanda comanda) {
