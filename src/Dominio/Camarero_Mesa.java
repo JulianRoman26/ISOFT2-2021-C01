@@ -26,7 +26,7 @@ public class Camarero_Mesa extends Camarero{
 
 
 
-	public boolean validarComanda(Comanda comandaAnotada) {
+	public static boolean validarComanda(Comanda comandaAnotada) {
 		ArrayList<Ingrediente> ingredientes= new ArrayList<Ingrediente>();
 		ArrayList<Plato> platos = new ArrayList<Plato>();
 		Plato p;

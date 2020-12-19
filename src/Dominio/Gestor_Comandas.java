@@ -2,6 +2,7 @@ package Dominio;
 
 import java.util.ArrayList;
 
+import Persistencia.Agente;
 import Presentacion.*;
 
 //SERGIO: AVISARCOCINA, REPONERALMACEN
@@ -20,10 +21,8 @@ public class Gestor_Comandas {
 	 * 
 	 * @param numeroMesa
 	 */
-	public static int camarero_secuenciarEstado(int numeroMesa) {
-		Camarero_Mesa.secuenciarEstado_Mesa(numeroMesa);
-		// TODO - implement Gestor_Comandas.camarero_secuenciarEstado
-		throw new UnsupportedOperationException();
+	public static void camarero_secuenciarEstado(int numeroMesa, String estadoNuevo) {
+		Agente.consultar("UPDATE Mesa SET estado= "+estadoNuevo+ "WHERE id= "+numeroMesa+";");
 	}
 
 	public static void camarero_anotarComanda(Camarero_Mesa cam, ArrayList<Plato> entrante, ArrayList<Plato> primer,
