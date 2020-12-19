@@ -3,6 +3,7 @@ package Dominio;
 import java.util.ArrayList;
 
 import Persistencia.Agente;
+import Presentacion.IU_Camarero;
 
 // JORGE
 public class Camarero_Barra extends Camarero {

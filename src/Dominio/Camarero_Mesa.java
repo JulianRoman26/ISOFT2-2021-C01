@@ -1,6 +1,9 @@
 
 package Dominio;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import Persistencia.Agente;
 
 // SERGIO
@@ -18,7 +21,7 @@ public class Camarero_Mesa extends Camarero{
 	private static Mesa[] mesas;
 	// la forma en la que organizaremos las mesas es con 
 	public static void secuenciarEstado_Mesa(int num_mesa) {
-		mesas[num_mesa].setEstado(Agente.consultar("GET estado FROM mesa WHERE num_mesa = "+ num_mesa+""));
+		mesas[num_mesa].setEstado(Agente.get("GET estado FROM mesa WHERE num_mesa = "+ num_mesa+""));
 		mesas[num_mesa].secuenciarEstado();
 		Agente.modificar("UPDATE mesa SET estados=("+mesas[num_mesa].getEstado()+") WHERE num ="+ num_mesa);
 		throw new UnsupportedOperationException();
@@ -26,7 +29,7 @@ public class Camarero_Mesa extends Camarero{
 
 
 
-	public boolean validarComanda(Comanda comandaAnotada) {
+	public static boolean validarComanda(Comanda comandaAnotada) {
 		ArrayList<Ingrediente> ingredientes= new ArrayList<Ingrediente>();
 		ArrayList<Plato> platos = new ArrayList<Plato>();
 		Plato p;
@@ -56,7 +59,7 @@ public class Camarero_Mesa extends Camarero{
 			// quiza se pueda usar una coleccion para almacenar todo lo que reciba Collection coleccion;
 			Ingrediente ing= null; 
 			Ingrediente ing_actual= iter3.next();
-			ArrayList<ArrayList<String>> componente =Agente.consultar("SELECT cantidad FROM Ingredientes WHERE nombre = "+ ing_actual.getNombre() +"");
+			ArrayList<ArrayList<String>> componente =Agente.getMany("SELECT cantidad FROM Ingredientes WHERE nombre = "+ ing_actual.getNombre() +"");
 			
 			if (ing_actual.getCantidad() > Integer.parseInt(componente.get(0).get(0))) return false;
 		}
