@@ -41,7 +41,7 @@ public class Camarero_Barra extends Camarero {
 	 * @param bebidas
 	 */
 	public static void reponerBebidas() {
-		Agente.modificar("UPDATE Bebidas SET cantidad_disponible=50 WHERE cantidad_disponible<10;\");"); //Insertar Bebidas
+		Agente.modificar("UPDATE Bebidas SET cantidad_disponible=50 WHERE cantidad_disponible<10;\");"); //reponer bebidas
 	}
 
 }

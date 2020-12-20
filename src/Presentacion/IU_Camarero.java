@@ -328,5 +328,46 @@ public class IU_Camarero {
 		}while(fin_entrante==false);
 		
 	}
+	
+	private void seleccionarEstado() {
+		
+		String estado=null;
+		System.out.print("Selecciona la mesa");
+		int mesa_id=scanner.nextInt(); //buscar mesa en la base de datos
+		System.out.print("Seleccione el estado de la mesa");
+		int opcion= scanner.nextInt();
+		
+		switch(opcion) {
+		case 1:
+			estado="Libre";
+			break;
+		case 2:
+			estado="Ocupado";
+			break;
+		case 3:
+			estado="Pidiendo";
+			break;
+		case 4:
+			estado="En espera";
+			break;
+		case 5:
+			estado="Servidos";
+			break;
+		case 6:
+			estado="Esperando";
+			break;
+		case 7:
+			estado="Pagando";
+			break;
+		case 8:
+			estado="En preparación";
+			break;
+		
+		}
+		
+		Gestor_Comandas.camarero_secuenciarEstado(mesa_id, estado);
+		
+		
+	}
 
 }
