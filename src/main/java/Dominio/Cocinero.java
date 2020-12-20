@@ -2,13 +2,15 @@ package Dominio;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 
 import Persistencia.Agente;
+
 
 // JULIAN
 public class Cocinero extends Empleado implements Carta {
 
-	
+	public static Scanner scanner=new Scanner(System.in);
 	public Cocinero(int i,String n,String t) {
 		super(i,n,t);
 		// TODO Auto-generated constructor stub
@@ -111,5 +113,31 @@ public class Cocinero extends Empleado implements Carta {
         }
 		return correcto;
 	}
+	public static void leerComanda() {
+		System.out.println("Introduzca la mesa de la que quiere obtener la comanda:");
+		int id_mesa=scanner.nextInt();
+		//Agente.get("GET estado FROM mesa WHERE num_mesa = "+ num_mesa+""
+		ArrayList<ArrayList<String>>total=new ArrayList();
+		
+		ArrayList<Bebida> bebidas;
+		ArrayList<Plato> entrantes;
+		ArrayList<Plato> primer_plato;
+		ArrayList<Plato> segundo_plato;
+		ArrayList<Plato> postres;
+		
+		total=Agente.getMany("SELECT * FROM Comandas WHERE id_mesa = "+id_mesa+"");
+		String entrante=total.get(0).get(1);
+		String primero=total.get(0).get(2);
+		String segundo=total.get(0).get(3);
+		String postre=total.get(0).get(4);
+		String bebida=total.get(0).get(5);
+
+		System.out.println("Las bebidas son: " + total.get(0).get(2));
+		System.out.println("Los entrantes son: " + entrante);
+		System.out.println("Los primeros son: " + primero);
+		System.out.println("Los segundos son: " + segundo);
+		System.out.println("Los postres son: " + postre);	
+	}
+	
 }
 

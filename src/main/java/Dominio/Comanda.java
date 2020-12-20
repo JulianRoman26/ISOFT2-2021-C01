@@ -64,7 +64,7 @@ public class Comanda {
 	public ArrayList<Plato> getPostre() {
 		return postre;
 	}
-	public void AñadirBebidas(Bebida bebida) {
+	public void AnadirBebidas(Bebida bebida) {
 		int posicion=0;
 		Iterator<Bebida>iter = bebidas.iterator();
 		while (iter.hasNext()) {

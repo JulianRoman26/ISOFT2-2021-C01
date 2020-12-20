@@ -64,7 +64,36 @@ public class IU_Cocina {
 	}
 
 	public static void mostrarMenu_cocina(Gestor_Comandas gestor) {
-		
+		int opcion;
+		boolean fin = false;
+		do {
+			do {
+				
+				System.out.println("\n           ****   MENU   ****\n");
+				System.out.println("  1.- Reponer Almacén");
+				System.out.println("  2.- Cocinar Plato");
+				System.out.println("  3.- Salir");
+
+				opcion = scanner.nextInt();
+
+				switch (opcion) {
+				case 1:
+					gestor.cocina_reponerAlmacen();
+					break;
+				case 2:
+					gestor.cocina_cocinarPlatos();
+					break;
+				case 3:
+					fin = true;
+					break;
+				default:
+					System.out.println("Valor no valido ");
+					break;
+				}
+			} while (opcion < 1 && opcion > 3);
+			//leerNotificaciones(gestor);
+		} while (fin == false);
+
 	}
 	public static int controlarNumero(String texto) {
 

@@ -123,16 +123,17 @@ public class Gestor_Comandas {
 	 * 
 	 * @param comanda
 	 */
-	public void cocina_cocinarPlatos(Comanda comanda) {
-		Cocinero.cocinarPlatos(comanda);
-		cocina_avisarComidaLista(comanda);
+	public void cocina_cocinarPlatos() {
+		cocinero.leerComanda();
+		//Cocinero.cocinarPlatos(comanda);
+		//cocina_avisarComidaLista(comanda);
 	}
 
 	/**
 	 * 
 	 * @param ingredientes
 	 */
-	public void cocina_reponerAlmacen(String[] ingredientes) {
+	public void cocina_reponerAlmacen() {
 		Cocinero.reponerAlmacen();
 	}
 

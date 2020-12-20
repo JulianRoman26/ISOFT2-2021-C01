@@ -104,7 +104,7 @@ public class IU_Camarero {
 			System.out.println("\n           ****   MENU   ****\n");
 			// while seleccion no terminado
 
-			opcion = controlarNumero("¿Qué desea pedir ahora?\n 1-Entrantes\n 2-Primeros\n 3-Segundos\n 4-Postres\n 5-Bebidas\n 6-Terminar");
+			opcion = controlarNumero("ï¿½Quï¿½ desea pedir ahora?\n 1-Entrantes\n 2-Primeros\n 3-Segundos\n 4-Postres\n 5-Bebidas\n 6-Terminar");
 			switch (opcion) {
 			case 1:
 				seleccionarEntrantes(entrantes); // Va introduciendo los platos que le van indicando al camarero
@@ -131,7 +131,7 @@ public class IU_Camarero {
 				finComanda = true;
 				break;
 			default:
-				System.out.println("Opción no válido");
+				System.out.println("Opciï¿½n no vï¿½lido");
 				break;
 			}
 
@@ -172,7 +172,7 @@ public class IU_Camarero {
 				fin_entrante = true;
 				break;
 			default:
-				System.out.println("Opción no válido");
+				System.out.println("Opciï¿½n no vï¿½lido");
 				break;
 			}
 		} while (fin_entrante == false);
@@ -212,7 +212,7 @@ public class IU_Camarero {
 				fin_primero = true;
 				break;
 			default:
-				System.out.println("Opción no válido");
+				System.out.println("Opciï¿½n no vï¿½lido");
 				break;
 			}
 		} while (fin_primero == false);
@@ -253,7 +253,7 @@ public class IU_Camarero {
 				fin_segundo = true;
 				break;
 			default:
-				System.out.println("Opción no válido");
+				System.out.println("Opciï¿½n no vï¿½lido");
 				break;
 			}
 		} while (fin_segundo == false);
@@ -293,7 +293,7 @@ public class IU_Camarero {
 				fin_postre = true;
 				break;
 			default:
-				System.out.println("Opción no válido");
+				System.out.println("Opciï¿½n no vï¿½lido");
 				break;
 			}
 		} while (fin_postre == false);
@@ -308,23 +308,23 @@ public class IU_Camarero {
 			opcion = controlarNumero("Seleccione una bebida: ");
 			switch (opcion) {
 			case 1:
-				comanda.AñadirBebidas(new Bebida("Soda",1));
+				comanda.AnadirBebidas(new Bebida("Soda",1));
 				break;
 			case 2:
-				comanda.AñadirBebidas(new Bebida("CocaCola",1));
+				comanda.AnadirBebidas(new Bebida("CocaCola",1));
 				break;
 			case 3:
-				comanda.AñadirBebidas(new Bebida("Vino",1));
+				comanda.AnadirBebidas(new Bebida("Vino",1));
 				break;
 			case 4:
-				comanda.AñadirBebidas(new Bebida("Cerveza",1));
+				comanda.AnadirBebidas(new Bebida("Cerveza",1));
 				break;
 
 			case 5:
 				fin_bebida = true;
 				break;
 			default:
-				System.out.println("Opción no válido");
+				System.out.println("Opciï¿½n no vï¿½lido");
 				break;
 			}
 		} while (fin_bebida == false);
