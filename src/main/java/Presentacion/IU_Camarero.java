@@ -55,7 +55,7 @@ public class IU_Camarero {
 					seleccionarMesa();
 					break;
 				case 2:
-					Gestor_Comandas.camarero_secuenciarEstado(mesa_actual);
+					gestor.camarero_secuenciarEstado(mesa_actual);
 					break;
 				case 3:
 					seleccionarPlatos(gestor);

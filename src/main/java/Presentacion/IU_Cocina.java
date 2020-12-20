@@ -12,7 +12,7 @@ public class IU_Cocina {
 	public static void main(String[] args) {
 		Gestor_Comandas gestor =new Gestor_Comandas();
 		if(identificarse(gestor)==true) {
-			mostrarMenu_cocina();
+			mostrarMenu_cocina(gestor);
 		}
 	}
 	
@@ -62,7 +62,7 @@ public class IU_Cocina {
 		
 	}
 
-	public static void mostrarMenu_cocina() {
+	public static void mostrarMenu_cocina(Gestor_Comandas gestor) {
 		
 	}
 	public static int controlarNumero(String texto) {

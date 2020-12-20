@@ -12,19 +12,40 @@ import Presentacion.*;
 //JULIAN: VALIDARCOMANDA, REPONERBEBIDAS
 public class Gestor_Comandas {
 
-	private Camarero[] Camareros;
-	private Comanda[] Comandas;
-	private Cocinero[] Cocineros;
 	private Camarero_Mesa camarero;
+	private Camarero_Barra barra;
+	private Cocinero cocinero;
+
+	public Camarero_Mesa getCamarero() {
+		return camarero;
+	}
+
+	public Camarero_Barra getBarra() {
+		return barra;
+	}
+
+	public Cocinero getCocinero() {
+		return cocinero;
+	}
+
+	public void setCamarero(Camarero_Mesa camarero) {
+		this.camarero = camarero;
+	}
+
+	public void setBarra(Camarero_Barra barra) {
+		this.barra = barra;
+	}
+
+	public void setCocinero(Cocinero cocinero) {
+		this.cocinero = cocinero;
+	}
 
 	/**
 	 * 
 	 * @param numeroMesa
 	 */
-	public static int camarero_secuenciarEstado(int numeroMesa) { // Terminado
-		Camarero_Mesa.secuenciarEstado_Mesa(numeroMesa);
-		// TODO - implement Gestor_Comandas.camarero_secuenciarEstado
-		throw new UnsupportedOperationException();
+	public void camarero_secuenciarEstado(int numeroMesa) { // Terminado
+		camarero.secuenciarEstado_Mesa(numeroMesa);
 	}
 
 	public  void camarero_anotarComanda(Comanda comanda) { // Terminado
@@ -41,8 +62,8 @@ public class Gestor_Comandas {
 	 * 
 	 * @param comandaAnotada
 	 */
-	public static boolean camarero_validarComanda(Comanda comandaAnotada) { // Terminado
-		return Camarero_Mesa.validarComanda(comandaAnotada);
+	public boolean camarero_validarComanda(Comanda comandaAnotada) { // Terminado
+		return camarero.validarComanda(comandaAnotada);
 	}
 	/**
 	 * 
@@ -117,7 +138,7 @@ public class Gestor_Comandas {
 
 	public void cocina_avisarComidaLista(Comanda comanda) {
 		String notificacion = "COMANDA LISTA de la mesa: " + comanda.getMesa_asociada() + "\n";
-		Cocinero.mandarNotificacion(notificacion, comanda);
+		cocinero.mandarNotificacion(notificacion, comanda);
 	}
 	
 	/**
@@ -125,12 +146,12 @@ public class Gestor_Comandas {
 	 * @param comanda
 	 */
 	public void camareroBarra_prepararBebida(Comanda comanda) {
-		Camarero_Barra.prepararBebidas(comanda);
+		barra.prepararBebidas(comanda);
 		camareroBarra_avisarBebidaLista(comanda);
 	}
 
-	public static void camareroBarra_reponerBebidas() {
-		Camarero_Barra.reponerBebidas();
+	public void camareroBarra_reponerBebidas() {
+		barra.reponerBebidas();
 	}
 
 	public void camareroBarra_avisarBebidaLista(Comanda comanda) {
@@ -178,8 +199,6 @@ public class Gestor_Comandas {
 		return existe;
 
 	}
-	public void setCamareroGestor(Camarero_Mesa c) {
-		camarero=c;
-	}
+
 
 }

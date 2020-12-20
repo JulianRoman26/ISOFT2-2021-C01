@@ -8,13 +8,33 @@ import Dominio.Gestor_Comandas;
 //NO POR EL MOMENTO
 public class IU_CamareroBarra {
 	static Scanner scanner = new Scanner(System.in);
-	ArrayList<String> notificaciones=new ArrayList<String>();
+	static ArrayList<String> notificaciones=new ArrayList<String>();
 	
+	public static void main(String[] args) {
+		Gestor_Comandas gestor =new Gestor_Comandas();
+		if(identificarse(gestor)==true) {
+			mostrarMenu_barra();
+		}
+	}
+	
+	public static boolean identificarse(Gestor_Comandas gestor) {
+		boolean valido;
+		int id=controlarNumero("Introduzca su identicador:");
+		if(gestor.identificarse("Cocinero",id)==true){
+			System.out.println("Inicio de sesion correcto");
+			valido=true;
+		}
+		else {
+			System.out.println("Inicio de sesion incorrecto");
+			valido=false;
+		}
+		return valido;
+	}
 	public ArrayList<String> getNotificaciones() {
 		return notificaciones;
 	}
 	
-	public void mostrarMenu_barra() {
+	public static void mostrarMenu_barra() {
 		int opcion;
 		boolean fin = false;
 		do {
@@ -50,13 +70,13 @@ public class IU_CamareroBarra {
 		
 	}
 	
-	public void reponerBebidas() {
-		Gestor_Comandas.camareroBarra_reponerBebidas();
+	public void reponerBebidas(Gestor_Comandas gestor) {
+		gestor.camareroBarra_reponerBebidas();
 	}
-	public void leerNotificaciones() {
+	public static void leerNotificaciones() {
 		System.out.println("Tiene usted: "+notificaciones.size()+" notificaciones.");
 	}
-	public void mostrarNotificacion() {
+	public static void mostrarNotificacion() {
 		boolean salir=false;
 		while(!notificaciones.isEmpty()&& salir==false) {
 			System.out.println(notificaciones.get(0));
