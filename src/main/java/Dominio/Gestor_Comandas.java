@@ -156,8 +156,7 @@ public class Gestor_Comandas {
 
 	public void camareroBarra_avisarBebidaLista(Comanda comanda) {
 		String notificacion = "BEBIDAS LISTA de la mesa: " + comanda.getMesa_asociada() + "\n";
-		Camarero_Barra cam = new Camarero_Barra();
-		cam.mandarNotificacion(comanda, notificacion);
+		barra.mandarNotificacion(comanda, notificacion);
 	}
 
 	public int contarNotificaciones(int identificador_usuario) {

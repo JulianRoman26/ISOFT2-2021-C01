@@ -8,17 +8,17 @@ import java.util.Iterator;
 import Persistencia.Agente;
 
 // SERGIO
-public class Camarero_Mesa extends Camarero{
+public class Camarero_Mesa extends Empleado{
 	private static Mesa[] mesas;
 	
 	
-	public Camarero_Mesa(String exp, int id) {
-		super(exp, id);
+	public Camarero_Mesa(int i,String n,String t) {
+		super(i,n,t);
 		// TODO Auto-generated constructor stub
 	}
 	
 	public Camarero_Mesa(int id) {
-		this.identificador=id;
+		super(id);
 	}
 
 	// la forma en la que organizaremos las mesas es con 
@@ -109,12 +109,13 @@ public class Camarero_Mesa extends Camarero{
 
 	public boolean Autenticar() {
 		boolean correcto=true;
-        int resultado=Integer.parseInt(Agente.get("SELECT id_empleado FROM Empleados WHERE (id_empleado="+this.identificador+" AND rol='Camarero_Mesa')"));
+        int resultado=Integer.parseInt(Agente.get("SELECT id_empleado FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Camarero_Mesa')"));
         if(resultado==0) {
         	correcto=false;
         }
         else {
         	correcto=true;
+        	
         }
 		return correcto;
 	}

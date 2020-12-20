@@ -6,21 +6,18 @@ import Persistencia.Agente;
 import Presentacion.IU_Camarero;
 
 // JORGE
-public class Camarero_Barra extends Camarero {
+public class Camarero_Barra extends Empleado {
 	private String barra;
 	
-
-	public Camarero_Barra(String experiencia_laboral, int id) {
-		super(experiencia_laboral, id);
+	public Camarero_Barra(int i,String n,String t) {
+		super(i,n,t);
 		// TODO Auto-generated constructor stub
 	}
-	public Camarero_Barra() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 	public Camarero_Barra(int id) {
-		// TODO Auto-generated constructor stub
+		super(id);
 	}
+
 	public int avisarCamarero_Mesa_BebidasListas() {
 		String mensaje= "LAS BEBIDAS DE LA COMANDA X YA ESTAN LISTAS PARA SER SERVIDAS ";
 		
@@ -48,7 +45,7 @@ public class Camarero_Barra extends Camarero {
 		Agente.modificar("UPDATE Bebidas SET cantidad_disponible=50 WHERE cantidad_disponible<10;\");"); //Insertar Bebidas
 	}
 	public void mandarNotificacion(Comanda comanda, String notificacion) {
-		Agente.insertar("INSERT INTO notificaciones VALUES(origen, destino, mensaje) VALUES "+ identificador +", "+comanda.getId_camarero() +","+ notificacion+"");
+		Agente.insertar("INSERT INTO notificaciones VALUES(origen, destino, mensaje) VALUES "+ id_empleado +", "+comanda.getId_camarero() +","+ notificacion+"");
 		// TODO Auto-generated method stub
 		
 	}
@@ -59,7 +56,7 @@ public class Camarero_Barra extends Camarero {
 	}
 	public boolean Autenticar() {
 		boolean correcto=true;
-        int resultado=Integer.parseInt(Agente.get("SELECT nombre FROM Empleados WHERE id_empleado="+this.identificador));
+        int resultado=Integer.parseInt(Agente.get("SELECT nombre FROM Empleados WHERE id_empleado="+this.id_empleado));
         if(resultado==0) {
         	correcto=false;
         }
