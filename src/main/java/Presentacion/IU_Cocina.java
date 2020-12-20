@@ -59,8 +59,8 @@ public class IU_Cocina {
 		}
 	}
 
-	public void reponerAlmacen() {
-		
+	public void reponerAlmacen(Gestor_Comandas gestor) {
+		gestor.cocina_reponerAlmacen();
 	}
 
 	public static void mostrarMenu_cocina(Gestor_Comandas gestor) {

@@ -87,7 +87,7 @@ public class Cocinero extends Empleado implements Carta {
 
 	}
 
-	public static void reponerAlmacen() {
+	public void reponerAlmacen() {
 		Agente.modificar("UPDATE Ingredientes SET cantidad_disponible=50 WHERE cantidad_disponible<10;");
 	}
 

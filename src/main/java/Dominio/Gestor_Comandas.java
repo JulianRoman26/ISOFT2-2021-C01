@@ -132,8 +132,8 @@ public class Gestor_Comandas {
 	 * 
 	 * @param ingredientes
 	 */
-	public void cocina_reponerAlmacen(String[] ingredientes) {
-		Cocinero.reponerAlmacen();
+	public void cocina_reponerAlmacen() {
+		cocinero.reponerAlmacen();
 	}
 
 	public void cocina_avisarComidaLista(Comanda comanda) {
