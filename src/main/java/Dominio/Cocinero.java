@@ -6,12 +6,16 @@ import java.util.Iterator;
 import Persistencia.Agente;
 
 // JULIAN
-public class Cocinero implements Carta{
+public class Cocinero extends Empleado implements Carta {
 
-	private static int identificador;
-	public Cocinero(int identificador) {
-		super();
-		this.identificador = identificador;
+	
+	public Cocinero(int i,String n,String t) {
+		super(i,n,t);
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Cocinero(int id) {
+		super(id);
 	}
 
 	/**
@@ -87,20 +91,23 @@ public class Cocinero implements Carta{
 		Agente.modificar("UPDATE Ingredientes SET cantidad_disponible=50 WHERE cantidad_disponible<10;");
 	}
 
-	public static void mandarNotificacion(String notificacion,Comanda comanda) {
-		Agente.insertar("INSERT INTO notificaciones VALUES (origen, destino, mensaje) VALUES ("+ identificador +","+comanda.getId_camarero()+","+notificacion +")");
+	public void mandarNotificacion(String notificacion,Comanda comanda) {
+		Agente.insertar("INSERT INTO notificaciones VALUES (origen, destino, mensaje) VALUES ("+ id_empleado +","+comanda.getId_camarero()+","+notificacion +")");
 		// TODO Auto-generated method stub
 		
 	}
 
 	public boolean Autenticar() {
 		boolean correcto=true;
-        int resultado=Integer.parseInt(Agente.get("SELECT id_empleado FROM Empleados WHERE (id_empleado="+this.identificador+" AND rol='Cocinero')"));
+        int resultado=Integer.parseInt(Agente.get("SELECT id_empleado FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Cocinero')"));
         if(resultado==0) {
         	correcto=false;
         }
         else {
-        	correcto=true;
+        	correcto= true;
+        	setId_empleado(resultado);
+        	setNombre(Agente.get("SELECT nombre FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Cocinero')"));
+        	setTelefono(Agente.get("SELECT telefono FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Cocinero')"));
         }
 		return correcto;
 	}

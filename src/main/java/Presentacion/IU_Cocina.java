@@ -21,6 +21,7 @@ public class IU_Cocina {
 		int id=controlarNumero("Introduzca su identicador:");
 		if(gestor.identificarse("Cocinero",id)==true){
 			System.out.println("Inicio de sesion correcto");
+			System.out.println(gestor.getCocinero().toString());
 			valido=true;
 		}
 		else {

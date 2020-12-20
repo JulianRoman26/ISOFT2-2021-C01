@@ -7,6 +7,10 @@ public abstract class Empleado {
 		this.id_empleado = id_empleado;
 		this.telefono = telefono;
 	}
+	@Override
+	public String toString() {
+		return "Empleado [id_empleado=" + id_empleado + ", nombre=" + nombre + ", telefono=" + telefono + "]";
+	}
 	public Empleado( int id_empleado) {
 
 		this.id_empleado = id_empleado;

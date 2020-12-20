@@ -27,6 +27,7 @@ public class IU_Camarero {
 		int id=controlarNumero("Introduzca su identicador:");
 		if(gestor.identificarse("Camarero_Mesa",id)==true){
 			System.out.println("Inicio de sesion correcto");
+			System.out.println("BIENVENIDO "+gestor.getCamarero().toString());
 			valido=true;
 		}
 		else {

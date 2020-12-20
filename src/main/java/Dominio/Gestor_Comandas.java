@@ -183,14 +183,18 @@ public class Gestor_Comandas {
 		case "Camarero_Mesa":
 			Camarero_Mesa c= new Camarero_Mesa(id);
 			existe=c.Autenticar();
+			setCamarero(c);
 			break;
 		case "Camarero_Barra":
 			Camarero_Barra cb= new Camarero_Barra(id);
 			existe=cb.Autenticar();
+			setBarra(cb);
+			
 			break;
 		case "Cocinero":
 			Cocinero co=new Cocinero(id);
 			existe=co.Autenticar();
+			setCocinero(co);
 			break;
 		case "Jefe_Mesa":
 			break;

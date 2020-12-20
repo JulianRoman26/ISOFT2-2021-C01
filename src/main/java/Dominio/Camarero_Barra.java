@@ -56,12 +56,15 @@ public class Camarero_Barra extends Empleado {
 	}
 	public boolean Autenticar() {
 		boolean correcto=true;
-        int resultado=Integer.parseInt(Agente.get("SELECT nombre FROM Empleados WHERE id_empleado="+this.id_empleado));
+        int resultado=Integer.parseInt(Agente.get("SELECT id_empleado FROM Empleados WHERE id_empleado="+this.id_empleado));
         if(resultado==0) {
         	correcto=false;
         }
         else {
-        	correcto=true;
+        	correcto= true;
+        	setId_empleado(resultado);
+        	setNombre(Agente.get("SELECT nombre FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Camarero_Barra')"));
+        	setTelefono(Agente.get("SELECT telefono FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Camarero_Barra')"));
         }
 		return correcto;
 	}

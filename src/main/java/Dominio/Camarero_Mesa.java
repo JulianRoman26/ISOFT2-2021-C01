@@ -110,12 +110,15 @@ public class Camarero_Mesa extends Empleado{
 	public boolean Autenticar() {
 		boolean correcto=true;
         int resultado=Integer.parseInt(Agente.get("SELECT id_empleado FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Camarero_Mesa')"));
+        
         if(resultado==0) {
         	correcto=false;
         }
         else {
-        	correcto=true;
-        	
+        	correcto= true;
+        	setId_empleado(resultado);
+        	setNombre(Agente.get("SELECT nombre FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Camarero_Mesa')"));
+        	setTelefono(Agente.get("SELECT telefono FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Camarero_Mesa')"));
         }
 		return correcto;
 	}

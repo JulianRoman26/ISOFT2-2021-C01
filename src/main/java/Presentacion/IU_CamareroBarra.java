@@ -20,8 +20,9 @@ public class IU_CamareroBarra {
 	public static boolean identificarse(Gestor_Comandas gestor) {
 		boolean valido;
 		int id=controlarNumero("Introduzca su identicador:");
-		if(gestor.identificarse("Cocinero",id)==true){
+		if(gestor.identificarse("Camarero_Barra",id)==true){
 			System.out.println("Inicio de sesion correcto");
+			System.out.println(gestor.getBarra().toString());
 			valido=true;
 		}
 		else {
