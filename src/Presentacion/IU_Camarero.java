@@ -40,7 +40,7 @@ public class IU_Camarero {
 			case 2:
 				System.out.println("Indique el número de la mesa que va a cambiar el estado");
 				int num=seleccionarMesa();
-				Gestor_Comandas.camarero_secuenciarEstado(num);
+				Gestor_Comandas.camarero_secuenciarEstado(num, "nuevo estado");
 				break;
 			case 3:
 				seleccionarMesa();

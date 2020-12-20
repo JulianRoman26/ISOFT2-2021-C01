@@ -22,7 +22,7 @@ public class Gestor_Comandas {
 	 * @param numeroMesa
 	 */
 	public static void camarero_secuenciarEstado(int numeroMesa, String estadoNuevo) {
-		Agente.consultar("UPDATE Mesa SET estado= "+estadoNuevo+ "WHERE id= "+numeroMesa+";");
+		Agente.modificar("UPDATE Mesa SET estado= "+estadoNuevo+ "WHERE id= "+numeroMesa+";");
 	}
 
 	public static void camarero_anotarComanda(Camarero_Mesa cam, ArrayList<Plato> entrante, ArrayList<Plato> primer,
