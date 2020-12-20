@@ -18,17 +18,16 @@ public interface Carta {
 		case "jamon":
 			
 			Ingrediente jamon=new Ingrediente("jamon",3);
-			jamon.setId(1);
+
 			ingredientes.add(jamon);
-			p.setIngredientes(ingredientes);
-			
+			p.setIngredientes(ingredientes);	
 			break;
 			
 		case "queso":
 			
 			Ingrediente queso = new Ingrediente("queso", 5);
 			ingredientes.add(queso);
-			queso.setId(2);
+
 			p.setIngredientes(ingredientes);
 			
 			break;
@@ -38,9 +37,7 @@ public interface Carta {
 			Ingrediente patatas = new Ingrediente("patata",7);
 			Ingrediente salsa=new Ingrediente("salsa_brava",2);
 			ingredientes.add(patatas);
-			patatas.setId(3);
 			ingredientes.add(salsa);
-			salsa.setId(19);
 			p.setIngredientes(ingredientes);
 			break;
 			

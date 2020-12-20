@@ -1,19 +1,35 @@
 package Dominio;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 //RAFA
 public class Comanda {
 
-	private ArrayList<String> bebidas;
+	private ArrayList<Bebida> bebidas;
 	private ArrayList<Plato> entrantes;
 	private ArrayList<Plato> primer_plato;
 	private ArrayList<Plato> segundo_plato;
 	private ArrayList<Plato> postre;
-	private Mesa mesa_asociada;
+	private int mesa_asociada;
+	private int id_camarero; 
 
-	public void setBebidas(ArrayList<String> bebidas) {
+	public Comanda(int id_camarero, int mesa) {
+		this.id_camarero=id_camarero;
+		this.mesa_asociada=mesa;
+	}
+	
+	public void setBebidas(ArrayList<Bebida> bebidas) {
 		this.bebidas = bebidas;
 	}
+	
+	public int getId_camarero() {
+		return id_camarero;
+	}
+
+	public void setId_camarero(int id_camarero) {
+		this.id_camarero = id_camarero;
+	}
+
 	public void setEntrantes(ArrayList<Plato> entrantes) {
 		this.entrantes = entrantes;
 	}
@@ -26,14 +42,14 @@ public class Comanda {
 	public void setPostre(ArrayList<Plato> postre) {
 		this.postre = postre;
 	}
-	public Mesa getMesa_asociada() {
+	public int getMesa_asociada() {
 		return mesa_asociada;
 	}
-	public void setMesa_asociada(Mesa mesa_asociada) {
+	public void setMesa_asociada(int mesa_asociada) {
 		this.mesa_asociada = mesa_asociada;
 	}
 
-	public ArrayList<String> getBebidas() {
+	public ArrayList<Bebida> getBebidas() {
 		return bebidas;
 	}
 	public ArrayList<Plato> getEntrantes() {
@@ -47,6 +63,19 @@ public class Comanda {
 	}
 	public ArrayList<Plato> getPostre() {
 		return postre;
+	}
+	public void AñadirBebidas(Bebida bebida) {
+		int posicion=0;
+		Iterator<Bebida>iter = bebidas.iterator();
+		while (iter.hasNext()) {
+			Bebida b= iter.next();
+			if (b.getNombre()== bebida.getNombre()) {
+				posicion=bebidas.indexOf(b);
+				bebidas.get(posicion).setCantidad(bebidas.get(posicion).getCantidad()+bebida.getCantidad());
+			}else {
+				bebidas.add(bebida);
+			}
+		}
 	}
 
 

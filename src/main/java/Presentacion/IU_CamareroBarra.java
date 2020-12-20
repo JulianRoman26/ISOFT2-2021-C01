@@ -25,7 +25,7 @@ public class IU_CamareroBarra {
 				System.out.println("  3.- ");
 				System.out.println("  4.- ");
 
-				opcion = controlarNumero("\nSeleccione entre 1-6:");
+				opcion = controlarNumero("\nSeleccione entre 1-5:");
 			} while (opcion < 1 && opcion > 5);
 			System.out.println("");
 			
@@ -49,7 +49,7 @@ public class IU_CamareroBarra {
 		}while(fin==false);
 		
 	}
-
+	
 	public void reponerBebidas() {
 		Gestor_Comandas.camareroBarra_reponerBebidas();
 	}

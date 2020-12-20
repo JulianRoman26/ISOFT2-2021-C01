@@ -5,7 +5,11 @@ import java.util.ArrayList;
 public class Plato {
 	
 	String nombre;
-
+	ArrayList <Ingrediente> ingredientes= new ArrayList<Ingrediente>();
+	
+	public Plato(String nombre) {
+		this.nombre=nombre;
+	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -14,15 +18,10 @@ public class Plato {
 		this.nombre = nombre;
 	}
 
-	ArrayList <Ingrediente> ingredientes= new ArrayList<Ingrediente>();
 
 	public Plato(ArrayList<Ingrediente> ingredientes) {
 		super();
 		this.ingredientes = ingredientes;
-	}
-	
-	public Plato(String nombre) {
-		this.nombre=nombre;
 	}
 
 	public ArrayList<Ingrediente> getIngredientes() {
@@ -32,7 +31,5 @@ public class Plato {
 	public void setIngredientes(ArrayList<Ingrediente> ingredientes) {
 		this.ingredientes = ingredientes;
 	}
-	
-	
 	
 }

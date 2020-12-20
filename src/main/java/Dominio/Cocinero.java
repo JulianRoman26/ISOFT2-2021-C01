@@ -4,23 +4,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import Persistencia.Agente;
-import Presentacion.IU_Camarero;
 
 // JULIAN
 public class Cocinero implements Carta{
-	
-	public Cocinero() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	protected int id;
 	/**
 	 * 
 	 * @param comanda
 	 */
-	public int avisarCamarero_Mesa_PlatosListos() {
-		String mensaje= "LOS PLATOS DE LA COMANDA X YA ESTAN LISTOS PARA SER SERVIDOS ";
-		IU_Camarero.getNotificaciones().add(mensaje);
-		throw new UnsupportedOperationException();
+	public Cocinero(int id) {
+		super();
+		this.id = id;
 	}
 	
 	public static void cocinarPlatos(Comanda comanda) {
@@ -42,7 +36,7 @@ public class Cocinero implements Carta{
 			for(int j = 0;j<ingredientes.size();j++) {
 
 				Agente.modificar("UPDATE Ingredientes SET cantidad_disponible=(cantidad_disponible-"+ingredientes.get(j).getCantidad()+
-						") WHERE id_producto="+ ingredientes.get(0).getId());
+						") WHERE id_producto="+ ingredientes.get(0).getNombre());
 			}
 
 		}
@@ -55,7 +49,7 @@ public class Cocinero implements Carta{
 			ingredientes=p.getIngredientes();
 			for(int j = 0;j<ingredientes.size();j++) {
 				Agente.modificar("UPDATE Ingredientes SET cantidad_disponible=(cantidad_disponible-"+ingredientes.get(j).getCantidad()+
-						") WHERE id_producto="+ ingredientes.get(0).getId());
+						") WHERE id_producto="+ ingredientes.get(0).getNombre());
 			}
 
 		}
@@ -68,7 +62,7 @@ public class Cocinero implements Carta{
 			ingredientes=p.getIngredientes();
 			for(int j = 0;j<ingredientes.size();j++) {
 				Agente.modificar("UPDATE Ingredientes SET cantidad_disponible=(cantidad_disponible-"+ingredientes.get(j).getCantidad()+
-						") WHERE id_producto="+ ingredientes.get(0).getId());
+						") WHERE id_producto="+ ingredientes.get(0).getNombre());
 			}
 
 		}
@@ -81,7 +75,7 @@ public class Cocinero implements Carta{
 			ingredientes=p.getIngredientes();
 			for(int j = 0;j<ingredientes.size();j++) {
 				Agente.modificar("UPDATE Ingredientes SET cantidad_disponible=(cantidad_disponible-"+ingredientes.get(j).getCantidad()+
-						") WHERE id_producto="+ ingredientes.get(0).getId());
+						") WHERE id_producto="+ ingredientes.get(0).getNombre());
 			}
 
 		}
@@ -90,6 +84,12 @@ public class Cocinero implements Carta{
 
 	public static void reponerAlmacen() {
 		Agente.modificar("UPDATE Ingredientes SET cantidad_disponible=50 WHERE cantidad_disponible<10;");
+	}
+
+	public static void mandarNotificacion(String notificacion,Comanda comanda) {
+		Agente.insertar("INSERT INTO notificaciones VALUES (origen, destino, mensaje) VALUES ("+ identificador +","+comanda.getId_camarero()+","+notificacion +")");
+		// TODO Auto-generated method stub
+		
 	}
 
 }

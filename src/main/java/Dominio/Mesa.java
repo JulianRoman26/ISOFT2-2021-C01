@@ -1,6 +1,7 @@
 package Dominio;
+
 //ALEX
-public class Mesa implements Estados{
+public class Mesa implements Estados {
 
 	private String estado;
 	private Comanda comanda_asociada;
@@ -11,7 +12,7 @@ public class Mesa implements Estados{
 	public Mesa() {
 
 	}
-	
+
 	public String getEstado() {
 		return this.estado;
 	}
@@ -23,8 +24,6 @@ public class Mesa implements Estados{
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-
-
 
 	public int getNumero() {
 		return this.numero;
@@ -54,11 +53,12 @@ public class Mesa implements Estados{
 		return camarero_asociado;
 
 	}
+
 	/*
 	 * @param camarero_asociado
 	 */
 	public void setCamarero_asociado(Camarero_Mesa camarero_asociado) {
-		this.camarero_asociado= camarero_asociado;
+		this.camarero_asociado = camarero_asociado;
 	}
 
 	public Comanda getComanda_asociada() {
@@ -70,7 +70,7 @@ public class Mesa implements Estados{
 	}
 
 	public void secuenciarEstado() {
-		switch(estado) {
+		switch (estado) {
 		case "Libre":
 			setEstado(Estados.OCUPADO);
 			break;
@@ -96,6 +96,8 @@ public class Mesa implements Estados{
 			setEstado(Estados.LIBRE);
 			break;
 		}
-		
+
 	}
 }
+
+

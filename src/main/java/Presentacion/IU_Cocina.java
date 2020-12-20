@@ -6,12 +6,15 @@ import java.util.Scanner;
 //NO POR EL MOMENTO
 public class IU_Cocina {
 	static Scanner scanner = new Scanner(System.in);
-	static ArrayList<String> notificaciones=new ArrayList<String>();
-	public static ArrayList<String> getNotificaciones() {
-		return notificaciones;
+	
+	public static void main(String[] args) {
+		mostrarMenu_cocina();
+		// TODO Auto-generated method stub
+
 	}
+
 	public void leerNotificaciones() {
-		System.out.println("Tiene usted: "+notificaciones.size()+" notificaciones.");
+		System.out.println("Tiene usted: "+ +" notificaciones.");
 	}
 	/**
 	 * 
@@ -41,7 +44,7 @@ public class IU_Cocina {
 		throw new UnsupportedOperationException();
 	}
 
-	public void mostrarMenu_cocina() {
+	public static void mostrarMenu_cocina() {
 		// TODO - implement IU_Cocina.mostrarMenu_cocina
 		throw new UnsupportedOperationException();
 	}
