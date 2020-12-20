@@ -11,11 +11,16 @@ import Persistencia.Agente;
 public class Camarero_Mesa extends Camarero{
 	private static Mesa[] mesas;
 	
+	
 	public Camarero_Mesa(String exp, int id) {
 		super(exp, id);
 		// TODO Auto-generated constructor stub
 	}
 	
+	public Camarero_Mesa(int id) {
+		this.identificador=id;
+	}
+
 	// la forma en la que organizaremos las mesas es con 
 	public static void secuenciarEstado_Mesa(int num_mesa) {  // Terminado
 		mesas[num_mesa].setEstado(Agente.get("GET estado FROM mesa WHERE num_mesa = "+ num_mesa+""));
@@ -91,14 +96,26 @@ public class Camarero_Mesa extends Camarero{
 
 	public int obtenerNotificaciones(int identificador_usuario) {
 		int n_mensajes=0;
-		n_mensajes=Integer.parseInt(Agente.get("COUNT * FROM notificiones WHERE destino = "+ identificador_usuario +""));
+		n_mensajes=Integer.parseInt(Agente.get("COUNT * FROM Notificiones WHERE destino = "+ identificador_usuario +""));
 		return n_mensajes;
 		// TODO Auto-generated method stub
 		
 	}
 
 	public ArrayList<ArrayList<String>> mostrarNotificaciones(int identificador_usuario) {
-		ArrayList<ArrayList<String>> notificaciones= Agente.getMany("SELECT * FROM notificaciones WHERE destino = "+identificador_usuario +"");
+		ArrayList<ArrayList<String>> notificaciones= Agente.getMany("SELECT * FROM Notificaciones WHERE destino = "+identificador_usuario +"");
 		return notificaciones;
+	}
+
+	public boolean Autenticar() {
+		boolean correcto=true;
+        int resultado=Integer.parseInt(Agente.get("SELECT id_empleado FROM Empleados WHERE (id_empleado="+this.identificador+" AND rol='Camarero_Mesa')"));
+        if(resultado==0) {
+        	correcto=false;
+        }
+        else {
+        	correcto=true;
+        }
+		return correcto;
 	}
 }

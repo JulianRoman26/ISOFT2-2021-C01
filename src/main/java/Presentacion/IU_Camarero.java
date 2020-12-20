@@ -15,13 +15,28 @@ public class IU_Camarero {
 	static int identificador_usuario = 0;
 	static int mesa_actual = 0;
 	static Scanner scanner = new Scanner(System.in);
+	
 	public static void main(String[] args) {
-		identificarse();
-		mostrarMenu();
-		// TODO Auto-generated method stub
-
+		Gestor_Comandas gestor =new Gestor_Comandas();
+		if(identificarse(gestor)==true) {
+			mostrarMenu(gestor);
+		}
 	}
-	public static void mostrarMenu() {
+	public static boolean identificarse(Gestor_Comandas gestor) {
+		boolean valido;
+		int id=controlarNumero("Introduzca su identicador:");
+		if(gestor.identificarse("Camarero_Mesa",id)==true){
+			System.out.println("Inicio de sesion correcto");
+			valido=true;
+		}
+		else {
+			System.out.println("Inicio de sesion incorrecto");
+			valido=false;
+		}
+		return valido;
+	}
+	
+	public static void mostrarMenu(Gestor_Comandas gestor) {
 		int opcion;
 		boolean fin = false;
 		do {
@@ -43,10 +58,10 @@ public class IU_Camarero {
 					Gestor_Comandas.camarero_secuenciarEstado(mesa_actual);
 					break;
 				case 3:
-					seleccionarPlatos();
+					seleccionarPlatos(gestor);
 					break;
 				case 4:
-					mostrarNotificacion();
+					mostrarNotificacion(gestor);
 					break;
 				case 5:
 					fin = true;
@@ -56,16 +71,16 @@ public class IU_Camarero {
 					break;
 				}
 			} while (opcion < 1 && opcion > 5);
-			leerNotificaciones();
+			leerNotificaciones(gestor);
 		} while (fin == false);
 
 	}
-	// Seccion de mesa------------------------------------------------------------------------------------------------------
+	// Seleccion de mesa------------------------------------------------------------------------------------------------------
 	public static void seleccionarMesa() {
 		int num_mesa = 0;
 		do {
 			num_mesa = scanner.nextInt();
-			if (num_mesa <= 0 || num_mesa > 8) { // hemos suspuesto que tenemos 8 mesas en el restaurante
+			if (num_mesa <= 0 || num_mesa > 8) { // hemos supuesto que tenemos 8 mesas en el restaurante
 				System.out.println("Mesa no valida");
 			}
 		} while (num_mesa <= 0 || num_mesa > 8);
@@ -75,8 +90,7 @@ public class IU_Camarero {
 
 // Seccion de platos y comandas----------------------------------------------------------------------------------------------------
 	
-	public static void seleccionarPlatos() {
-		Camarero_Mesa camarero = new Camarero_Mesa("",identificador_usuario);
+	public static  void seleccionarPlatos(Gestor_Comandas gestor) {
 		boolean finComanda = false;
 		int opcion;
 		Comanda comanda= new Comanda(identificador_usuario,mesa_actual);
@@ -122,7 +136,7 @@ public class IU_Camarero {
 
 		} while (finComanda);
 		
-		Gestor_Comandas.camarero_anotarComanda(camarero, comanda);
+		gestor.camarero_anotarComanda(comanda);
 	}
 	private static void seleccionarEntrantes(ArrayList<Plato> entrantes) {
 		int opcion;
@@ -316,14 +330,14 @@ public class IU_Camarero {
 
 	}
 	// Seccion de notificaciones----------------------------------------------------------------------------------------------------
-		public static void leerNotificaciones() {
-			System.out.println("Tiene usted: " + Gestor_Comandas.contarNotificaciones(identificador_usuario) + " notificaciones.");
+		public static void leerNotificaciones(Gestor_Comandas gestor) {
+			System.out.println("Tiene usted: " + gestor.contarNotificaciones(identificador_usuario) + " notificaciones.");
 		}
 
-		public static void mostrarNotificacion() {
+		public static  void mostrarNotificacion(Gestor_Comandas gestor) {
 			boolean salir = false;
 			int elemento=0;
-			ArrayList<ArrayList<String>> notificaciones = Gestor_Comandas.mostrarNotificaciones(identificador_usuario);
+			ArrayList<ArrayList<String>> notificaciones = gestor.mostrarNotificaciones(identificador_usuario);
 			while (!notificaciones.isEmpty() && salir == false) {
 				ArrayList<String> notificacion = notificaciones.get(elemento);
 				System.out.println("Mensaje:");

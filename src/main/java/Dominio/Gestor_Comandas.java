@@ -13,7 +13,9 @@ import Presentacion.*;
 public class Gestor_Comandas {
 
 	private Camarero[] Camareros;
+	private Comanda[] Comandas;
 	private Cocinero[] Cocineros;
+	private Camarero_Mesa camarero;
 
 	/**
 	 * 
@@ -25,9 +27,9 @@ public class Gestor_Comandas {
 		throw new UnsupportedOperationException();
 	}
 
-	public static void camarero_anotarComanda(Camarero_Mesa cam, Comanda comanda) { // Terminado
+	public  void camarero_anotarComanda(Comanda comanda) { // Terminado
 		if (camarero_validarComanda(comanda) == true) {
-			cam.anotarComanda(comanda); // Anadir la comanda en la base de datos
+			camarero.anotarComanda(comanda); // Anadir la comanda en la base de datos
 			camarero_mandarComida(comanda);
 			camarero_mandarBebida(comanda);
 		} else {
@@ -137,15 +139,14 @@ public class Gestor_Comandas {
 		cam.mandarNotificacion(comanda, notificacion);
 	}
 
-	public static int contarNotificaciones(int identificador_usuario) {
-		Camarero_Mesa cam =new Camarero_Mesa("",identificador_usuario);
-		int num=cam.obtenerNotificaciones(identificador_usuario);
+	public int contarNotificaciones(int identificador_usuario) {
+		int num=camarero.obtenerNotificaciones(identificador_usuario);
 		return num;
 	}
 
-	public static ArrayList<ArrayList<String>> mostrarNotificaciones(int identificador_usuario) {
-		Camarero_Mesa cam =new Camarero_Mesa("",identificador_usuario);
-		ArrayList<ArrayList<String>> notificaciones=cam.mostrarNotificaciones(identificador_usuario);
+	public  ArrayList<ArrayList<String>> mostrarNotificaciones(int identificador_usuario) {
+		
+		ArrayList<ArrayList<String>> notificaciones=camarero.mostrarNotificaciones(identificador_usuario);
 		return notificaciones;
 
 	}
@@ -154,6 +155,31 @@ public class Gestor_Comandas {
 		Camarero_Barra.eliminarNotificacion(identificador);
 		// TODO Auto-generated method stub
 		
+	}
+
+	public boolean identificarse(String rol, int id) {
+		boolean existe=true;
+		switch(rol) {
+		case "Camarero_Mesa":
+			Camarero_Mesa c= new Camarero_Mesa(id);
+			existe=c.Autenticar();
+			break;
+		case "Camarero_Barra":
+			Camarero_Barra cb= new Camarero_Barra(id);
+			existe=cb.Autenticar();
+			break;
+		case "Cocinero":
+			Cocinero co=new Cocinero(id);
+			existe=co.Autenticar();
+			break;
+		case "Jefe_Mesa":
+			break;
+		}
+		return existe;
+
+	}
+	public void setCamareroGestor(Camarero_Mesa c) {
+		camarero=c;
 	}
 
 }

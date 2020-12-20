@@ -20,7 +20,7 @@ public class Agente {
     
     //Constructor
     private Agente() {
-         String url = "jdbc:mysql://servidorpecespi.hopto.org:3306/nation";
+         String url = "jdbc:mysql://servidorpecespi.hopto.org:3306/restaurante";
          String driver = "com.mysql.cj.jdbc.Driver";
          String usuario = "isoft2";
          String password = "isoft2c01";

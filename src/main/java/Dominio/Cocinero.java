@@ -7,16 +7,17 @@ import Persistencia.Agente;
 
 // JULIAN
 public class Cocinero implements Carta{
-	protected int id;
+
+	private static int identificador;
+	public Cocinero(int identificador) {
+		super();
+		this.identificador = identificador;
+	}
+
 	/**
 	 * 
 	 * @param comanda
 	 */
-	public Cocinero(int id) {
-		super();
-		this.id = id;
-	}
-	
 	public static void cocinarPlatos(Comanda comanda) {
 		Plato p=new Plato("");
 		
@@ -92,4 +93,16 @@ public class Cocinero implements Carta{
 		
 	}
 
+	public boolean Autenticar() {
+		boolean correcto=true;
+        int resultado=Integer.parseInt(Agente.get("SELECT id_empleado FROM Empleados WHERE (id_empleado="+this.identificador+" AND rol='Cocinero')"));
+        if(resultado==0) {
+        	correcto=false;
+        }
+        else {
+        	correcto=true;
+        }
+		return correcto;
+	}
 }
+

@@ -18,6 +18,9 @@ public class Camarero_Barra extends Camarero {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public Camarero_Barra(int id) {
+		// TODO Auto-generated constructor stub
+	}
 	public int avisarCamarero_Mesa_BebidasListas() {
 		String mensaje= "LAS BEBIDAS DE LA COMANDA X YA ESTAN LISTAS PARA SER SERVIDAS ";
 		
@@ -53,6 +56,17 @@ public class Camarero_Barra extends Camarero {
 		Agente.eliminar("DELETE * FROM notificaciones WHERE id= " +identificador+ "");
 		// TODO Auto-generated method stub
 		
+	}
+	public boolean Autenticar() {
+		boolean correcto=true;
+        int resultado=Integer.parseInt(Agente.get("SELECT nombre FROM Empleados WHERE id_empleado="+this.identificador));
+        if(resultado==0) {
+        	correcto=false;
+        }
+        else {
+        	correcto=true;
+        }
+		return correcto;
 	}
 
 }
