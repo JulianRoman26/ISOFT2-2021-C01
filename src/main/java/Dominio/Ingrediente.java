@@ -2,6 +2,10 @@ package Dominio;
 
 public class Ingrediente {
 	
+	@Override
+	public String toString() {
+		return "Ingrediente [nombre=" + nombre + ", cantidad=" + cantidad + "]";
+	}
 	private String nombre;
 	private int cantidad;
 

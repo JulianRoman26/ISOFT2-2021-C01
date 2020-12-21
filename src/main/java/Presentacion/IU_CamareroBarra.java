@@ -13,7 +13,7 @@ public class IU_CamareroBarra {
 	public static void main(String[] args) {
 		Gestor_Comandas gestor =new Gestor_Comandas();
 		if(identificarse(gestor)==true) {
-			mostrarMenu_barra();
+			mostrarMenu_barra(gestor);
 		}
 	}
 	
@@ -35,14 +35,14 @@ public class IU_CamareroBarra {
 		return notificaciones;
 	}
 	
-	public static void mostrarMenu_barra() {
+	public static void mostrarMenu_barra(Gestor_Comandas gestor) {
 		int opcion;
 		boolean fin = false;
 		do {
 			do {
 				System.out.println("\n           ****   MENU   ****\n");
-				System.out.println("  1.-");
-				System.out.println("  2.- ");
+				System.out.println("  1.-Reponer Bebidas");
+				System.out.println("  2.-Preparar Bebidas ");
 				System.out.println("  3.- ");
 				System.out.println("  4.- ");
 
@@ -52,9 +52,10 @@ public class IU_CamareroBarra {
 			
 			switch(opcion) {
 			case 1:
-				
+				reponerBebidas(gestor);
 				break;
 			case 2:
+				prepararBebidas(gestor);
 				break;
 			case 3:
 				
@@ -71,7 +72,12 @@ public class IU_CamareroBarra {
 		
 	}
 	
-	public void reponerBebidas(Gestor_Comandas gestor) {
+	private static void prepararBebidas(Gestor_Comandas gestor) {
+		gestor.camareroBarra_prepararBebida();
+		
+	}
+
+	public static void reponerBebidas(Gestor_Comandas gestor) {
 		gestor.camareroBarra_reponerBebidas();
 	}
 	public static void leerNotificaciones() {

@@ -5,11 +5,16 @@ import java.util.Iterator;
 //RAFA
 public class Comanda {
 
-	private ArrayList<Bebida> bebidas;
-	private ArrayList<Plato> entrantes;
-	private ArrayList<Plato> primer_plato;
-	private ArrayList<Plato> segundo_plato;
-	private ArrayList<Plato> postre;
+	private ArrayList<Bebida> bebidas=new ArrayList<Bebida>();
+	private ArrayList<Plato> entrantes=new ArrayList<Plato>();
+	private ArrayList<Plato> primer_plato=new ArrayList<Plato>();
+	private ArrayList<Plato> segundo_plato=new ArrayList<Plato>();
+	private ArrayList<Plato> postre=new ArrayList<Plato>();
+	@Override
+	public String toString() {
+		return "Comanda [bebidas=" + bebidas.toString() + ", entrantes=" + entrantes.toString() + ", primer_plato=" + primer_plato
+				+ ", segundo_plato=" + segundo_plato.toString() + ", postre=" + postre.toString()+"]";
+	}
 	private int mesa_asociada;
 	private int id_camarero; 
 

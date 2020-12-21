@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 public class Plato {
 	
+	@Override
+	public String toString() {
+		return "Plato [nombre=" + nombre + ", ingredientes=" + ingredientes + "]";
+	}
+
 	String nombre;
 	ArrayList <Ingrediente> ingredientes= new ArrayList<Ingrediente>();
 	

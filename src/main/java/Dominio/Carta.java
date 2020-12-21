@@ -104,7 +104,7 @@ public interface Carta {
 		case "espagueti_con_carne":
 			Ingrediente espagueti = new Ingrediente("espagueti",1);
 			Ingrediente chorizo=new Ingrediente("chorizo",4);
-			Ingrediente tomate_espagueti=new Ingrediente("tomate_espagueti",8);
+			Ingrediente tomate_espagueti=new Ingrediente("tomate",8);
 			ingredientes.add(espagueti);
 			ingredientes.add(chorizo);
 			ingredientes.add(tomate_espagueti);
@@ -164,6 +164,17 @@ public static Plato getSegundoPlato(Plato p) {
 			p.setIngredientes(ingredientes);
 			break;
 			
+		case "hamburguesa":
+			Ingrediente carne = new Ingrediente("carne",2);
+			Ingrediente lechuga=new Ingrediente("lechuga",5);
+			Ingrediente queso = new Ingrediente("queso", 1);
+			ingredientes.add(queso);
+			ingredientes.add(carne);
+			ingredientes.add(lechuga);
+			
+			p.setIngredientes(ingredientes);
+			break;
+			
 		}
 		return p;
 	
@@ -198,7 +209,21 @@ public static Plato getPostre(Plato p) {
 		
 		break;
 		
-
+		
+	case "chocolate":
+		
+		Ingrediente chocolate = new Ingrediente("chocolate", 3);
+		ingredientes.add(chocolate);
+		p.setIngredientes(ingredientes);
+		
+		break;
+		
+	case "bizcocho":
+		Ingrediente bizcocho2 = new Ingrediente("bizcocho", 5);
+		ingredientes.add(bizcocho2);
+		p.setIngredientes(ingredientes);
+		
+		break;
 		
 	}
 	return p;

@@ -1,13 +1,17 @@
 package Dominio;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
 
 import Persistencia.Agente;
 import Presentacion.IU_Camarero;
 
 // JORGE
+	
 public class Camarero_Barra extends Empleado {
 	private String barra;
+	static Scanner scanner =new Scanner (System.in);
 	
 	public Camarero_Barra(int i,String n,String t) {
 		super(i,n,t);
@@ -56,7 +60,7 @@ public class Camarero_Barra extends Empleado {
 	}
 	public boolean Autenticar() {
 		boolean correcto=true;
-        int resultado=Integer.parseInt(Agente.get("SELECT id_empleado FROM Empleados WHERE id_empleado="+this.id_empleado));
+        int resultado=Integer.parseInt(Agente.get("SELECT id_empleado FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Camarero_Barra')"));
         if(resultado==0) {
         	correcto=false;
         }
@@ -67,6 +71,71 @@ public class Camarero_Barra extends Empleado {
         	setTelefono(Agente.get("SELECT telefono FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Camarero_Barra')"));
         }
 		return correcto;
+	}
+
+	public static Comanda leerComanda() {
+		System.out.println("Introduzca la mesa de la que quiere obtener la comanda:");
+		int id_mesa=scanner.nextInt();
+		ArrayList<ArrayList<String>>total=new ArrayList();
+		Comanda comanda = new Comanda(id_mesa);		
+		total=Agente.getMany("SELECT * FROM Comandas WHERE id_mesa = "+id_mesa+"");
+		
+		comanda.setBebidas(obtenerBebidas(total.get(0).get(5)));
+		comanda.setEntrantes(obtenerEntrantes(total.get(0).get(1)));
+		comanda.setPrimer_plato(obtenerPrimeros(total.get(0).get(2)));
+		comanda.setSegundo_plato(obtenerSegundos(total.get(0).get(3)));
+		comanda.setPostre(obtenerSegundos(total.get(0).get(4)));
+		
+	
+		return comanda;
+	}
+
+	private static ArrayList<Plato> obtenerSegundos(String segundos) {
+		ArrayList<Plato> lista_segundos = new ArrayList();
+		String nombre;
+		StringTokenizer tokens=new StringTokenizer(segundos,",");
+		while(tokens.hasMoreTokens()){
+			nombre=tokens.nextToken();
+			Plato segundo=new Plato(nombre);
+			lista_segundos.add(segundo);
+	        }
+		return lista_segundos;
+	}
+
+	private static ArrayList<Plato> obtenerPrimeros(String primeros) {
+		ArrayList<Plato> lista_primeros = new ArrayList();
+		String nombre;
+		StringTokenizer tokens=new StringTokenizer(primeros,",");
+		while(tokens.hasMoreTokens()){
+			nombre=tokens.nextToken();
+			Plato primero=new Plato(nombre);
+			lista_primeros.add(primero);
+	        }
+		return lista_primeros;
+	}
+
+	private static ArrayList<Plato> obtenerEntrantes(String entrantes) {
+		ArrayList<Plato> lista_entrantes = new ArrayList();
+		String nombre;
+		StringTokenizer tokens=new StringTokenizer(entrantes,",");
+		while(tokens.hasMoreTokens()){
+			nombre=tokens.nextToken();
+			Plato entrante=new Plato(nombre);
+			lista_entrantes.add(entrante);
+	        }
+		return lista_entrantes;
+	}
+
+	private static ArrayList<Bebida> obtenerBebidas(String bebidas) {
+		ArrayList<Bebida> lista_bebidas = new ArrayList();
+		String nombre;
+		StringTokenizer tokens=new StringTokenizer(bebidas,",");
+		while(tokens.hasMoreTokens()){
+			nombre=tokens.nextToken();
+			Bebida bebida=new Bebida(nombre);
+			lista_bebidas.add(bebida);
+	        }
+		return lista_bebidas;
 	}
 
 }

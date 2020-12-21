@@ -50,10 +50,12 @@ public class Gestor_Comandas {
 
 	public  void camarero_anotarComanda(Comanda comanda) { // Terminado
 		if (camarero_validarComanda(comanda) == true) {
+			System.out.println("Validada");
 			camarero.anotarComanda(comanda); // Anadir la comanda en la base de datos
 			camarero_mandarComida(comanda);
 			camarero_mandarBebida(comanda);
 		} else {
+			System.out.println(" No Validada");
 			camarero_AvisarCocina_FaltaIngredientes();
 		}
 	}
@@ -146,7 +148,8 @@ public class Gestor_Comandas {
 	 * 
 	 * @param comanda
 	 */
-	public void camareroBarra_prepararBebida(Comanda comanda) {
+	public void camareroBarra_prepararBebida() {
+		Comanda comanda = barra.leerComanda();
 		barra.prepararBebidas(comanda);
 		camareroBarra_avisarBebidaLista(comanda);
 	}
@@ -203,6 +206,8 @@ public class Gestor_Comandas {
 		return existe;
 
 	}
+
+
 
 
 }
