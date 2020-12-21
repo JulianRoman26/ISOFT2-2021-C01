@@ -103,6 +103,7 @@ public class Cocinero extends Empleado implements Carta {
         if(resultado==0) {
         	correcto=false;
         }
+        
         else {
         	correcto= true;
         	setId_empleado(resultado);

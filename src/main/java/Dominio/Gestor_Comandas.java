@@ -10,6 +10,7 @@ import Presentacion.*;
 //AARON: SELECCIONARNUMERO
 //JORGE: SECUENCIARESTADOS, COCINARPLATOS
 //JULIAN: VALIDARCOMANDA, REPONERBEBIDAS
+
 public class Gestor_Comandas {
 
 	private Camarero_Mesa camarero;
@@ -50,7 +51,7 @@ public class Gestor_Comandas {
 
 	public  void camarero_anotarComanda(Comanda comanda) { // Terminado
 		if (camarero_validarComanda(comanda) == true) {
-			camarero.anotarComanda(comanda); // Anadir la comanda en la base de datos
+			camarero.anotarComanda(comanda); // Anadir  la comanda en la base de datos
 			camarero_mandarComida(comanda);
 			camarero_mandarBebida(comanda);
 		} else {

@@ -58,20 +58,23 @@ public class IU_Cocina {
 			}
 		}
 	}
+	
 
 	public void reponerAlmacen(Gestor_Comandas gestor) {
 		gestor.cocina_reponerAlmacen();
 	}
+	
 
 	public static void mostrarMenu_cocina(Gestor_Comandas gestor) {
 		
 	}
+	
 	public static int controlarNumero(String texto) {
 
 		int num = 0;
 		boolean control = true;
 
-		do { // Bucle para controlar que se introducen numeros
+		do { 	// Bucle que sirve para controlar si se introducen numeros
 			try {
 				System.out.println(texto);
 				num = scanner.nextInt();

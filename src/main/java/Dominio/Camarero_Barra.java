@@ -34,6 +34,7 @@ public class Camarero_Barra extends Empleado {
 		for(int j = 0;j<bebidas.size();j++) {
 		Agente.modificar("UPDATE Bebidas SET cantidad_disponible=(cantidad_disponible-"+bebidas.get(j).getCantidad()+
 				") WHERE nombre="+ bebidas.get(j).getNombre());
+		
 		}
 	}
 
@@ -44,16 +45,19 @@ public class Camarero_Barra extends Empleado {
 	public static void reponerBebidas() {
 		Agente.modificar("UPDATE Bebidas SET cantidad=50 WHERE cantidad<10;");
 	}
+	
 	public void mandarNotificacion(Comanda comanda, String notificacion) {
 		Agente.insertar("INSERT INTO notificaciones VALUES(origen, destino, mensaje) VALUES "+ id_empleado +", "+comanda.getId_camarero() +","+ notificacion+"");
 		// TODO Auto-generated method stub
 		
 	}
+	
 	public static void eliminarNotificacion(String identificador) {
 		Agente.eliminar("DELETE * FROM notificaciones WHERE id= " +identificador+ "");
 		// TODO Auto-generated method stub
 		
 	}
+	
 	public boolean Autenticar() {
 		boolean correcto=true;
         int resultado=Integer.parseInt(Agente.get("SELECT id_empleado FROM Empleados WHERE id_empleado="+this.id_empleado));

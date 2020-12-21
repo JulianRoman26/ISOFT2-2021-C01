@@ -36,8 +36,8 @@ public class IU_Camarero {
 		}
 		return valido;
 	}
-	
-	public static void mostrarMenu(Gestor_Comandas gestor) {
+	//Muestra el menu----------------------------------------------------------------------------------------------------------
+	public static void mostrarMenu(Gestor_Comandas gestor) { 
 		int opcion;
 		boolean fin = false;
 		do {
@@ -76,7 +76,7 @@ public class IU_Camarero {
 		} while (fin == false);
 
 	}
-	// Seleccion de mesa------------------------------------------------------------------------------------------------------
+	// Selecciona de mesa
 	public static void seleccionarMesa() {
 		int num_mesa = 0;
 		do {
@@ -139,6 +139,8 @@ public class IU_Camarero {
 		
 		gestor.camarero_anotarComanda(comanda);
 	}
+	
+	//Selecciona los entrantes
 	private static void seleccionarEntrantes(ArrayList<Plato> entrantes) {
 		int opcion;
 		Plato p;
@@ -178,7 +180,8 @@ public class IU_Camarero {
 		} while (fin_entrante == false);
 
 	}
-
+	
+	//Selecciona los primeros
 	private static void seleccionarPrimeros(ArrayList<Plato> primeros) {
 		int opcion;
 		Plato p;
@@ -218,7 +221,7 @@ public class IU_Camarero {
 		} while (fin_primero == false);
 
 	}
-
+	//Selecciona los segundos
 	private static void seleccionarSegundos(ArrayList<Plato> segundos) {
 		int opcion;
 		Plato p;
@@ -259,7 +262,7 @@ public class IU_Camarero {
 		} while (fin_segundo == false);
 
 	}
-
+	//Selecciona los postres
 	private static void seleccionarPostres(ArrayList<Plato> postres) {
 		int opcion;
 		Plato p;
@@ -299,7 +302,8 @@ public class IU_Camarero {
 		} while (fin_postre == false);
 
 	}
-
+	
+	//Selecciona las bebidas
 	private static void seleccionarBebidas(Comanda comanda) {
 		int opcion;
 		boolean fin_bebida = false;
@@ -334,7 +338,7 @@ public class IU_Camarero {
 		public static void leerNotificaciones(Gestor_Comandas gestor) {
 			System.out.println("Tiene usted: " + gestor.contarNotificaciones(identificador_usuario) + " notificaciones.");
 		}
-
+		// Muestra las nostificaciones
 		public static  void mostrarNotificacion(Gestor_Comandas gestor) {
 			boolean salir = false;
 			int elemento=0;
@@ -359,7 +363,7 @@ public class IU_Camarero {
 				}
 			}
 		}
-		
+		//elimina las notificaciones
 private static void eliminarNotificacion(String identificador) {
 	Gestor_Comandas.eliminarNotificacion(identificador);
 			// TODO Auto-generated method stub
