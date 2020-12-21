@@ -8,7 +8,6 @@ import Dominio.Gestor_Comandas;
 //NO POR EL MOMENTO
 public class IU_CamareroBarra {
 	static Scanner scanner = new Scanner(System.in);
-	static ArrayList<String> notificaciones=new ArrayList<String>();
 	
 	public static void main(String[] args) {
 		Gestor_Comandas gestor =new Gestor_Comandas();
@@ -30,9 +29,6 @@ public class IU_CamareroBarra {
 			valido=false;
 		}
 		return valido;
-	}
-	public ArrayList<String> getNotificaciones() {
-		return notificaciones;
 	}
 	
 	public static void mostrarMenu_barra(Gestor_Comandas gestor) {
@@ -61,13 +57,13 @@ public class IU_CamareroBarra {
 				
 				break;
 			case 4:
-				mostrarNotificacion();
+				mostrarNotificacion(gestor);
 				break;
 			case 5:
 				fin=true;
 				break;
 			}
-			leerNotificaciones();
+			leerNotificaciones(gestor);
 		}while(fin==false);
 		
 	}
@@ -80,27 +76,41 @@ public class IU_CamareroBarra {
 	public static void reponerBebidas(Gestor_Comandas gestor) {
 		gestor.camareroBarra_reponerBebidas();
 	}
-	public static void leerNotificaciones() {
-		System.out.println("Tiene usted: "+notificaciones.size()+" notificaciones.");
+	public static void leerNotificaciones(Gestor_Comandas gestor) {
+		System.out.println("Tiene usted: " + gestor.contarNotificaciones(gestor.getCamarero().getId_empleado()) + " notificaciones.");
 	}
-	public static void mostrarNotificacion() {
-		boolean salir=false;
-		while(!notificaciones.isEmpty()&& salir==false) {
-			System.out.println(notificaciones.get(0));
-			System.out.println("1-Leer\n2-Borrar\n3-Salir");
-			int opcion=scanner.nextInt();
-			switch(opcion) {
+
+	public static  void mostrarNotificacion(Gestor_Comandas gestor) {
+		boolean salir = false;
+		int elemento=0;
+		ArrayList<ArrayList<String>> notificaciones = gestor.mostrarNotificaciones(gestor.getBarra().getId_empleado());
+		while (!notificaciones.isEmpty() && salir == false) {
+			ArrayList<String> notificacion = notificaciones.get(elemento);
+			System.out.println("Mensaje:");
+			System.out.println(" Id :"+ notificacion.get(0)+"\n Origen: "+notificacion.get(1) +"\n Mensaje: "+ notificacion.get(3)+"");
+			System.out.println("1-Leer siguiente\n2-Borrar\n3-Salir");
+			int opcion = scanner.nextInt();
+			switch (opcion) {
 			case 1:
+				elemento++;
 				break;
 			case 2:
-				notificaciones.remove(0);
+				notificaciones.remove(elemento);
+				eliminarNotificacion(notificacion.get(0));
 				break;
 			case 3:
-					salir=true;
-					break;
+				salir = true;
+				break;
 			}
 		}
 	}
+	
+private static void eliminarNotificacion(String identificador) {
+Gestor_Comandas.eliminarNotificacion(identificador);
+		// TODO Auto-generated method stub
+		
+	}
+
 	public static int controlarNumero(String texto) {
 
 		int num = 0;

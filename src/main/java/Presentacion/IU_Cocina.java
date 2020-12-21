@@ -30,33 +30,39 @@ public class IU_Cocina {
 		}
 		return valido;
 	}
-	public static ArrayList<String> getNotificaciones() {
-		return notificaciones;
+	public static void leerNotificaciones(Gestor_Comandas gestor) {
+		System.out.println("Tiene usted: " + gestor.contarNotificaciones(gestor.getCamarero().getId_empleado()) + " notificaciones.");
 	}
-	public void leerNotificaciones() {
-		System.out.println("Tiene usted: "+notificaciones.size()+" notificaciones.");
-	}
-	/**
-	 * 
-	 * @param 
-	 */
-	public void mostrarNotificacion() {
-		boolean salir=false;
-		while(!notificaciones.isEmpty()&& salir==false) {
-			System.out.println(notificaciones.get(0));
-			System.out.println("1-Leer\n2-Borrar\n3-Salir");
-			int opcion=scanner.nextInt();
-			switch(opcion) {
+
+	public static  void mostrarNotificacion(Gestor_Comandas gestor) {
+		boolean salir = false;
+		int elemento=0;
+		ArrayList<ArrayList<String>> notificaciones = gestor.mostrarNotificaciones(gestor.getBarra().getId_empleado());
+		while (!notificaciones.isEmpty() && salir == false) {
+			ArrayList<String> notificacion = notificaciones.get(elemento);
+			System.out.println("Mensaje:");
+			System.out.println(" Id :"+ notificacion.get(0)+"\n Origen: "+notificacion.get(1) +"\n Mensaje: "+ notificacion.get(3)+"");
+			System.out.println("1-Leer siguiente\n2-Borrar\n3-Salir");
+			int opcion = scanner.nextInt();
+			switch (opcion) {
 			case 1:
+				elemento++;
 				break;
 			case 2:
-				notificaciones.remove(0);
+				notificaciones.remove(elemento);
+				eliminarNotificacion(notificacion.get(0));
 				break;
 			case 3:
-					salir=true;
-					break;
+				salir = true;
+				break;
 			}
 		}
+	}
+	
+private static void eliminarNotificacion(String identificador) {
+Gestor_Comandas.eliminarNotificacion(identificador);
+		// TODO Auto-generated method stub
+		
 	}
 
 	public static void mostrarMenu_cocina(Gestor_Comandas gestor) {
