@@ -59,10 +59,6 @@ public class IU_Cocina {
 		}
 	}
 
-	public void reponerAlmacen() {
-		
-	}
-
 	public static void mostrarMenu_cocina(Gestor_Comandas gestor) {
 		int opcion;
 		boolean fin = false;

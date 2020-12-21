@@ -91,7 +91,7 @@ public class Cocinero extends Empleado implements Carta {
 		Agente.modificar("UPDATE Ingredientes SET cantidad_disponible=50 WHERE cantidad_disponible<10;");
 	}
 
-	public void mandarNotificacion(String notificacion,Comanda comanda) {
+	public void avisar_Comida_Lista(String notificacion,Comanda comanda) {
 		Agente.insertar("INSERT INTO notificaciones VALUES (origen, destino, mensaje) VALUES ("+ id_empleado +","+comanda.getId_camarero()+","+notificacion +")");
 		// TODO Auto-generated method stub
 		
