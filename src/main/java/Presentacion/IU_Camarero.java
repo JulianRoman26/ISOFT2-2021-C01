@@ -80,7 +80,7 @@ public class IU_Camarero {
 	public static void seleccionarMesa() {
 		int num_mesa = 0;
 		do {
-			num_mesa = scanner.nextInt();
+			num_mesa = controlarNumero("Seleccione una de las 8 mesas disponibles");
 			if (num_mesa <= 0 || num_mesa > 8) { // hemos supuesto que tenemos 8 mesas en el restaurante
 				System.out.println("Mesa no valida");
 			}
@@ -104,7 +104,7 @@ public class IU_Camarero {
 			System.out.println("\n           ****   MENU   ****\n");
 			// while seleccion no terminado
 
-			opcion = controlarNumero("�Qu� desea pedir ahora?\n 1-Entrantes\n 2-Primeros\n 3-Segundos\n 4-Postres\n 5-Bebidas\n 6-Terminar");
+			opcion = controlarNumero("Seleccione tipo de plato:\n 1-Entrantes\n 2-Primeros\n 3-Segundos\n 4-Postres\n 5-Bebidas\n 6-Terminar");
 			switch (opcion) {
 			case 1:
 				seleccionarEntrantes(entrantes); // Va introduciendo los platos que le van indicando al camarero

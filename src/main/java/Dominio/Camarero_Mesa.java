@@ -96,7 +96,7 @@ public class Camarero_Mesa extends Empleado{
 
 	public int obtenerNotificaciones(int identificador_usuario) {
 		int n_mensajes=0;
-		n_mensajes=Integer.parseInt(Agente.get("COUNT * FROM Notificiones WHERE destino = "+ identificador_usuario +""));
+		n_mensajes=Integer.parseInt(Agente.get("SELECT COUNT(*) FROM Notificaciones WHERE destino = "+ identificador_usuario +""));
 		return n_mensajes;
 		// TODO Auto-generated method stub
 		
