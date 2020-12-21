@@ -73,7 +73,7 @@ public class IU_CamareroBarra {
 	}
 	
 	private static void prepararBebidas(Gestor_Comandas gestor) {
-		int num=controlarNumero("introduce el de que mesa quieres ver la comanda:");
+		int num=controlarNumero("introduce el numero de mesa de la que quieres ver la comanda:");
 		gestor.camareroBarra_prepararBebida(num);
 	}
 

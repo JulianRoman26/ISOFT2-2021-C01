@@ -125,8 +125,8 @@ public class Gestor_Comandas {
 	 * 
 	 * @param comanda
 	 */
-	public void cocina_cocinarPlatos() {
-		Comanda comanda =cocinero.leerComanda();
+	public void cocina_cocinarPlatos(int id_mesa) {
+		Comanda comanda =cocinero.leerComanda(id_mesa);
 		Cocinero.cocinarPlatos(comanda);
 		//cocina_avisarComidaLista(comanda);
 	}

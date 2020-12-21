@@ -70,7 +70,7 @@ public class IU_Cocina {
 			do {
 				
 				System.out.println("\n           ****   MENU   ****\n");
-				System.out.println("  1.- Reponer Almacén");
+				System.out.println("  1.- Reponer Almacen");
 				System.out.println("  2.- Cocinar Plato");
 				System.out.println("  3.- Salir");
 
@@ -81,7 +81,8 @@ public class IU_Cocina {
 					gestor.cocina_reponerAlmacen();
 					break;
 				case 2:
-					gestor.cocina_cocinarPlatos();
+					int id_mesa=controlarNumero("Introduzca la mesa de la que quiere obtener la comanda:");
+					gestor.cocina_cocinarPlatos(id_mesa);
 					break;
 				case 3:
 					fin = true;

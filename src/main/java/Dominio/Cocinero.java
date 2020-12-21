@@ -111,9 +111,8 @@ public class Cocinero extends Empleado implements Carta {
         }
 		return correcto;
 	}
-	public static Comanda leerComanda() {
-		System.out.println("Introduzca la mesa de la que quiere obtener la comanda:");
-		int id_mesa=scanner.nextInt();
+	public static Comanda leerComanda(int id_mesa) {
+	
 		ArrayList<ArrayList<String>>total=new ArrayList();
 		Comanda comanda = new Comanda(id_mesa);		
 		total=Agente.getMany("SELECT * FROM Comandas WHERE id_mesa = "+id_mesa+"");
