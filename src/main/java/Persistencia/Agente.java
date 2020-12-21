@@ -27,7 +27,7 @@ public class Agente {
         try {
             Class.forName(driver);
             conexion = DriverManager.getConnection(url,usuario,password);
-            System.out.println("Conexión con la base de datos realizada con exito");
+            System.out.println("Conexiï¿½n con la base de datos realizada con exito");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -35,7 +35,7 @@ public class Agente {
     
     //Metodos para la interaccion con la base de datos:
     
-    //Método para iniciar la conexion con la base de datos
+    //Mï¿½todo para iniciar la conexion con la base de datos
     public static Connection getConnection(){
         if (conexion == null) {
             new Agente();
@@ -43,14 +43,14 @@ public class Agente {
         return conexion;
     }
     
-    //Método para cerrar la conexion con la base de datos
+    //Mï¿½todo para cerrar la conexion con la base de datos
     public static void closeConnection() throws SQLException {
         if(conexion != null) {
             conexion.close();
         }
     }
     
-    //Método para insertar registros en la base de dato.
+    //Mï¿½todo para insertar registros en la base de dato.
     public static void insertar(String comando) {
         try {
             getConnection();
@@ -66,7 +66,7 @@ public class Agente {
         }
     }
     
-    //Método para mostrar datos
+    //Mï¿½todo para mostrar datos
     public static void mostrar(String comando) {
         try {
             getConnection();
@@ -92,7 +92,7 @@ public class Agente {
         }
     }
     
-    //Método para obtener varios elementos de una tabla.
+    //Mï¿½todo para obtener varios elementos de una tabla.
     public static ArrayList<ArrayList<String>> getMany(String comando) {
         ArrayList<ArrayList<String>> lista= new ArrayList<ArrayList<String>>();
         try {
@@ -142,7 +142,7 @@ public class Agente {
         return resultado;
     }
     
-    //Método para modificar las tablas.
+    //Mï¿½todo para modificar las tablas.
     public static void modificar(String comando) {
         try {
             getConnection();
@@ -152,13 +152,12 @@ public class Agente {
                 System.out.println("Valores modificados en la base de datos");
             } else
                 System.out.println("Error al modificar valores en la base de datos");
-            conexion.close();
         } catch (Exception e) {
             System.err.print(e);
         }
     }
     
-    //Método para eliminar elementos de la base de datos
+    //Mï¿½todo para eliminar elementos de la base de datos
     public static void eliminar(String comando) {
         try {
             getConnection();
@@ -168,7 +167,6 @@ public class Agente {
                 System.out.println("Valores eliminados de la base de datos");
             } else
                 System.out.println("Error al eliminar valores de la base de datos");
-            conexion.close();
         } catch (Exception e) {
             System.err.print(e);
         }
