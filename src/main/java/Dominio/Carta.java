@@ -41,6 +41,35 @@ public interface Carta {
 			p.setIngredientes(ingredientes);
 			break;
 			
+		case "nachos":
+			
+			Ingrediente nachos = new Ingrediente("nacho",7);
+			Ingrediente guacamole = new Ingrediente("guacamole",2);
+			Ingrediente chilli = new Ingrediente("chilli",2);
+			ingredientes.add(nachos);
+			ingredientes.add(guacamole);
+			ingredientes.add(chilli);
+			break;
+		
+		case "rollitos":
+			
+			Ingrediente aceite = new Ingrediente("aceite",2);
+			Ingrediente queso_rollito = new Ingrediente("queso",2);
+			Ingrediente jamon_rollito = new Ingrediente("jamon",2);
+			Ingrediente rucula = new Ingrediente("rucula",1);
+			ingredientes.add(aceite);
+			ingredientes.add(queso_rollito);
+			ingredientes.add(queso_rollito);
+			ingredientes.add(jamon_rollito);
+			ingredientes.add(rucula);
+			
+		case "falafel":
+			Ingrediente garbanzos = new Ingrediente("garbanzo",5);
+			Ingrediente ajo = new Ingrediente("ajo",3);
+			Ingrediente cebolla = new Ingrediente("cebolla",2);
+			Ingrediente perejil = new Ingrediente("perejil",1);
+			Ingrediente comino = new Ingrediente("comino",2);
+			Ingrediente sal = new Ingrediente("sal",1);
 		}
 		
 		return p;
