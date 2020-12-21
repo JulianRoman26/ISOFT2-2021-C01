@@ -76,7 +76,7 @@ Gestor_Comandas.eliminarNotificacion(identificador);
 				System.out.println("  2.- Cocinar Plato");
 				System.out.println("  3.- Salir");
 
-				opcion = scanner.nextInt();
+				opcion = controlarNumero("Elija una opcion");
 
 				switch (opcion) {
 				case 1:

@@ -148,10 +148,10 @@ public class Gestor_Comandas {
 	 * 
 	 * @param comanda
 	 */
-	public void camareroBarra_prepararBebida() {
-		Comanda comanda = barra.leerComanda();
+	public void camareroBarra_prepararBebida(int n) {
+		Comanda comanda = barra.leerComanda(n);
 		barra.prepararBebidas(comanda);
-		camareroBarra_avisarBebidaLista(comanda);
+		//camareroBarra_avisarBebidaLista(comanda);
 	}
 
 	public void camareroBarra_reponerBebidas() {
@@ -206,6 +206,8 @@ public class Gestor_Comandas {
 		return existe;
 
 	}
+
+
 
 
 
