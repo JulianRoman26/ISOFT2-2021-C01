@@ -17,6 +17,9 @@ public class Comanda {
 		this.id_camarero=id_camarero;
 		this.mesa_asociada=mesa;
 	}
+	public Comanda(int mesa) {
+		this.mesa_asociada=mesa;
+	}
 	
 	public void setBebidas(ArrayList<Bebida> bebidas) {
 		this.bebidas = bebidas;
