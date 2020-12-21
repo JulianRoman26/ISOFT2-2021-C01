@@ -117,8 +117,7 @@ public class Cocinero extends Empleado implements Carta {
 		ArrayList<ArrayList<String>>total=new ArrayList();
 		Comanda comanda = new Comanda(id_mesa);		
 		total=Agente.getMany("SELECT * FROM Comandas WHERE id_mesa = "+id_mesa+"");
-		
-		comanda.setBebidas(obtenerBebidas(total.get(0).get(5)));
+
 		comanda.setEntrantes(obtenerEntrantes(total.get(0).get(1)));
 		comanda.setPrimer_plato(obtenerPrimeros(total.get(0).get(2)));
 		comanda.setSegundo_plato(obtenerSegundos(total.get(0).get(3)));

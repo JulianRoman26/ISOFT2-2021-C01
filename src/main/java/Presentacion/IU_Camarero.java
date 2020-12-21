@@ -306,36 +306,7 @@ public class IU_Camarero {
 		} while (fin_postre == false);
 	}
 
-	/*private static void seleccionarBebidas(Comanda comanda) {
-		int opcion;
-		boolean fin_bebida = false;
-		do {
-			System.out.println("\n1-Agua\n2-Pepsi\n3-Vino\n4-Fanta\n 5-Salir");
-			opcion = controlarNumero("Seleccione una bebida: ");
-			switch (opcion) {
-			case 1:
-				comanda.AnadirBebidas(new Bebida("agua",1));
-				break;
-			case 2:
-				comanda.AnadirBebidas(new Bebida("pepsi",1));
-				break;
-			case 3:
-				comanda.AnadirBebidas(new Bebida("vino",1));
-				break;
-			case 4:
-				comanda.AnadirBebidas(new Bebida("fanta",1));
-				break;
 
-			case 5:
-				fin_bebida = true;
-				break;
-			default:
-				System.out.println("Opcion no valida");
-				break;
-			}
-		} while (fin_bebida == false);
-
-	}*/
 	private static void seleccionarBebidas(ArrayList<Bebida> bebidas) {
 	
 		int opcion;
