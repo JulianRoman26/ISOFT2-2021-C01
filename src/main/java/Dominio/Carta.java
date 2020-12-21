@@ -90,6 +90,37 @@ public interface Carta {
 			p.setIngredientes(ingredientes);
 			break;
 			
+		case "paella":
+			
+			Ingrediente arroz = new Ingrediente("arroz",2);
+			Ingrediente gambas=new Ingrediente("gambas",6);
+			Ingrediente aceitunas=new Ingrediente("aceitunas",8);
+			ingredientes.add(arroz);
+			ingredientes.add(gambas);
+			ingredientes.add(aceitunas);
+			p.setIngredientes(ingredientes);
+			break; 
+			
+		case "espagueti_con_carne":
+			Ingrediente espagueti = new Ingrediente("espagueti",1);
+			Ingrediente chorizo=new Ingrediente("chorizo",4);
+			Ingrediente tomate_espagueti=new Ingrediente("tomate_espagueti",8);
+			ingredientes.add(espagueti);
+			ingredientes.add(chorizo);
+			ingredientes.add(tomate_espagueti);
+			p.setIngredientes(ingredientes);
+			break;
+			
+		case "almejas_a_la_marinera":
+			Ingrediente almejas = new Ingrediente("almejas",1);
+			Ingrediente limon=new Ingrediente("limon",1);
+			Ingrediente salsa_marinera=new Ingrediente("salsa_marinera",8);
+			ingredientes.add(almejas);
+			ingredientes.add(limon);
+			ingredientes.add(salsa_marinera);
+			p.setIngredientes(ingredientes);
+			break;
+			
 		}
 		return p;
 	
