@@ -41,24 +41,24 @@ public abstract class Empleado {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	public static int obtenerNotificaciones(int identificador_usuario) {
+	public static int obtenerNotificaciones() {
 		int n_mensajes=0;
-		n_mensajes=Integer.parseInt(Agente.get("COUNT * FROM Notificiones WHERE destino = "+ identificador_usuario +""));
+		n_mensajes=Integer.parseInt(Agente.get("SELECT COUNT( id ) FROM Notificaciones WHERE destino = "+ id_empleado+""));
 		return n_mensajes;
 	}
 
-	public static ArrayList<ArrayList<String>> mostrarNotificaciones(int identificador_usuario) {
-		ArrayList<ArrayList<String>> notificaciones= Agente.getMany("SELECT * FROM Notificaciones WHERE destino = "+identificador_usuario +"");
+	public static ArrayList<ArrayList<String>> mostrarNotificaciones() {
+		ArrayList<ArrayList<String>> notificaciones= Agente.getMany("SELECT * FROM Notificaciones WHERE destino = "+id_empleado +"");
 		return notificaciones;
 	}
 	
 	public static void mandarNotificacion(String notificacion,Comanda comanda) {
-		Agente.insertar("INSERT INTO notificaciones VALUES (origen, destino, mensaje) VALUES ("+ id_empleado +","+comanda.getId_camarero()+","+notificacion +")");
+		Agente.insertar("INSERT INTO Notificaciones VALUES (origen, destino, mensaje) VALUES ("+ id_empleado +","+comanda.getId_camarero()+","+notificacion +")");
 		// TODO Auto-generated method stub
 	}
 	
 	public static void eliminarNotificacion(String identificador) {
-		Agente.eliminar("DELETE * FROM notificaciones WHERE id= " +identificador+ "");
+		Agente.eliminar("DELETE * FROM Notificaciones WHERE id= " +identificador+ "");
 		// TODO Auto-generated method stub	
 	}
 }

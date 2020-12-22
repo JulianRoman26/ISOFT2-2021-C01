@@ -60,7 +60,6 @@ public class Agente {
                 System.out.println("Valores guardados");
             } else
                 System.out.println("Error al guardar valores");
-            conexion.close();
         } catch (Exception e) {
             System.err.print(e);
         }

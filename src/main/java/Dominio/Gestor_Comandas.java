@@ -163,14 +163,14 @@ public class Gestor_Comandas {
 		barra.avisarCamarero_Mesa_BebidasListas(comanda, notificacion);
 	}
 
-	public int contarNotificaciones(int identificador_usuario) {
-		int num=camarero.obtenerNotificaciones(identificador_usuario);
+	public int contarNotificaciones() {
+		int num=camarero.obtenerNotificaciones();
 		return num;
 	}
 
-	public  ArrayList<ArrayList<String>> mostrarNotificaciones(int identificador_usuario) {
+	public  ArrayList<ArrayList<String>> mostrarNotificaciones() {
 		
-		ArrayList<ArrayList<String>> notificaciones=camarero.mostrarNotificaciones(identificador_usuario);
+		ArrayList<ArrayList<String>> notificaciones=camarero.mostrarNotificaciones();
 		return notificaciones;
 
 	}

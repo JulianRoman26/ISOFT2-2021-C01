@@ -92,7 +92,7 @@ public class Cocinero extends Empleado implements Carta {
 	}
 
 	public void avisar_Comida_Lista(String notificacion,Comanda comanda) {
-		Agente.insertar("INSERT INTO notificaciones VALUES (origen, destino, mensaje) VALUES ("+ id_empleado +","+comanda.getId_camarero()+","+notificacion +")");
+		Agente.insertar("INSERT INTO Notificaciones (origen, destino, mensaje) VALUES ("+ id_empleado +","+comanda.getId_camarero()+",'"+notificacion +"')");
 		// TODO Auto-generated method stub
 		
 	}
@@ -120,7 +120,7 @@ public class Cocinero extends Empleado implements Carta {
 		comanda.setEntrantes(obtenerEntrantes(total.get(0).get(1)));
 		comanda.setPrimer_plato(obtenerPrimeros(total.get(0).get(2)));
 		comanda.setSegundo_plato(obtenerSegundos(total.get(0).get(3)));
-		comanda.setPostre(obtenerSegundos(total.get(0).get(4)));
+		comanda.setPostre(obtenerPostres(total.get(0).get(4)));
 		
 		/*for(int i=0;i<comanda.getPrimer_plato().size();i++) {
 			System.out.println("Primero: "+comanda.getPrimer_plato().get(i).getNombre());
