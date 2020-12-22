@@ -306,7 +306,6 @@ public class IU_Camarero {
 		} while (fin_postre == false);
 	}
 
-
 	private static void seleccionarBebidas(ArrayList<Bebida> bebidas) {
 	
 		int opcion;

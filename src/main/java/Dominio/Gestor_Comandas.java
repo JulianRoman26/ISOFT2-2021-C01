@@ -12,7 +12,7 @@ import Presentacion.*;
 //JULIAN: VALIDARCOMANDA, REPONERBEBIDAS
 public class Gestor_Comandas {
 
-	private Camarero_Mesa camarero;
+	private static Camarero_Mesa camarero;
 	private Camarero_Barra barra;
 	private Cocinero cocinero;
 
@@ -74,7 +74,7 @@ public class Gestor_Comandas {
 	 */
 	public static void camarero_AvisarCocina_FaltaIngredientes() {
 		String notificacion = "NOS HEMOS QUEDADO SIN INGREDIENTES. DEBES REPONER EL ALMACEN";
-		IU_Cocina.getNotificaciones().add(notificacion);
+		camarero.avisar_ingredientes(notificacion);
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class Gestor_Comandas {
 		while (!comida.isEmpty()) {
 			notificacion = notificacion + comida.remove(0) + "\n";
 		}
-		IU_Cocina.getNotificaciones().add(notificacion);
+		camarero.mandar_comida(notificacion);
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class Gestor_Comandas {
 		while (!bebida.isEmpty()) {
 			notificacion = notificacion + bebida.remove(0) + "\n";
 		}
-		IU_Cocina.getNotificaciones().add(notificacion);
+		camarero.mandar_bebida(notificacion);
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class Gestor_Comandas {
 	public void cocina_cocinarPlatos(int id_mesa) {
 		Comanda comanda =cocinero.leerComanda(id_mesa);
 		Cocinero.cocinarPlatos(comanda);
-		//cocina_avisarComidaLista(comanda);
+		cocina_avisarComidaLista(comanda);
 	}
 
 	/**
@@ -141,7 +141,7 @@ public class Gestor_Comandas {
 
 	public void cocina_avisarComidaLista(Comanda comanda) {
 		String notificacion = "COMANDA LISTA de la mesa: " + comanda.getMesa_asociada() + "\n";
-		cocinero.mandarNotificacion(notificacion, comanda);
+		cocinero.avisar_Comida_Lista(notificacion, comanda);
 	}
 	
 	/**
@@ -160,7 +160,7 @@ public class Gestor_Comandas {
 
 	public void camareroBarra_avisarBebidaLista(Comanda comanda) {
 		String notificacion = "BEBIDAS LISTA de la mesa: " + comanda.getMesa_asociada() + "\n";
-		barra.mandarNotificacion(comanda, notificacion);
+		barra.avisarCamarero_Mesa_BebidasListas(comanda, notificacion);
 	}
 
 	public int contarNotificaciones(int identificador_usuario) {

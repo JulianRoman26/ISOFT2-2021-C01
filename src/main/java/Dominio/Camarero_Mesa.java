@@ -149,19 +149,6 @@ public class Camarero_Mesa extends Empleado{
 		return s;
 	}
 
-	public int obtenerNotificaciones(int identificador_usuario) {
-		int n_mensajes=0;
-		n_mensajes=Integer.parseInt(Agente.get("COUNT * FROM Notificiones WHERE destino = "+ identificador_usuario +""));
-		return n_mensajes;
-		// TODO Auto-generated method stub
-		
-	}
-
-	public ArrayList<ArrayList<String>> mostrarNotificaciones(int identificador_usuario) {
-		ArrayList<ArrayList<String>> notificaciones= Agente.getMany("SELECT * FROM Notificaciones WHERE destino = "+identificador_usuario +"");
-		return notificaciones;
-	}
-
 	public boolean Autenticar() {
 		boolean correcto=true;
         int resultado=Integer.parseInt(Agente.get("SELECT id_empleado FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Camarero_Mesa')"));
@@ -176,5 +163,19 @@ public class Camarero_Mesa extends Empleado{
         	setTelefono(Agente.get("SELECT telefono FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Camarero_Mesa')"));
         }
 		return correcto;
+	}
+	public void avisar_ingredientes( String notificacion) { // Terminado
+		Agente.insertar("INSERT INTO notificaciones VALUES (origen, destino, mensaje) VALUES (" + id_empleado + ","
+				+ 1 + "," + notificacion + ")");
+
+	}
+	
+	public static void mandar_comida(String notificacion) { // Terminado
+		Agente.insertar("INSERT INTO notificaciones VALUES (origen, destino, mensaje) VALUES (" + id_empleado + ","
+				+ 1 + "," + notificacion + ")");
+	}
+	public static void mandar_bebida(String notificacion) { // Terminado
+		Agente.insertar("INSERT INTO notificaciones VALUES (origen, destino, mensaje) VALUES (" + id_empleado + ","
+				+ 2 + "," + notificacion + ")");	
 	}
 }
