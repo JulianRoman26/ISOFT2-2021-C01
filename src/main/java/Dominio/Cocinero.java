@@ -114,7 +114,7 @@ public class Cocinero extends Empleado implements Carta {
 	public static Comanda leerComanda() {
 		System.out.println("Introduzca la mesa de la que quiere obtener la comanda:");
 		int id_mesa=scanner.nextInt();
-		ArrayList<ArrayList<String>>total=new ArrayList();
+		ArrayList<ArrayList<String>>total=new ArrayList<ArrayList<String>>();
 		Comanda comanda = new Comanda(id_mesa);		
 		total=Agente.getMany("SELECT * FROM Comandas WHERE id_mesa = "+id_mesa+"");
 
@@ -129,7 +129,7 @@ public class Cocinero extends Empleado implements Carta {
 		return comanda;
 	}
 	private static ArrayList<Bebida> obtenerBebidas(String bebidas){
-		ArrayList<Bebida> lista_bebidas = new ArrayList();
+		ArrayList<Bebida> lista_bebidas = new ArrayList<Bebida>();
 		String nombre;
 		StringTokenizer tokens=new StringTokenizer(bebidas,",");
 		while(tokens.hasMoreTokens()){
@@ -140,7 +140,7 @@ public class Cocinero extends Empleado implements Carta {
 		return lista_bebidas;
 	}
 	private static ArrayList<Plato> obtenerEntrantes(String entrantes){
-		ArrayList<Plato> lista_entrantes = new ArrayList();
+		ArrayList<Plato> lista_entrantes = new ArrayList<Plato>();
 		String nombre;
 		StringTokenizer tokens=new StringTokenizer(entrantes,",");
 		while(tokens.hasMoreTokens()){
@@ -151,7 +151,7 @@ public class Cocinero extends Empleado implements Carta {
 		return lista_entrantes;
 	}
 	private static ArrayList<Plato> obtenerPrimeros(String primeros){
-		ArrayList<Plato> lista_primeros = new ArrayList();
+		ArrayList<Plato> lista_primeros = new ArrayList<Plato>();
 		String nombre;
 		StringTokenizer tokens=new StringTokenizer(primeros,",");
 		while(tokens.hasMoreTokens()){
@@ -162,7 +162,7 @@ public class Cocinero extends Empleado implements Carta {
 		return lista_primeros;
 	}
 	private static ArrayList<Plato> obtenerSegundos(String segundos){
-		ArrayList<Plato> lista_segundos = new ArrayList();
+		ArrayList<Plato> lista_segundos = new ArrayList<Plato>();
 		String nombre;
 		StringTokenizer tokens=new StringTokenizer(segundos,",");
 		while(tokens.hasMoreTokens()){
@@ -173,7 +173,7 @@ public class Cocinero extends Empleado implements Carta {
 		return lista_segundos;
 	}
 	private static ArrayList<Plato> obtenerPostres(String postres){
-		ArrayList<Plato> lista_postres = new ArrayList();
+		ArrayList<Plato> lista_postres = new ArrayList<Plato>();
 		String nombre;
 		StringTokenizer tokens=new StringTokenizer(postres,",");
 		while(tokens.hasMoreTokens()){

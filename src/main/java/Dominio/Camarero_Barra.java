@@ -66,7 +66,7 @@ public class Camarero_Barra extends Empleado {
 
 	public static Comanda leerComanda(int id_mesa) {
 		
-		ArrayList<ArrayList<String>>total=new ArrayList();
+		ArrayList<ArrayList<String>>total=new ArrayList<ArrayList<String>>();
 		Comanda comanda = new Comanda(id_mesa);		
 		total=Agente.getMany("SELECT * FROM Comandas WHERE id_mesa = "+id_mesa+"");
 		comanda.setBebidas(obtenerBebidas(total.get(0).get(5)));	
