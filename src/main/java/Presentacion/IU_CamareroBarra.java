@@ -69,7 +69,7 @@ public class IU_CamareroBarra {
 	}
 	
 	private static void prepararBebidas(Gestor_Comandas gestor) {
-		int num=controlarNumero("introduce el de que mesa quieres ver la comanda:");
+		int num=controlarNumero("introduce el numero de mesa de la que quieres ver la comanda:");
 		gestor.camareroBarra_prepararBebida(num);
 	}
 
@@ -77,13 +77,13 @@ public class IU_CamareroBarra {
 		gestor.camareroBarra_reponerBebidas();
 	}
 	public static void leerNotificaciones(Gestor_Comandas gestor) {
-		System.out.println("Tiene usted: " + gestor.contarNotificaciones(gestor.getCamarero().getId_empleado()) + " notificaciones.");
+		System.out.println("Tiene usted: " + gestor.contarNotificaciones() + " notificaciones.");
 	}
 
 	public static  void mostrarNotificacion(Gestor_Comandas gestor) {
 		boolean salir = false;
 		int elemento=0;
-		ArrayList<ArrayList<String>> notificaciones = gestor.mostrarNotificaciones(gestor.getBarra().getId_empleado());
+		ArrayList<ArrayList<String>> notificaciones = gestor.mostrarNotificaciones();
 		while (!notificaciones.isEmpty() && salir == false) {
 			ArrayList<String> notificacion = notificaciones.get(elemento);
 			System.out.println("Mensaje:");

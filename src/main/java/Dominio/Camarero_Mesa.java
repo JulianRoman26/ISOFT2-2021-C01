@@ -36,9 +36,6 @@ public class Camarero_Mesa extends Empleado{
 		Agente.modificar("UPDATE mesa SET estados=("+mesas[num_mesa].getEstado()+") WHERE num ="+ num_mesa);
 		
 	}
-
-
-
 	public static boolean validarComanda(Comanda comandaAnotada) {  // Terminado
 		System.out.println(comandaAnotada.toString());
 		ArrayList<Ingrediente> ingredientes= new ArrayList<Ingrediente>();
@@ -89,14 +86,6 @@ public class Camarero_Mesa extends Empleado{
 		
 		return true;
 	}
-	
-
-	@Override
-	public String toString() {
-		return "Camarero_Mesa [id_mesa=" + id_mesa + ", nombre=" + nombre + ", id_empleado=" + id_empleado
-				+ ", telefono=" + telefono + "]";
-	}
-
 	private static int  comprobarIngrediente(ArrayList<Ingrediente> ingredientes, Ingrediente i) { // Terminado
 		int posicion =-1;
 		Iterator<Ingrediente> iter= ingredientes.iterator();
@@ -109,10 +98,42 @@ public class Camarero_Mesa extends Empleado{
 		// TODO Auto-generated method stub
 		return posicion;
 	}
-
 	public void anotarComanda(Comanda comanda) { // Terminado
-		Agente.insertar("INSERT INTO Comandas (id_mesa, entrantes, primeros, segundos, postres, bebidas) VALUES ("+id_mesa+",'"+arrayListToString(comanda.getEntrantes())+"','"+arrayListToString(comanda.getPrimer_plato())+"','"+arrayListToString(comanda.getSegundo_plato())+"','"+arrayListToString(comanda.getPostre())+"','"+arrayListToString2(comanda.getBebidas())+"')");
+		Agente.insertar("INSERT INTO Comandas (id_mesa, entrantes, primeros, segundos, postres, bebidas, id_camarero) VALUES ("+id_mesa+",'"+arrayListToString(comanda.getEntrantes())+"','"+arrayListToString(comanda.getPrimer_plato())+"','"+arrayListToString(comanda.getSegundo_plato())+"','"+arrayListToString(comanda.getPostre())+"','"+arrayListToString2(comanda.getBebidas())+"', "+id_empleado+")");
 		
+	}
+	public boolean Autenticar() {
+		boolean correcto=true;
+        int resultado=Integer.parseInt(Agente.get("SELECT id_empleado FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Camarero_Mesa')"));
+        
+        if(resultado==0) {
+        	correcto=false;
+        }
+        else {
+        	correcto= true;
+        	setId_empleado(resultado);
+        	setNombre(Agente.get("SELECT nombre FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Camarero_Mesa')"));
+        	setTelefono(Agente.get("SELECT telefono FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Camarero_Mesa')"));
+        }
+		return correcto;
+	}
+	public void avisar_ingredientes( String notificacion) { // Terminado
+		Agente.insertar("INSERT INTO Notificaciones (origen, destino, mensaje) VALUES (" + id_empleado + ","
+				+ 3 + ",'" + notificacion + "')");
+
+	}
+	public static void mandar_comida(String notificacion) { // Terminado
+		Agente.insertar("INSERT INTO Notificaciones (origen, destino, mensaje) VALUES (" + id_empleado + ","
+				+ 3 + ",'" + notificacion + "')");
+	}
+	public static void mandar_bebida(String notificacion) { // Terminado
+		Agente.insertar("INSERT INTO Notificaciones (origen, destino, mensaje) VALUES (" + id_empleado + ","
+				+ 1 + ",'" + notificacion + "')");	
+	}
+	@Override
+	public String toString() {
+		return "Camarero_Mesa [id_mesa=" + id_mesa + ", nombre=" + nombre + ", id_empleado=" + id_empleado
+				+ ", telefono=" + telefono + "]";
 	}
 	public String arrayListToString(ArrayList<Plato> a) {
 		String s="";
@@ -149,33 +170,4 @@ public class Camarero_Mesa extends Empleado{
 		return s;
 	}
 
-	public boolean Autenticar() {
-		boolean correcto=true;
-        int resultado=Integer.parseInt(Agente.get("SELECT id_empleado FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Camarero_Mesa')"));
-        
-        if(resultado==0) {
-        	correcto=false;
-        }
-        else {
-        	correcto= true;
-        	setId_empleado(resultado);
-        	setNombre(Agente.get("SELECT nombre FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Camarero_Mesa')"));
-        	setTelefono(Agente.get("SELECT telefono FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Camarero_Mesa')"));
-        }
-		return correcto;
-	}
-	public void avisar_ingredientes( String notificacion) { // Terminado
-		Agente.insertar("INSERT INTO notificaciones VALUES (origen, destino, mensaje) VALUES (" + id_empleado + ","
-				+ 1 + "," + notificacion + ")");
-
-	}
-	
-	public static void mandar_comida(String notificacion) { // Terminado
-		Agente.insertar("INSERT INTO notificaciones VALUES (origen, destino, mensaje) VALUES (" + id_empleado + ","
-				+ 1 + "," + notificacion + ")");
-	}
-	public static void mandar_bebida(String notificacion) { // Terminado
-		Agente.insertar("INSERT INTO notificaciones VALUES (origen, destino, mensaje) VALUES (" + id_empleado + ","
-				+ 2 + "," + notificacion + ")");	
-	}
 }

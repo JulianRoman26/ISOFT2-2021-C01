@@ -31,13 +31,13 @@ public class IU_Cocina {
 		return valido;
 	}
 	public static void leerNotificaciones(Gestor_Comandas gestor) {
-		System.out.println("Tiene usted: " + gestor.contarNotificaciones(gestor.getCamarero().getId_empleado()) + " notificaciones.");
+		System.out.println("Tiene usted: " + gestor.contarNotificaciones() + " notificaciones.");
 	}
 
 	public static  void mostrarNotificacion(Gestor_Comandas gestor) {
 		boolean salir = false;
 		int elemento=0;
-		ArrayList<ArrayList<String>> notificaciones = gestor.mostrarNotificaciones(gestor.getBarra().getId_empleado());
+		ArrayList<ArrayList<String>> notificaciones = gestor.mostrarNotificaciones();
 		while (!notificaciones.isEmpty() && salir == false) {
 			ArrayList<String> notificacion = notificaciones.get(elemento);
 			System.out.println("Mensaje:");
@@ -72,9 +72,10 @@ Gestor_Comandas.eliminarNotificacion(identificador);
 			do {
 				
 				System.out.println("\n           ****   MENU   ****\n");
-				System.out.println("  1.- Reponer Almacén");
+				System.out.println("  1.- Reponer Almacen");
 				System.out.println("  2.- Cocinar Plato");
-				System.out.println("  3.- Salir");
+				System.out.println("  3.- Mostrar Notificaciones");
+				System.out.println("  4.- Salir");
 
 				opcion = controlarNumero("Elija una opcion");
 
@@ -83,17 +84,21 @@ Gestor_Comandas.eliminarNotificacion(identificador);
 					gestor.cocina_reponerAlmacen();
 					break;
 				case 2:
-					gestor.cocina_cocinarPlatos();
+					int id_mesa=controlarNumero("Introduzca la mesa de la que quiere obtener la comanda:");
+					gestor.cocina_cocinarPlatos(id_mesa);
 					break;
 				case 3:
-					fin = true;
+					mostrarNotificacion(gestor);
+					break;
+				case 4:
+					fin=true;
 					break;
 				default:
 					System.out.println("Valor no valido ");
 					break;
 				}
 			} while (opcion < 1 && opcion > 3);
-			//leerNotificaciones(gestor);
+			leerNotificaciones(gestor);
 		} while (fin == false);
 
 	}

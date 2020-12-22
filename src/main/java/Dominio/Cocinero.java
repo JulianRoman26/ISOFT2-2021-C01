@@ -92,7 +92,7 @@ public class Cocinero extends Empleado implements Carta {
 	}
 
 	public void avisar_Comida_Lista(String notificacion,Comanda comanda) {
-		Agente.insertar("INSERT INTO notificaciones VALUES (origen, destino, mensaje) VALUES ("+ id_empleado +","+comanda.getId_camarero()+","+notificacion +")");
+		Agente.insertar("INSERT INTO Notificaciones (origen, destino, mensaje) VALUES ("+ id_empleado +","+comanda.getId_camarero()+",'"+notificacion +"')");
 		// TODO Auto-generated method stub
 		
 	}
@@ -111,17 +111,16 @@ public class Cocinero extends Empleado implements Carta {
         }
 		return correcto;
 	}
-	public static Comanda leerComanda() {
-		System.out.println("Introduzca la mesa de la que quiere obtener la comanda:");
-		int id_mesa=scanner.nextInt();
-		ArrayList<ArrayList<String>>total=new ArrayList<ArrayList<String>>();
+
+	public static Comanda leerComanda(int id_mesa) {
+		ArrayList<ArrayList<String>>total=new ArrayList();
 		Comanda comanda = new Comanda(id_mesa);		
 		total=Agente.getMany("SELECT * FROM Comandas WHERE id_mesa = "+id_mesa+"");
 
 		comanda.setEntrantes(obtenerEntrantes(total.get(0).get(1)));
 		comanda.setPrimer_plato(obtenerPrimeros(total.get(0).get(2)));
 		comanda.setSegundo_plato(obtenerSegundos(total.get(0).get(3)));
-		comanda.setPostre(obtenerSegundos(total.get(0).get(4)));
+		comanda.setPostre(obtenerPostres(total.get(0).get(4)));
 		
 		/*for(int i=0;i<comanda.getPrimer_plato().size();i++) {
 			System.out.println("Primero: "+comanda.getPrimer_plato().get(i).getNombre());

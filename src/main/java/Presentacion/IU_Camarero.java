@@ -81,7 +81,7 @@ public class IU_Camarero {
 					break;
 				}
 			} while (opcion < 1 && opcion > 5);
-			//leerNotificaciones(gestor);
+			leerNotificaciones(gestor);
 		} while (fin == false);
 
 	}
@@ -148,7 +148,7 @@ public class IU_Camarero {
 			}
 
 		} while (finComanda==false);
-
+		comanda.setId_camarero(gestor.getCamarero().getId_mesa());
 		gestor.camarero_anotarComanda(comanda);
 	}
 	private static void seleccionarEntrantes(ArrayList<Plato> entrantes) {
@@ -291,7 +291,7 @@ public class IU_Camarero {
 				postres.add(p);
 				break;
 			case 4:
-				p = new Plato("Bizcocho");
+				p = new Plato("bizcocho");
 				Carta.getPostre(p);
 				postres.add(p);
 				break;
@@ -340,13 +340,13 @@ public class IU_Camarero {
 	}
 	// Seccion de notificaciones----------------------------------------------------------------------------------------------------
 		public static void leerNotificaciones(Gestor_Comandas gestor) {
-			System.out.println("Tiene usted: " + gestor.contarNotificaciones(gestor.getCamarero().getId_empleado()) + " notificaciones.");
+			System.out.println("Tiene usted: " + gestor.contarNotificaciones() + " notificaciones.");
 		}
 
 		public static  void mostrarNotificacion(Gestor_Comandas gestor) {
 			boolean salir = false;
 			int elemento=0;
-			ArrayList<ArrayList<String>> notificaciones = gestor.mostrarNotificaciones(gestor.getBarra().getId_empleado());
+			ArrayList<ArrayList<String>> notificaciones = gestor.mostrarNotificaciones();
 			while (!notificaciones.isEmpty() && salir == false) {
 				ArrayList<String> notificacion = notificaciones.get(elemento);
 				System.out.println("Mensaje:");

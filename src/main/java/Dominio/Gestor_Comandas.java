@@ -125,8 +125,8 @@ public class Gestor_Comandas {
 	 * 
 	 * @param comanda
 	 */
-	public void cocina_cocinarPlatos() {
-		Comanda comanda =cocinero.leerComanda();
+	public void cocina_cocinarPlatos(int id_mesa) {
+		Comanda comanda =cocinero.leerComanda(id_mesa);
 		Cocinero.cocinarPlatos(comanda);
 		cocina_avisarComidaLista(comanda);
 	}
@@ -163,14 +163,14 @@ public class Gestor_Comandas {
 		barra.avisarCamarero_Mesa_BebidasListas(comanda, notificacion);
 	}
 
-	public int contarNotificaciones(int identificador_usuario) {
-		int num=camarero.obtenerNotificaciones(identificador_usuario);
+	public int contarNotificaciones() {
+		int num=camarero.obtenerNotificaciones();
 		return num;
 	}
 
-	public  ArrayList<ArrayList<String>> mostrarNotificaciones(int identificador_usuario) {
+	public  ArrayList<ArrayList<String>> mostrarNotificaciones() {
 		
-		ArrayList<ArrayList<String>> notificaciones=camarero.mostrarNotificaciones(identificador_usuario);
+		ArrayList<ArrayList<String>> notificaciones=camarero.mostrarNotificaciones();
 		return notificaciones;
 
 	}
