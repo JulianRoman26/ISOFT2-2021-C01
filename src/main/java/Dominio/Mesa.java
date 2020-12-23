@@ -99,5 +99,3 @@ public class Mesa implements Estados {
 
 	}
 }
-
-

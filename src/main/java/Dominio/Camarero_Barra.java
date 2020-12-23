@@ -1,13 +1,17 @@
 package Dominio;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
 
 import Persistencia.Agente;
 import Presentacion.IU_Camarero;
 
 // JORGE
+	
 public class Camarero_Barra extends Empleado {
 	private String barra;
+	static Scanner scanner =new Scanner (System.in);
 	
 	public Camarero_Barra(int i,String n,String t) {
 		super(i,n,t);
@@ -18,9 +22,8 @@ public class Camarero_Barra extends Empleado {
 		super(id);
 	}
 
-	public int avisarCamarero_Mesa_BebidasListas() {
-		String mensaje= "LAS BEBIDAS DE LA COMANDA X YA ESTAN LISTAS PARA SER SERVIDAS ";
-		
+	public int avisarCamarero_Mesa_BebidasListas(Comanda comanda,String notificacion) {
+		Agente.insertar("INSERT INTO notificaciones VALUES(origen, destino, mensaje) VALUES "+ id_empleado +", "+comanda.getId_camarero() +","+ notificacion+"");
 		// TODO - implement Camarero_Barra.avisarCamarero_Mesa_BebidasListas
 		throw new UnsupportedOperationException();
 	}
@@ -32,9 +35,9 @@ public class Camarero_Barra extends Empleado {
 	public static void prepararBebidas(Comanda comanda) {
 		ArrayList<Bebida> bebidas= comanda.getBebidas();
 		for(int j = 0;j<bebidas.size();j++) {
-		Agente.modificar("UPDATE Bebidas SET cantidad_disponible=(cantidad_disponible-"+bebidas.get(j).getCantidad()+
-				") WHERE nombre="+ bebidas.get(j).getNombre());
-		
+			bebidas.get(j).setCantidad(1);
+		Agente.modificar("UPDATE Bebidas SET cantidad=(cantidad-"+bebidas.get(j).getCantidad()+
+				") WHERE nombre='"+ bebidas.get(j).getNombre()+"'");
 		}
 	}
 
@@ -43,24 +46,12 @@ public class Camarero_Barra extends Empleado {
 	 * @param bebidas
 	 */
 	public static void reponerBebidas() {
-		Agente.modificar("UPDATE Bebidas SET cantidad=50 WHERE cantidad<10;");
-	}
-	
-	public void mandarNotificacion(Comanda comanda, String notificacion) {
-		Agente.insertar("INSERT INTO notificaciones VALUES(origen, destino, mensaje) VALUES "+ id_empleado +", "+comanda.getId_camarero() +","+ notificacion+"");
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public static void eliminarNotificacion(String identificador) {
-		Agente.eliminar("DELETE * FROM notificaciones WHERE id= " +identificador+ "");
-		// TODO Auto-generated method stub
-		
+		Agente.modificar("UPDATE Bebidas SET cantidad=50 WHERE cantidad<10;\");"); //Insertar Bebidas
 	}
 	
 	public boolean Autenticar() {
 		boolean correcto=true;
-        int resultado=Integer.parseInt(Agente.get("SELECT id_empleado FROM Empleados WHERE id_empleado="+this.id_empleado));
+        int resultado=Integer.parseInt(Agente.get("SELECT id_empleado FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Camarero_Barra')"));
         if(resultado==0) {
         	correcto=false;
         }
@@ -71,6 +62,28 @@ public class Camarero_Barra extends Empleado {
         	setTelefono(Agente.get("SELECT telefono FROM Empleados WHERE (id_empleado="+this.id_empleado+" AND rol='Camarero_Barra')"));
         }
 		return correcto;
+	}
+
+	public static Comanda leerComanda(int id_mesa) {
+		
+		ArrayList<ArrayList<String>>total=new ArrayList<ArrayList<String>>();
+		Comanda comanda = new Comanda(id_mesa);		
+		total=Agente.getMany("SELECT * FROM Comandas WHERE id_mesa = "+id_mesa+"");
+		comanda.setBebidas(obtenerBebidas(total.get(0).get(5)));	
+
+		return comanda;
+	}
+
+	private static ArrayList<Bebida> obtenerBebidas(String bebidas) {
+		ArrayList<Bebida> lista_bebidas = new ArrayList<Bebida>();
+		String nombre;
+		StringTokenizer tokens=new StringTokenizer(bebidas,",");
+		while(tokens.hasMoreTokens()){
+			nombre=tokens.nextToken();
+			Bebida bebida=new Bebida(nombre);
+			lista_bebidas.add(bebida);
+	        }
+		return lista_bebidas;
 	}
 
 }

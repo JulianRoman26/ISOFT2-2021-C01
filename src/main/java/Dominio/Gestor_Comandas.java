@@ -10,10 +10,9 @@ import Presentacion.*;
 //AARON: SELECCIONARNUMERO
 //JORGE: SECUENCIARESTADOS, COCINARPLATOS
 //JULIAN: VALIDARCOMANDA, REPONERBEBIDAS
-
 public class Gestor_Comandas {
 
-	private Camarero_Mesa camarero;
+	private static Camarero_Mesa camarero;
 	private Camarero_Barra barra;
 	private Cocinero cocinero;
 
@@ -51,10 +50,12 @@ public class Gestor_Comandas {
 
 	public  void camarero_anotarComanda(Comanda comanda) { // Terminado
 		if (camarero_validarComanda(comanda) == true) {
-			camarero.anotarComanda(comanda); // Anadir  la comanda en la base de datos
+			System.out.println("Validada");
+			camarero.anotarComanda(comanda); // Anadir la comanda en la base de datos
 			camarero_mandarComida(comanda);
 			camarero_mandarBebida(comanda);
 		} else {
+			System.out.println(" No Validada");
 			camarero_AvisarCocina_FaltaIngredientes();
 		}
 	}
@@ -73,7 +74,7 @@ public class Gestor_Comandas {
 	 */
 	public static void camarero_AvisarCocina_FaltaIngredientes() {
 		String notificacion = "NOS HEMOS QUEDADO SIN INGREDIENTES. DEBES REPONER EL ALMACEN";
-		IU_Cocina.getNotificaciones().add(notificacion);
+		camarero.avisar_ingredientes(notificacion);
 	}
 
 	/**
@@ -104,7 +105,7 @@ public class Gestor_Comandas {
 		while (!comida.isEmpty()) {
 			notificacion = notificacion + comida.remove(0) + "\n";
 		}
-		IU_Cocina.getNotificaciones().add(notificacion);
+		camarero.mandar_comida(notificacion);
 	}
 
 	/**
@@ -117,14 +118,15 @@ public class Gestor_Comandas {
 		while (!bebida.isEmpty()) {
 			notificacion = notificacion + bebida.remove(0) + "\n";
 		}
-		IU_Cocina.getNotificaciones().add(notificacion);
+		camarero.mandar_bebida(notificacion);
 	}
 
 	/**
 	 * 
 	 * @param comanda
 	 */
-	public void cocina_cocinarPlatos(Comanda comanda) {
+	public void cocina_cocinarPlatos(int id_mesa) {
+		Comanda comanda =cocinero.leerComanda(id_mesa);
 		Cocinero.cocinarPlatos(comanda);
 		cocina_avisarComidaLista(comanda);
 	}
@@ -134,21 +136,22 @@ public class Gestor_Comandas {
 	 * @param ingredientes
 	 */
 	public void cocina_reponerAlmacen() {
-		cocinero.reponerAlmacen();
+		Cocinero.reponerAlmacen();
 	}
 
 	public void cocina_avisarComidaLista(Comanda comanda) {
 		String notificacion = "COMANDA LISTA de la mesa: " + comanda.getMesa_asociada() + "\n";
-		cocinero.mandarNotificacion(notificacion, comanda);
+		cocinero.avisar_Comida_Lista(notificacion, comanda);
 	}
 	
 	/**
 	 * 
 	 * @param comanda
 	 */
-	public void camareroBarra_prepararBebida(Comanda comanda) {
+	public void camareroBarra_prepararBebida(int n) {
+		Comanda comanda = barra.leerComanda(n);
 		barra.prepararBebidas(comanda);
-		camareroBarra_avisarBebidaLista(comanda);
+		//camareroBarra_avisarBebidaLista(comanda);
 	}
 
 	public void camareroBarra_reponerBebidas() {
@@ -157,17 +160,17 @@ public class Gestor_Comandas {
 
 	public void camareroBarra_avisarBebidaLista(Comanda comanda) {
 		String notificacion = "BEBIDAS LISTA de la mesa: " + comanda.getMesa_asociada() + "\n";
-		barra.mandarNotificacion(comanda, notificacion);
+		barra.avisarCamarero_Mesa_BebidasListas(comanda, notificacion);
 	}
 
-	public int contarNotificaciones(int identificador_usuario) {
-		int num=camarero.obtenerNotificaciones(identificador_usuario);
+	public int contarNotificaciones() {
+		int num=camarero.obtenerNotificaciones();
 		return num;
 	}
 
-	public  ArrayList<ArrayList<String>> mostrarNotificaciones(int identificador_usuario) {
+	public  ArrayList<ArrayList<String>> mostrarNotificaciones() {
 		
-		ArrayList<ArrayList<String>> notificaciones=camarero.mostrarNotificaciones(identificador_usuario);
+		ArrayList<ArrayList<String>> notificaciones=camarero.mostrarNotificaciones();
 		return notificaciones;
 
 	}
@@ -203,6 +206,10 @@ public class Gestor_Comandas {
 		return existe;
 
 	}
+
+
+
+
 
 
 }

@@ -12,9 +12,10 @@ import Dominio.Plato;
 
 //NO POR EL MOMENTO
 public class IU_Camarero {
-	static int identificador_usuario = 0;
-	static int mesa_actual = 0;
+	/*static int identificador_usuario = 0;
+	static int mesa_actual = 0;*/
 	static Scanner scanner = new Scanner(System.in);
+
 	
 	public static void main(String[] args) {
 		Gestor_Comandas gestor =new Gestor_Comandas();
@@ -36,8 +37,8 @@ public class IU_Camarero {
 		}
 		return valido;
 	}
-	//Muestra el menu----------------------------------------------------------------------------------------------------------
-	public static void mostrarMenu(Gestor_Comandas gestor) { 
+	
+	public static void mostrarMenu(Gestor_Comandas gestor) {
 		int opcion;
 		boolean fin = false;
 		do {
@@ -53,13 +54,21 @@ public class IU_Camarero {
 
 				switch (opcion) {
 				case 1:
-					seleccionarMesa();
+					seleccionarMesa(gestor);
 					break;
 				case 2:
-					gestor.camarero_secuenciarEstado(mesa_actual);
+					if(gestor.getCamarero().getId_mesa()==0) {
+						System.out.println("Error, no has escogido la mesa a la cual se va a atender, por favor seleccione el numero de mesa.");
+					}else{
+						gestor.camarero_secuenciarEstado(gestor.getCamarero().getId_mesa());
+					}
 					break;
 				case 3:
-					seleccionarPlatos(gestor);
+					if(gestor.getCamarero().getId_mesa()==0) {
+						System.out.println("Error, no has escogido la mesa a la cual se va a atender, por favor seleccione el numero de mesa.");
+						}else{
+							seleccionarPlatos(gestor);
+						}
 					break;
 				case 4:
 					mostrarNotificacion(gestor);
@@ -76,16 +85,18 @@ public class IU_Camarero {
 		} while (fin == false);
 
 	}
-	// Selecciona de mesa
-	public static void seleccionarMesa() {
+	// Seleccion de mesa------------------------------------------------------------------------------------------------------
+	public static void seleccionarMesa(Gestor_Comandas gestor) {
 		int num_mesa = 0;
 		do {
-			num_mesa = scanner.nextInt();
+			num_mesa = controlarNumero("Por favor, seleccione el numero de mesa:");
 			if (num_mesa <= 0 || num_mesa > 8) { // hemos supuesto que tenemos 8 mesas en el restaurante
 				System.out.println("Mesa no valida");
 			}
 		} while (num_mesa <= 0 || num_mesa > 8);
-		mesa_actual= num_mesa;
+		gestor.getCamarero().setId_mesa(num_mesa);
+		System.out.println(gestor.getCamarero().toString());
+		
 	}
 
 
@@ -94,7 +105,8 @@ public class IU_Camarero {
 	public static  void seleccionarPlatos(Gestor_Comandas gestor) {
 		boolean finComanda = false;
 		int opcion;
-		Comanda comanda= new Comanda(identificador_usuario,mesa_actual);
+	
+		Comanda comanda= new Comanda(gestor.getCamarero().getId_empleado(),gestor.getCamarero().getId_mesa());
 		ArrayList<Plato> entrantes = new ArrayList<Plato>();
 		ArrayList<Plato> primeros = new ArrayList<Plato>();
 		ArrayList<Plato> segundos = new ArrayList<Plato>();
@@ -104,12 +116,11 @@ public class IU_Camarero {
 			System.out.println("\n           ****   MENU   ****\n");
 			// while seleccion no terminado
 
-			opcion = controlarNumero("¿Qué desea pedir ahora?\n 1-Entrantes\n 2-Primeros\n 3-Segundos\n 4-Postres\n 5-Bebidas\n 6-Terminar");
+			opcion = controlarNumero("¿Que desea pedir ahora?\n 1-Entrantes\n 2-Primeros\n 3-Segundos\n 4-Postres\n 5-Bebidas\n 6-Terminar");
 			switch (opcion) {
 			case 1:
-				seleccionarEntrantes(entrantes); // Va introduciendo los platos que le van indicando al camarero
+			    seleccionarEntrantes(entrantes); // Va introduciendo los platos que le van indicando al camarero
 				comanda.setEntrantes(entrantes);
-				
 				break;
 			case 2:
 				seleccionarPrimeros(primeros);
@@ -124,89 +135,82 @@ public class IU_Camarero {
 				comanda.setPostre(postres);
 				break;
 			case 5:
-				seleccionarBebidas(comanda);
+				seleccionarBebidas(bebidas);
 				comanda.setBebidas(bebidas);
+				
 				break;
 			case 6:
 				finComanda = true;
 				break;
 			default:
-				System.out.println("Opción no válido");
+				System.out.println("Opcion no valido");
 				break;
 			}
 
-		} while (finComanda);
-		
+		} while (finComanda==false);
+		comanda.setId_camarero(gestor.getCamarero().getId_mesa());
 		gestor.camarero_anotarComanda(comanda);
 	}
-	
-	//Selecciona los entrantes
 	private static void seleccionarEntrantes(ArrayList<Plato> entrantes) {
 		int opcion;
 		Plato p;
 		boolean fin_entrante = false;
 		do {
-			System.out.println("\n1-Jamon\n2-Queso\n3-Tostas\n4-Calamares\n 5-Salir");
+			System.out.println("\n1-Jamon\n2-Queso\n3-Patatas Bravas\n 4-Salir");
 			opcion = controlarNumero("Seleccione un entrante: ");
 			switch (opcion) {
 			case 1:
-				p = new Plato("Jamon");
+				p = new Plato("jamon");
 				Carta.getEntrantes(p);
 				entrantes.add(p);
 				break;
 			case 2:
-				p = new Plato("Queso");
+				p = new Plato("queso");
 				Carta.getEntrantes(p);
 				entrantes.add(p);
 				break;
 			case 3:
-				p = new Plato("Tostas");
+				p = new Plato("bravas");
 				Carta.getEntrantes(p);
 				entrantes.add(p);
 				break;
+	
 			case 4:
-				p = new Plato("Calamares");
-				Carta.getEntrantes(p);
-				entrantes.add(p);
-				break;
-
-			case 5:
 				fin_entrante = true;
 				break;
 			default:
-				System.out.println("Opción no válido");
+				System.out.println("Opcion no valido");
 				break;
 			}
 		} while (fin_entrante == false);
-
-	}
 	
-	//Selecciona los primeros
+	}
+
 	private static void seleccionarPrimeros(ArrayList<Plato> primeros) {
 		int opcion;
 		Plato p;
 		boolean fin_primero = false;
 		do {
-			System.out.println("\n1-Cocido\n2-Ensalada\n3-Crema de Verduras\n4-Esparragos\n 5-Salir");
+			System.out.println("\n1-Sopa de Cocido\n2-Ensalada\n3-Crema de Calabaza\n4-Paella\n 5-Salir");
 			opcion = controlarNumero("Seleccione un primer plato: ");
 			switch (opcion) {
 			case 1:
-				p = new Plato("Cocido");
+				p = new Plato("sopa_de_cocido");
 				Carta.getPrimerPlato(p);
 				primeros.add(p);
 				break;
 			case 2:
-				p = new Plato("Ensalada");
+				p = new Plato("ensalada");
 				Carta.getPrimerPlato(p);
 				primeros.add(p);
 				break;
 			case 3:
-				p = new Plato("Crema de Verduras");
+				p = new Plato("crema_de_calabaza");
 				Carta.getPrimerPlato(p);
 				primeros.add(p);
 				break;
 			case 4:
-				p = new Plato("Esparragos");
+				p = new Plato("paella");
 				Carta.getPrimerPlato(p);
 				primeros.add(p);
 				break;
@@ -215,38 +219,38 @@ public class IU_Camarero {
 				fin_primero = true;
 				break;
 			default:
-				System.out.println("Opción no válido");
+				System.out.println("Opcion no valida");
 				break;
 			}
 		} while (fin_primero == false);
-
+		
 	}
-	//Selecciona los segundos
+
 	private static void seleccionarSegundos(ArrayList<Plato> segundos) {
 		int opcion;
 		Plato p;
 		boolean fin_segundo = false;
 		do {
-			System.out.println("\n1-Lubina\n2-Solomillo\n3-Macarrones\n4-Hamburguesa\n 5-Salir");
+			System.out.println("\n1-Lubina\n2-Cordero\n3-Macarrones\n4-Hamburguesa\n 5-Salir");
 			opcion = controlarNumero("Seleccione un segundo plato: ");
 			switch (opcion) {
 			case 1:
-				p = new Plato("Lubina");
+				p = new Plato("lubina");
 				Carta.getSegundoPlato(p);
 				segundos.add(p);
 				break;
 			case 2:
-				p = new Plato("Solomillo");
+				p = new Plato("cordero");
 				Carta.getSegundoPlato(p);
 				segundos.add(p);
 				break;
 			case 3:
-				p = new Plato("Macarrones");
+				p = new Plato("macarrones");
 				Carta.getSegundoPlato(p);
 				segundos.add(p);
 				break;
 			case 4:
-				p = new Plato("Hamburguesa");
+				p = new Plato("hamburguesa");
 				Carta.getSegundoPlato(p);
 				segundos.add(p);
 				break;
@@ -256,38 +260,38 @@ public class IU_Camarero {
 				fin_segundo = true;
 				break;
 			default:
-				System.out.println("Opción no válido");
+				System.out.println("Opcion no valida");
 				break;
 			}
 		} while (fin_segundo == false);
-
+	
 	}
-	//Selecciona los postres
+
 	private static void seleccionarPostres(ArrayList<Plato> postres) {
 		int opcion;
 		Plato p;
 		boolean fin_postre = false;
 		do {
-			System.out.println("\n1-Tarta\n2-Helado\n3-Chocolate\n4-Bizcocho\n 5-Salir");
+			System.out.println("\n1-Tarta De Queso\n2-Flan\n3-Chocolate\n4-Bizcocho\n5-Salir");
 			opcion = controlarNumero("Seleccione un postre: ");
 			switch (opcion) {
 			case 1:
-				p = new Plato("Tarta");
+				p = new Plato("tarta_de_queso");
 				Carta.getPostre(p);
 				postres.add(p);
 				break;
 			case 2:
-				p = new Plato("Helado");
+				p = new Plato("flan");
 				Carta.getPostre(p);
 				postres.add(p);
 				break;
 			case 3:
-				p = new Plato("Chocolate");
+				p = new Plato("chocolate");
 				Carta.getPostre(p);
 				postres.add(p);
 				break;
 			case 4:
-				p = new Plato("Bizcocho");
+				p = new Plato("bizcocho");
 				Carta.getPostre(p);
 				postres.add(p);
 				break;
@@ -296,53 +300,53 @@ public class IU_Camarero {
 				fin_postre = true;
 				break;
 			default:
-				System.out.println("Opción no válido");
+				System.out.println("Opcion no valida");
 				break;
 			}
 		} while (fin_postre == false);
-
 	}
+
+	private static void seleccionarBebidas(ArrayList<Bebida> bebidas) {
 	
-	//Selecciona las bebidas
-	private static void seleccionarBebidas(Comanda comanda) {
 		int opcion;
 		boolean fin_bebida = false;
 		do {
-			System.out.println("\n1-Soda\n2-CocaCola\n3-Vino\n4-Cerveza\n 5-Salir");
+			System.out.println("\n1-Agua\n2-Pepsi\n3-Vino\n4-Fanta\n 5-Salir");
 			opcion = controlarNumero("Seleccione una bebida: ");
 			switch (opcion) {
 			case 1:
-				comanda.AñadirBebidas(new Bebida("Soda",1));
+				bebidas.add(new Bebida("agua",1));
+				
 				break;
 			case 2:
-				comanda.AñadirBebidas(new Bebida("CocaCola",1));
+				bebidas.add(new Bebida("pepsi",1));
 				break;
 			case 3:
-				comanda.AñadirBebidas(new Bebida("Vino",1));
+				bebidas.add(new Bebida("vino",1));
 				break;
 			case 4:
-				comanda.AñadirBebidas(new Bebida("Cerveza",1));
+				bebidas.add(new Bebida("fanta",1));
 				break;
 
 			case 5:
 				fin_bebida = true;
 				break;
 			default:
-				System.out.println("Opción no válido");
+				System.out.println("Opcion no valida");
 				break;
 			}
 		} while (fin_bebida == false);
-
+		
 	}
 	// Seccion de notificaciones----------------------------------------------------------------------------------------------------
 		public static void leerNotificaciones(Gestor_Comandas gestor) {
-			System.out.println("Tiene usted: " + gestor.contarNotificaciones(identificador_usuario) + " notificaciones.");
+			System.out.println("Tiene usted: " + gestor.contarNotificaciones() + " notificaciones.");
 		}
-		// Muestra las nostificaciones
+
 		public static  void mostrarNotificacion(Gestor_Comandas gestor) {
 			boolean salir = false;
 			int elemento=0;
-			ArrayList<ArrayList<String>> notificaciones = gestor.mostrarNotificaciones(identificador_usuario);
+			ArrayList<ArrayList<String>> notificaciones = gestor.mostrarNotificaciones();
 			while (!notificaciones.isEmpty() && salir == false) {
 				ArrayList<String> notificacion = notificaciones.get(elemento);
 				System.out.println("Mensaje:");
@@ -363,7 +367,7 @@ public class IU_Camarero {
 				}
 			}
 		}
-		//elimina las notificaciones
+		
 private static void eliminarNotificacion(String identificador) {
 	Gestor_Comandas.eliminarNotificacion(identificador);
 			// TODO Auto-generated method stub

@@ -8,6 +8,9 @@ public Bebida(String nombre, int cantidad) {
 	this.nombre = nombre;
 	this.cantidad = cantidad;
 }
+public Bebida(String nombre) {
+	this.nombre=nombre;
+}
 public String getNombre() {
 	return nombre;
 }

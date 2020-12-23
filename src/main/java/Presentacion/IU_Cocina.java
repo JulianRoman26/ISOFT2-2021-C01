@@ -30,51 +30,84 @@ public class IU_Cocina {
 		}
 		return valido;
 	}
-	public static ArrayList<String> getNotificaciones() {
-		return notificaciones;
+	public static void leerNotificaciones(Gestor_Comandas gestor) {
+		System.out.println("Tiene usted: " + gestor.contarNotificaciones() + " notificaciones.");
 	}
-	public void leerNotificaciones() {
-		System.out.println("Tiene usted: "+notificaciones.size()+" notificaciones.");
-	}
-	/**
-	 * 
-	 * @param 
-	 */
-	public void mostrarNotificacion() {
-		boolean salir=false;
-		while(!notificaciones.isEmpty()&& salir==false) {
-			System.out.println(notificaciones.get(0));
-			System.out.println("1-Leer\n2-Borrar\n3-Salir");
-			int opcion=scanner.nextInt();
-			switch(opcion) {
+
+	public static  void mostrarNotificacion(Gestor_Comandas gestor) {
+		boolean salir = false;
+		int elemento=0;
+		ArrayList<ArrayList<String>> notificaciones = gestor.mostrarNotificaciones();
+		while (!notificaciones.isEmpty() && salir == false) {
+			ArrayList<String> notificacion = notificaciones.get(elemento);
+			System.out.println("Mensaje:");
+			System.out.println(" Id :"+ notificacion.get(0)+"\n Origen: "+notificacion.get(1) +"\n Mensaje: "+ notificacion.get(3)+"");
+			System.out.println("1-Leer siguiente\n2-Borrar\n3-Salir");
+			int opcion = scanner.nextInt();
+			switch (opcion) {
 			case 1:
+				elemento++;
 				break;
 			case 2:
-				notificaciones.remove(0);
+				notificaciones.remove(elemento);
+				eliminarNotificacion(notificacion.get(0));
 				break;
 			case 3:
-					salir=true;
-					break;
+				salir = true;
+				break;
 			}
 		}
 	}
 	
-
-	public void reponerAlmacen(Gestor_Comandas gestor) {
-		gestor.cocina_reponerAlmacen();
-	}
-	
-
-	public static void mostrarMenu_cocina(Gestor_Comandas gestor) {
+private static void eliminarNotificacion(String identificador) {
+Gestor_Comandas.eliminarNotificacion(identificador);
+		// TODO Auto-generated method stub
 		
 	}
-	
+
+	public static void mostrarMenu_cocina(Gestor_Comandas gestor) {
+		int opcion;
+		boolean fin = false;
+		do {
+			do {
+				
+				System.out.println("\n           ****   MENU   ****\n");
+				System.out.println("  1.- Reponer Almacen");
+				System.out.println("  2.- Cocinar Plato");
+				System.out.println("  3.- Mostrar Notificaciones");
+				System.out.println("  4.- Salir");
+
+				opcion = controlarNumero("Elija una opcion");
+
+				switch (opcion) {
+				case 1:
+					gestor.cocina_reponerAlmacen();
+					break;
+				case 2:
+					int id_mesa=controlarNumero("Introduzca la mesa de la que quiere obtener la comanda:");
+					gestor.cocina_cocinarPlatos(id_mesa);
+					break;
+				case 3:
+					mostrarNotificacion(gestor);
+					break;
+				case 4:
+					fin=true;
+					break;
+				default:
+					System.out.println("Valor no valido ");
+					break;
+				}
+			} while (opcion < 1 && opcion > 3);
+			leerNotificaciones(gestor);
+		} while (fin == false);
+
+	}
 	public static int controlarNumero(String texto) {
 
 		int num = 0;
 		boolean control = true;
 
-		do { 	// Bucle que sirve para controlar si se introducen numeros
+		do { // Bucle para controlar que se introducen numeros
 			try {
 				System.out.println(texto);
 				num = scanner.nextInt();

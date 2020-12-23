@@ -90,6 +90,37 @@ public interface Carta {
 			p.setIngredientes(ingredientes);
 			break;
 			
+		case "paella":
+			
+			Ingrediente arroz = new Ingrediente("arroz",2);
+			Ingrediente gambas=new Ingrediente("gambas",6);
+			Ingrediente aceitunas=new Ingrediente("aceitunas",8);
+			ingredientes.add(arroz);
+			ingredientes.add(gambas);
+			ingredientes.add(aceitunas);
+			p.setIngredientes(ingredientes);
+			break; 
+			
+		case "espagueti_con_carne":
+			Ingrediente espagueti = new Ingrediente("espagueti",1);
+			Ingrediente chorizo=new Ingrediente("chorizo",4);
+			Ingrediente tomate_espagueti=new Ingrediente("tomate",8);
+			ingredientes.add(espagueti);
+			ingredientes.add(chorizo);
+			ingredientes.add(tomate_espagueti);
+			p.setIngredientes(ingredientes);
+			break;
+			
+		case "almejas_a_la_marinera":
+			Ingrediente almejas = new Ingrediente("almejas",1);
+			Ingrediente limon=new Ingrediente("limon",1);
+			Ingrediente salsa_marinera=new Ingrediente("salsa_marinera",8);
+			ingredientes.add(almejas);
+			ingredientes.add(limon);
+			ingredientes.add(salsa_marinera);
+			p.setIngredientes(ingredientes);
+			break;
+			
 		}
 		return p;
 	
@@ -133,6 +164,17 @@ public static Plato getSegundoPlato(Plato p) {
 			p.setIngredientes(ingredientes);
 			break;
 			
+		case "hamburguesa":
+			Ingrediente carne = new Ingrediente("carne",2);
+			Ingrediente lechuga=new Ingrediente("lechuga",5);
+			Ingrediente queso = new Ingrediente("queso", 1);
+			ingredientes.add(queso);
+			ingredientes.add(carne);
+			ingredientes.add(lechuga);
+			
+			p.setIngredientes(ingredientes);
+			break;
+			
 		}
 		return p;
 	
@@ -167,7 +209,21 @@ public static Plato getPostre(Plato p) {
 		
 		break;
 		
-
+		
+	case "chocolate":
+		
+		Ingrediente chocolate = new Ingrediente("chocolate", 3);
+		ingredientes.add(chocolate);
+		p.setIngredientes(ingredientes);
+		
+		break;
+		
+	case "bizcocho":
+		Ingrediente bizcocho2 = new Ingrediente("bizcocho", 5);
+		ingredientes.add(bizcocho2);
+		p.setIngredientes(ingredientes);
+		
+		break;
 		
 	}
 	return p;

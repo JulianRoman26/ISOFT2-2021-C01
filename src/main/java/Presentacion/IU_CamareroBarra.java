@@ -8,7 +8,6 @@ import Dominio.Gestor_Comandas;
 //NO POR EL MOMENTO
 public class IU_CamareroBarra {
 	static Scanner scanner = new Scanner(System.in);
-	static ArrayList<String> notificaciones=new ArrayList<String>();
 	
 	public static void main(String[] args) {
 		Gestor_Comandas gestor =new Gestor_Comandas();
@@ -31,9 +30,6 @@ public class IU_CamareroBarra {
 		}
 		return valido;
 	}
-	public ArrayList<String> getNotificaciones() {
-		return notificaciones;
-	}
 	
 	public static void mostrarMenu_barra(Gestor_Comandas gestor) {
 		int opcion;
@@ -41,12 +37,12 @@ public class IU_CamareroBarra {
 		do {
 			do {
 				System.out.println("\n           ****   MENU   ****\n");
-				System.out.println("  1.- Reponer Bebidas");
-				System.out.println("  2.-");
-				System.out.println("  3.-");
-				System.out.println("  4.-");
+				System.out.println("  1.-Reponer Bebidas");
+				System.out.println("  2.-Preparar Bebidas ");
+				System.out.println("  3.- ");
+				System.out.println("  4.- ");
 
-				opcion = controlarNumero("\nSeleccione entre 1-5:");
+				opcion = controlarNumero("\nSeleccione entre 1-2:");
 			} while (opcion < 1 && opcion > 5);
 			System.out.println("");
 			
@@ -55,58 +51,78 @@ public class IU_CamareroBarra {
 				reponerBebidas(gestor);
 				break;
 			case 2:
+				prepararBebidas(gestor);
 				break;
 			case 3:
 				
 				break;
 			case 4:
-				mostrarNotificacion();
+				mostrarNotificacion(gestor);
 				break;
 			case 5:
 				fin=true;
 				break;
 			}
-			leerNotificaciones();
+			leerNotificaciones(gestor);
 		}while(fin==false);
 		
 	}
 	
+	private static void prepararBebidas(Gestor_Comandas gestor) {
+		int num=controlarNumero("introduce el numero de mesa de la que quieres ver la comanda:");
+		gestor.camareroBarra_prepararBebida(num);
+	}
+
 	public static void reponerBebidas(Gestor_Comandas gestor) {
 		gestor.camareroBarra_reponerBebidas();
 	}
-	public static void leerNotificaciones() {
-		System.out.println("Tiene usted: "+notificaciones.size()+" notificaciones.");
+	public static void leerNotificaciones(Gestor_Comandas gestor) {
+		System.out.println("Tiene usted: " + gestor.contarNotificaciones() + " notificaciones.");
 	}
-	public static void mostrarNotificacion() {
-		boolean salir=false;
-		while(!notificaciones.isEmpty()&& salir==false) {
-			System.out.println(notificaciones.get(0));
-			System.out.println("1-Leer\n2-Borrar\n3-Salir");
-			int opcion=scanner.nextInt();
-			switch(opcion) {
+
+	public static  void mostrarNotificacion(Gestor_Comandas gestor) {
+		boolean salir = false;
+		int elemento=0;
+		ArrayList<ArrayList<String>> notificaciones = gestor.mostrarNotificaciones();
+		while (!notificaciones.isEmpty() && salir == false) {
+			ArrayList<String> notificacion = notificaciones.get(elemento);
+			System.out.println("Mensaje:");
+			System.out.println(" Id :"+ notificacion.get(0)+"\n Origen: "+notificacion.get(1) +"\n Mensaje: "+ notificacion.get(3)+"");
+			System.out.println("1-Leer siguiente\n2-Borrar\n3-Salir");
+			int opcion = scanner.nextInt();
+			switch (opcion) {
 			case 1:
+				elemento++;
 				break;
 			case 2:
-				notificaciones.remove(0);
+				notificaciones.remove(elemento);
+				eliminarNotificacion(notificacion.get(0));
 				break;
 			case 3:
-					salir=true;
-					break;
+				salir = true;
+				break;
 			}
 		}
 	}
+	
+private static void eliminarNotificacion(String identificador) {
+Gestor_Comandas.eliminarNotificacion(identificador);
+		// TODO Auto-generated method stub
+		
+	}
+
 	public static int controlarNumero(String texto) {
 
 		int num = 0;
 		boolean control = true;
 
-		do { 		// Bucle que sirve para controlar si se introducen numeros
+		do { // Bucle para controlar que se introducen numeros
 			try {
 				System.out.println(texto);
 				num = scanner.nextInt();
 				control = false;
 			} catch (Exception e) {
-				System.err.println("\nSolo se permiten nÃºmeros");
+				System.err.println("\nSolo se permiten números");
 				scanner.next();
 			}
 		} while (control);
